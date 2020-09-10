@@ -19,6 +19,7 @@ public class RescueHelicopterDay extends DayEncounter {
   @Override
   public String encounter(Player player) {
 
+    // adding to check push rules
     if (player.getItems().contains(Item.FLARE)) {
       player.setHydration(20);
       player.updateMorale(20);
