@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -43,6 +44,7 @@ import com.palehorsestudios.alone.nightencounter.NightEncounter;
 import com.palehorsestudios.alone.nightencounter.RainStorm;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static javafx.util.Duration.seconds;
 
@@ -578,11 +580,9 @@ public class GameApp extends Application {
   }
 
   public void getIntro(File file) {
-    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-      String line;
-      while ((line = br.readLine()) != null) {
-        introController.getIntro().appendText(line + "\n");
-      }
+    try {
+      String intro = Files.lines(file.toPath()).collect(Collectors.joining("\n"));
+      introController.getIntro().appendText(intro);
     } catch (IOException e) {
       e.printStackTrace();
       System.out.println(
