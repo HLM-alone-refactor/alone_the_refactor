@@ -51,8 +51,9 @@ public class ItemSelectionController {
   @FXML private CheckBox journalandpen;
 
   private static int count = 0;
+  private Set<Item> initItems = new HashSet<>();
 
-  public Set<Item> selectItems() {
+  public void selectItems() {
     Map<CheckBox, Item> inventory = new HashMap<>();
     inventory.put(fishingLine, Item.FISHING_LINE);
     inventory.put(fishingHooks, Item.FISHING_HOOKS);
@@ -86,8 +87,6 @@ public class ItemSelectionController {
     inventory.put(survivalManual, Item.SURVIVAL_MANUAL);
     inventory.put(journalandpen, Item.JOURNAL);
 
-    Set<Item> initItems = new HashSet<>();
-
     for (Map.Entry<CheckBox, Item> entry : inventory.entrySet()) {
       entry
           .getKey()
@@ -111,102 +110,6 @@ public class ItemSelectionController {
               });
     }
 
-    if (fishingLine.isSelected()) {
-      initItems.add(Item.FISHING_LINE);
-    }
-    if (fishingHooks.isSelected()) {
-      initItems.add(Item.FISHING_HOOKS);
-    }
-    if (fishingLures.isSelected()) {
-      initItems.add(Item.FISHING_LURES);
-    }
-    if (knife.isSelected()) {
-      initItems.add(Item.KNIFE);
-    }
-    if (flintandsteel.isSelected()) {
-      initItems.add(Item.FLINT_AND_STEEL);
-    }
-    if (bow.isSelected()) {
-      initItems.add(Item.BOW);
-    }
-    if (arrows.isSelected()) {
-      initItems.add(Item.ARROWS);
-    }
-    if (familyPhoto.isSelected()) {
-      initItems.add(Item.FAMILY_PHOTO);
-    }
-    if (parachuteChord.isSelected()) {
-      initItems.add(Item.PARACHUTE_CHORD);
-    }
-    if (flare.isSelected()) {
-      initItems.add(Item.FLARE);
-    }
-    if (extraBoots.isSelected()) {
-      initItems.add(Item.EXTRA_BOOTS);
-    }
-    if (extraPants.isSelected()) {
-      initItems.add(Item.EXTRA_PANTS);
-    }
-    if (sleepingGear.isSelected()) {
-      initItems.add(Item.SLEEPING_GEAR);
-    }
-    if (coldWeatherGear.isSelected()) {
-      initItems.add(Item.COLD_WEATHER_GEAR);
-    }
-    if (footTarp.isSelected()) {
-      initItems.add(Item.TARP);
-    }
-    if (matches.isSelected()) {
-      initItems.add(Item.MATCHES);
-    }
-    if (firstAid.isSelected()) {
-      initItems.add(Item.FIRST_AID_KIT);
-    }
-    if (flashlight.isSelected()) {
-      initItems.add(Item.FLASHLIGHT);
-    }
-    if (extraBatteries.isSelected()) {
-      initItems.add(Item.BATTERIES);
-    }
-    if (gaugeWire.isSelected()) {
-      initItems.add(Item.WIRE);
-    }
-    if (cookingPot.isSelected()) {
-      initItems.add(Item.POT);
-    }
-    if (axe.isSelected()) {
-      initItems.add(Item.AXE);
-    }
-    if (hatchet.isSelected()) {
-      initItems.add(Item.HATCHET);
-    }
-    if (iodineTablets.isSelected()) {
-      initItems.add(Item.IODINE_TABLETS);
-    }
-    if (magnumRevolver.isSelected()) {
-      initItems.add(Item.PISTOL);
-    }
-    if (cartridges.isSelected()) {
-      initItems.add(Item.PISTOL_CARTRIDGES);
-    }
-    if (shovel.isSelected()) {
-      initItems.add(Item.SHOVEL);
-    }
-
-    if (harmonica.isSelected()) {
-      initItems.add(Item.HARMONICA);
-    }
-    if (lighter.isSelected()) {
-      initItems.add(Item.LIGHTER);
-    }
-    if (survivalManual.isSelected()) {
-      initItems.add(Item.SURVIVAL_MANUAL);
-    }
-    if (journalandpen.isSelected()) {
-      initItems.add(Item.JOURNAL);
-    }
-
-    return initItems;
   }
 
   public Button getNext() {
@@ -219,5 +122,9 @@ public class ItemSelectionController {
 
   public GridPane getPaneSelected() {
     return paneSelected;
+  }
+
+  public Set<Item> getInitItems() {
+    return initItems;
   }
 }

@@ -6,6 +6,7 @@ import com.palehorsestudios.alone.HelperMethods;
 import com.palehorsestudios.alone.Item;
 import com.palehorsestudios.alone.Shelter;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Player {
@@ -38,26 +39,23 @@ public class Player {
     for (Item item : items) {
       this.shelter.addEquipment(item, 1);
     }
-    // boost shelter if Player has fire starting items
-    if(items.contains(Item.FLINT_AND_STEEL) || items.contains(Item.MATCHES) || items.contains(Item.LIGHTER)) {
-      this.shelter.setIntegrity(this.shelter.getIntegrity() + 1);
-    }
-    // boost shelter if Player has a tarp
-    if(items.contains(Item.TARP)) {
-      this.shelter.setIntegrity(this.shelter.getIntegrity() + 1);
-    }
-    // boost shelter if Player has items to assist in shelter construction
-    if(items.contains(Item.PARACHUTE_CHORD) || items.contains(Item.AXE) || items.contains(Item.HATCHET) || items.contains(Item.SHOVEL) || items.contains(Item.KNIFE) || items.contains(Item.TARP)){
-      this.shelter.setIntegrity(this.shelter.getIntegrity() + 1);
-    }
-    // boost shelter if Player has sleeping gear
-    if(items.contains(Item.SLEEPING_GEAR)) {
-      this.shelter.setIntegrity(this.shelter.getIntegrity() + 1);
-    }
-    // boost shelter if Player has other "nice to have" items
-    if((items.contains(Item.FLASHLIGHT) && items.contains(Item.BATTERIES)) || items.contains(Item.POT) || items.contains(Item.SURVIVAL_MANUAL)) {
-      this.shelter.setIntegrity(this.shelter.getIntegrity() + 1);
-    }
+
+    // boost shelter if have any item of these item groups
+    shelterBoost(items, List.of(
+            Set.of(Item.FLINT_AND_STEEL, Item.MATCHES, Item.LIGHTER), // fire starting items
+            Set.of(Item.TARP), // has a tarp
+            Set.of(Item.PARACHUTE_CHORD, Item.AXE, Item.HATCHET, Item.SHOVEL, Item.KNIFE), // items to assist in shelter construction
+            Set.of(Item.SLEEPING_GEAR), // has sleeping gear
+            Set.of(Item.POT, Item.FLASHLIGHT, Item.BATTERIES, Item.SURVIVAL_MANUAL) // "nice to have" items
+    ));
+  }
+
+  private void shelterBoost(Set<Item> items, List<Set<Item>> checking) {
+    checking.forEach(e -> {
+      if (items.stream().filter(e::contains).count() >= 1) {
+        shelter.setIntegrity(shelter.getIntegrity() + 1);
+      }
+    });
   }
 
   // getters

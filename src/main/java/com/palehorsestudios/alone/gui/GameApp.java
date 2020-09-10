@@ -139,7 +139,7 @@ public class GameApp extends Application {
                         Stage gameStage = new Stage();
                         gameStage.setScene(gameScene);
                         // get initial items from the checkboxes
-                        initItems = itemSelectionController.selectItems();
+                        initItems = itemSelectionController.getInitItems();
                         // hide item selection scene
                         selectItemsScene.getWindow().hide();
                         System.out.println(initItems.size());
