@@ -16,6 +16,14 @@ import com.palehorsestudios.alone.player.Player;
 import com.palehorsestudios.alone.player.SuccessRate;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import com.palehorsestudios.alone.dayencounter.BearEncounterDay;
+import com.palehorsestudios.alone.dayencounter.DayEncounter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Map;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -34,6 +42,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.palehorsestudios.alone.Main.parseActivityChoice;
 import static com.palehorsestudios.alone.Main.parseChoice;
@@ -557,31 +566,16 @@ public class GameApp extends Application {
         return currentInput;
     }
 
-    public void getNarrative(File file) {
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                gameController.getCurActivity().appendText(line + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println(
-                    "Whoops! We seemed to have misplaced the next segment of the story. We're working on it!");
-        }
+  public void getIntro(File file) {
+    try {
+      String intro = Files.lines(file.toPath()).collect(Collectors.joining("\n"));
+      introController.getIntro().appendText(intro);
+    } catch (IOException e) {
+      e.printStackTrace();
+      System.out.println(
+          "Whoops! We seemed to have misplaced the next segment of the story. We're working on it!");
     }
-
-    public void getIntro(File file) {
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                introController.getIntro().appendText(line + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println(
-                    "Whoops! We seemed to have misplaced the next segment of the story. We're working on it!");
-        }
-    }
+  }
 
     // call from game logic thread to update the UI for current activity
     public void appendToCurActivity(String txt) {
