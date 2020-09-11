@@ -7,6 +7,9 @@ import static com.palehorsestudios.alone.Item.SURVIVAL_MANUAL;
 
 import com.palehorsestudios.alone.Food;
 import com.palehorsestudios.alone.player.Player;
+import com.palehorsestudios.alone.sounds.PlaySounds;
+
+import java.io.File;
 
 public class BearEncounterDay extends DayEncounter {
   private static DayEncounter encounter;
@@ -80,6 +83,12 @@ public class BearEncounterDay extends DayEncounter {
         }
     } else {
       player.updateMorale(-20);
+      File file = new File("./resources/sounds/willhelm.wav");
+      try {
+        PlaySounds.playClip(file);
+      } catch (Exception e) { // hi
+        e.printStackTrace();
+      }
       return "While in the northern territories, you're just another link in the food chain. Every time "
           + "you leave to venture out into the wilderness, whatever you might be doing, "
           + "this fact is never far from your thoughts. \n"
