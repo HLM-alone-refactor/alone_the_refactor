@@ -16,14 +16,6 @@ import com.palehorsestudios.alone.player.Player;
 import com.palehorsestudios.alone.player.SuccessRate;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import com.palehorsestudios.alone.dayencounter.BearEncounterDay;
-import com.palehorsestudios.alone.dayencounter.DayEncounter;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Map;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -40,6 +32,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -566,16 +559,27 @@ public class GameApp extends Application {
         return currentInput;
     }
 
-  public void getIntro(File file) {
-    try {
-      String intro = Files.lines(file.toPath()).collect(Collectors.joining("\n"));
-      introController.getIntro().appendText(intro);
-    } catch (IOException e) {
-      e.printStackTrace();
-      System.out.println(
-          "Whoops! We seemed to have misplaced the next segment of the story. We're working on it!");
+    public void getIntro(File file) {
+        try {
+            String intro = Files.lines(file.toPath()).collect(Collectors.joining("\n"));
+            introController.getIntro().appendText(intro);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(
+                    "Whoops! We seemed to have misplaced the next segment of the story. We're working on it!");
+        }
     }
-  }
+
+    public void getNarrative(File file) {
+        try {
+            String narrative = Files.lines(file.toPath()).collect(Collectors.joining("\n"));
+            gameController.getCurActivity().appendText(narrative);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(
+                    "Whoops! We seemed to have misplaced the next segment of the story. We're working on it!");
+        }
+    }
 
     // call from game logic thread to update the UI for current activity
     public void appendToCurActivity(String txt) {
