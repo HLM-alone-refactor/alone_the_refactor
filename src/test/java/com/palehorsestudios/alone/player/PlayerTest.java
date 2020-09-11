@@ -11,41 +11,41 @@ import java.util.logging.Logger;
 
 public class PlayerTest {
 
-  static final double LOW_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT = 179.9;
-  static final double LOW_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT = 179.7;
-  static final double LOW_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT = 179.5;
-  static final double MED_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT = 179.7;
-  static final double MED_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT = 179.5;
-  static final double MED_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT = 178.9;
-  static final double HIGH_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT = 178.8;
-  static final double HIGH_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT = 177.5;
-  static final double HIGH_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT = 175.4;
+    static final double LOW_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT = 179.9;
+    static final double LOW_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT = 179.7;
+    static final double LOW_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT = 179.5;
+    static final double MED_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT = 179.7;
+    static final double MED_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT = 179.5;
+    static final double MED_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT = 178.9;
+    static final double HIGH_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT = 178.8;
+    static final double HIGH_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT = 177.5;
+    static final double HIGH_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT = 175.4;
 
-  Player player;
-  Logger logger = Logger.getLogger(PlayerTest.class.getName());
+    Player player;
+    Logger logger = Logger.getLogger(PlayerTest.class.getName());
 
-  @Before
-  public void setUp() {
-    Set<Item> items =
-        new HashSet<>(
-            Arrays.asList(
-                Item.AXE,
-                Item.KNIFE,
-                Item.FISHING_LINE,
-                Item.FISHING_HOOKS,
-                Item.WIRE,
-                Item.HARMONICA,
-                Item.FLINT_AND_STEEL,
-                Item.POT,
-                Item.FIRST_AID_KIT,
-                Item.COLD_WEATHER_GEAR));
-    player = new Player(items);
-    player.getShelter().addFoodToCache(Food.FISH, 1000);
-    player.getShelter().addFoodToCache(Food.SQUIRREL, 1000);
-    player.getShelter().addFoodToCache(Food.RABBIT, 1000);
-    player.getShelter().addFoodToCache(Food.PORCUPINE, 1000);
-    player.getShelter().addFoodToCache(Food.MOOSE, 1000);
-  }
+    @Before
+    public void setUp() {
+        Set<Item> items =
+                new HashSet<>(
+                        Arrays.asList(
+                                Item.AXE,
+                                Item.KNIFE,
+                                Item.FISHING_LINE,
+                                Item.FISHING_HOOKS,
+                                Item.WIRE,
+                                Item.HARMONICA,
+                                Item.FLINT_AND_STEEL,
+                                Item.POT,
+                                Item.FIRST_AID_KIT,
+                                Item.COLD_WEATHER_GEAR));
+        player = new Player(items);
+        player.getShelter().addFoodToCache(Food.FISH, 1000);
+        player.getShelter().addFoodToCache(Food.SQUIRREL, 1000);
+        player.getShelter().addFoodToCache(Food.RABBIT, 1000);
+        player.getShelter().addFoodToCache(Food.PORCUPINE, 1000);
+        player.getShelter().addFoodToCache(Food.MOOSE, 1000);
+    }
 
 //  @Test
 //  public void testOvernightStatusUpdateHigh() {

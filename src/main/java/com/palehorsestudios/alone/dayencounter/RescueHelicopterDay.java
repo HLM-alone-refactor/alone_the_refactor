@@ -5,13 +5,16 @@ import com.palehorsestudios.alone.player.Player;
 
 public class RescueHelicopterDay extends DayEncounter {
 
-  private static DayEncounter encounter;
+    private static DayEncounter encounter;
 
-  private RescueHelicopterDay(){}
+    private RescueHelicopterDay() {
+    }
 
-  public static DayEncounter getInstance() {
-    if (encounter == null) {
-      encounter = new RescueHelicopterDay();
+    public static DayEncounter getInstance() {
+        if (encounter == null) {
+            encounter = new RescueHelicopterDay();
+        }
+        return encounter;
     }
     return encounter;
   }
@@ -35,6 +38,5 @@ public class RescueHelicopterDay extends DayEncounter {
           + " They continue flying south and pass your position half a mile to west."
           + " Perhaps if you had a flare they would have seen it.";
     }
-  }
 }
 
