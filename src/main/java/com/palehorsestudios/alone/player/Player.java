@@ -41,18 +41,15 @@ public class Player {
     }
 
     // boost shelter if have any item of these item groups
-    shelterBoost(items, List.of(
+    List<Set<Item>> shelter_boosts = List.of(
             Set.of(Item.FLINT_AND_STEEL, Item.MATCHES, Item.LIGHTER), // fire starting items
             Set.of(Item.TARP), // has a tarp
             Set.of(Item.PARACHUTE_CHORD, Item.AXE, Item.HATCHET, Item.SHOVEL, Item.KNIFE), // items to assist in shelter construction
             Set.of(Item.SLEEPING_GEAR), // has sleeping gear
             Set.of(Item.POT, Item.FLASHLIGHT, Item.BATTERIES, Item.SURVIVAL_MANUAL) // "nice to have" items
-    ));
-  }
-
-  private void shelterBoost(Set<Item> items, List<Set<Item>> checking) {
-    checking.forEach(e -> {
-      if (items.stream().filter(e::contains).count() >= 1) {
+    );
+    shelter_boosts.forEach(e -> {
+      if (items.stream().anyMatch(e::contains)) {
         shelter.setIntegrity(shelter.getIntegrity() + 1);
       }
     });
