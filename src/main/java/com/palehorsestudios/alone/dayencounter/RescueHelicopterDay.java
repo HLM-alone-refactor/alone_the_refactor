@@ -2,6 +2,7 @@ package com.palehorsestudios.alone.dayencounter;
 
 import com.palehorsestudios.alone.Item;
 import com.palehorsestudios.alone.player.Player;
+import com.palehorsestudios.alone.sounds.PlaySound;
 
 public class RescueHelicopterDay extends DayEncounter {
 
@@ -30,6 +31,7 @@ public class RescueHelicopterDay extends DayEncounter {
                   + " They greet you with a warm blanket and tell you to hop in."
                   + " You are saved, but you will never forget this incredible experience.";
       } else {
+          PlaySound.playSound("helicopter.wav");
           player.updateMorale(-5);
           return "You hear a helicopter approaching your position rapidly from the north."
                   + " You wave your arms and scream your lungs out, but it is no use."

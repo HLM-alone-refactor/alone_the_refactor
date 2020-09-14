@@ -1,6 +1,7 @@
 package com.palehorsestudios.alone.nightencounter;
 
 import com.palehorsestudios.alone.player.Player;
+import com.palehorsestudios.alone.sounds.PlaySound;
 
 public class RescueHelicopterNight extends NightEncounter {
 
@@ -28,6 +29,7 @@ public class RescueHelicopterNight extends NightEncounter {
                     + " They land on the beach, and greet you with a warm blanket and tell you to hop in."
                     + " You are saved, but you will never forget this incredible experience.";
         } else {
+            PlaySound.playSound("helicopter.wav");
             player.updateMorale(-5);
             return "You wake from a deep slumber to the sound of an approaching helicopter."
                     + " You wave your arms and scream your lungs out, but it is no use."

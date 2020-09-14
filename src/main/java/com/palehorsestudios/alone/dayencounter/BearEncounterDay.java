@@ -2,6 +2,7 @@ package com.palehorsestudios.alone.dayencounter;
 
 import com.palehorsestudios.alone.Food;
 import com.palehorsestudios.alone.player.Player;
+import com.palehorsestudios.alone.sounds.PlaySound;
 
 import static com.palehorsestudios.alone.Item.*;
 
@@ -79,6 +80,7 @@ public class BearEncounterDay extends DayEncounter {
             }
         } else {
             player.updateMorale(-20);
+            PlaySound.playSound("willhelm.wav");
             return "While in the northern territories, you're just another link in the food chain. Every time "
                     + "you leave to venture out into the wilderness, whatever you might be doing, "
                     + "this fact is never far from your thoughts. \n"
