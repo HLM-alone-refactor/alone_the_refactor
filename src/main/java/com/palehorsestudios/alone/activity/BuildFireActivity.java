@@ -1,7 +1,8 @@
 package com.palehorsestudios.alone.activity;
 
 import com.palehorsestudios.alone.Choice;
-import com.palehorsestudios.alone.Item;
+import com.palehorsestudios.alone.Items.Item;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.SuccessRate;
 
 public class BuildFireActivity extends Activity {
@@ -24,7 +25,10 @@ public class BuildFireActivity extends Activity {
             result = "You don't have any firewood.";
         } else {
             double boostFactor =
-                    Activity.getActivityBoostFactor(new Item[]{Item.SURVIVAL_MANUAL, Item.LIGHTER, Item.MATCHES, Item.FLINT_AND_STEEL}, choice.getPlayer());
+                    Activity.getActivityBoostFactor(
+                            ItemFactory.getNewInstances("Survival Manual", "Lighter",
+                                    "Matches", "Flint and Steel"),
+                            choice.getPlayer());
             SuccessRate successRate;
             if (boostFactor == 0.0) {
                 successRate = SuccessRate.LOW;

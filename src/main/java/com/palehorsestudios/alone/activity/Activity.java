@@ -1,9 +1,11 @@
 package com.palehorsestudios.alone.activity;
 
 import com.palehorsestudios.alone.Choice;
-import com.palehorsestudios.alone.Item;
+import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.player.Player;
 import com.palehorsestudios.alone.player.SuccessRate;
+
+import java.util.List;
 
 public abstract class Activity {
     public abstract String act(Choice choice);
@@ -14,7 +16,7 @@ public abstract class Activity {
      * @param boosterItems Items that could boost activity Result if Player possesses them.
      * @return Factor by which Player activity Result gets boosted.
      */
-    public static double getActivityBoostFactor(Item[] boosterItems, Player player) {
+    public static double getActivityBoostFactor(List<Item> boosterItems, Player player) {
         double boostValue = 0.0;
         for (Item item : boosterItems) {
             if (player.getItems().contains(item)) {

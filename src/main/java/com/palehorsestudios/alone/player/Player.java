@@ -1,14 +1,14 @@
 package com.palehorsestudios.alone.player;
 
 import com.google.common.base.Objects;
-import com.palehorsestudios.alone.Food;
+import com.palehorsestudios.alone.Foods.Food;
 import com.palehorsestudios.alone.HelperMethods;
-import com.palehorsestudios.alone.Item;
+import com.palehorsestudios.alone.Items.Item;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.Shelter;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Player {
     // static constants
@@ -18,7 +18,7 @@ public class Player {
     private static final int MIN_MORALE = 0;
     private static final int MAX_MORALE = 20;
     private static final double CALORIES_PER_POUND = 285.7;
-    private final Set<Item> items;
+    private final List<Item> items;
     private final Shelter shelter;
     // instance vars
     private int hydration;
@@ -31,24 +31,24 @@ public class Player {
      *
      * @param items Set of Items to be added to Player Shelter.
      */
-    public Player(Set<Item> items) {
+    public Player(List<Item> items) {
         this.isRescued = false;
         this.hydration = 15;
         this.weight = 180;
         this.morale = 15;
-        this.items = new HashSet<>();
+        this.items = new ArrayList<>();
         this.shelter = new Shelter();
         for (Item item : items) {
             this.shelter.addEquipment(item, 1);
         }
 
         // boost shelter if have any item of these item groups
-        List<Set<Item>> shelter_boosts = List.of(
-                Set.of(Item.FLINT_AND_STEEL, Item.MATCHES, Item.LIGHTER), // fire starting items
-                Set.of(Item.TARP), // has a tarp
-                Set.of(Item.PARACHUTE_CHORD, Item.AXE, Item.HATCHET, Item.SHOVEL, Item.KNIFE), // items to assist in shelter construction
-                Set.of(Item.SLEEPING_GEAR), // has sleeping gear
-                Set.of(Item.POT, Item.FLASHLIGHT, Item.BATTERIES, Item.SURVIVAL_MANUAL) // "nice to have" items
+        List<List<Item>> shelter_boosts = List.of(
+                ItemFactory.getNewInstances("Flint and Steel", "Matches", "Lighter"), // fire starting items
+                ItemFactory.getNewInstances("Tarp"), // has a tarp
+                ItemFactory.getNewInstances("Parachute Chord", "Axe", "Hatchet", "Shovel", "Knife"), // items to assist in shelter construction
+                ItemFactory.getNewInstances("Sleeping Gear"), // has sleeping gear
+                ItemFactory.getNewInstances("Pot", "Flashlight", "Batteries", "Survival Manual") // "nice to have" items
         );
         shelter_boosts.forEach(e -> {
             if (items.stream().anyMatch(e::contains)) {
@@ -111,7 +111,7 @@ public class Player {
      *
      * @return ImmutableSet of Player items.
      */
-    public Set<Item> getItems() {
+    public List<Item> getItems() {
         return this.items;
     }
 

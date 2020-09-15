@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <item>
+        <type>Fishing Line</type>
+        <description>A standard fishing line.</description>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>wire</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>yarn</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
+    </item>
+
+    <item>
+        <type>Fishing Hooks</type>
+        <description>Fishing Hooks</description>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Metal</key>
+                    <value>1</value>
+                </entry>
+                <entry>
+                    <key>Feather</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
+    </item>
+
+    <item>
+        <type>Fishing Lures</type>
+        <description>Fishing lures</description>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Bait</key>
+                    <value>1</value>
+                </entry>
+                <entry>
+                    <key>Fishing Hooks</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
+    </item>
+
+    <item>
+        <type>Knife</type>
+        <description>A short, sharp blade.</description>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Wood</key>
+                    <value>1</value>
+                </entry>
+                <entry>
+                    <key>Metal</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
+    </item>
+
+    <item>
+        <type>Flint and Steel</type>
+        <description>Flint and steel, mainly used for staring fires</description>
+    </item>
+
+    <item>
+        <type>Bow</type>
+        <description>A Bow. Used to shoot arrows.</description>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Wood</key>
+                    <value>1</value>
+                </entry>
+                <entry>
+                    <key>Wire</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
+    </item>
+
+    <item>
+        <type>Arrow</type>
+        <description>An typical arrow. Sharp point and made of wood, should fly ok.</description>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Metal</key>
+                    <value>1</value>
+                </entry>
+                <entry>
+                    <key>Wood</key>
+                    <value>1</value>
+                </entry>
+                <entry>
+                    <key>Feather</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Metal</key>
+                    <value>1</value>
+                </entry>
+                <entry>
+                    <key>Wood</key>
+                    <value>1</value>
+                </entry>
+                <entry>
+                    <key>Leaf</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
+    </item>
+
+    <item>
+        <type>Family Photo</type>
+        <description>A photo of your family. In color too.</description>
+    </item>
+
+    <item>
+        <type>Parachute Chord</type>
+        <description>Parachute chord. This stuff is very strong.</description>
+    </item>
+
+    <item>
+        <type>Flare</type>
+        <description>An emergency signal flare, probably very bright when ignited.</description>
+    </item>
+
+    <item>
+        <type>Boots</type>
+        <description>Heavy shoes that you wear on your feet.</description>
+    </item>
+
+    <item>
+        <type>Pants</type>
+        <description>Pants.</description>
+    </item>
+
+    <item>
+        <type>Sleeping Gear</type>
+        <description>Sleeping bag and pillow. Allows for comfortable resting</description>
+    </item>
+
+    <item>
+        <type>Cold Weather Gear</type>
+        <description>Cold weather gear. This will keep you warmer during those cold flashes</description>
+    </item>
+
+    <item>
+        <type>Tarp</type>
+        <description>A all-weather tarp</description>
+    </item>
+
+    <item>
+        <type>Matches</type>
+        <description>A box of matches</description>
+    </item>
+
+    <item>
+        <type>First Aid Kit</type>
+        <description>A first aid kit, heals some broken wounds</description>
+    </item>
+
+    <item>
+        <type>Flashlight</type>
+        <description>A bright flashlight</description>
+    </item>
+
+    <item>
+        <type>Batteries</type>
+        <description>Standard AA batteries</description>
+    </item>
+
+    <item>
+        <type>Wire</type>
+        <description>18 gauge wire</description>
+    </item>
+
+    <item>
+        <type>Pot</type>
+        <description>A cooking pot</description>
+    </item>
+
+    <item>
+        <type>Axe</type>
+        <description>A sharp axe</description>
+    </item>
+
+    <item>
+        <type>Hatchet</type>
+        <description>A large hatchet</description>
+    </item>
+
+    <item>
+        <type>Iodine Tablets</type>
+        <description>Iodine Tablets</description>
+    </item>
+
+    <item>
+        <type>Pistol</type>
+        <description>A 9M Berreta in good condition</description>
+    </item>
+
+    <item>
+        <type>Pistol Round</type>
+        <description>A 9M pistol round</description>
+    </item>
+
+    <item>
+        <type>Pistol Cartridge</type>
+        <description>A pistol cartridge, fits 12 pistol rounds</description>
+    </item>
+
+    <item>
+        <type>Shovel</type>
+        <description>A sturdy shovel</description>
+    </item>
+
+    <item>
+        <type>Harmonica</type>
+        <description>A small harmonica. A pleasant sound.</description>
+    </item>
+
+    <item>
+        <type>Lighter</type>
+        <description>A cigarette lighter</description>
+    </item>
+
+    <item>
+        <type>Survival Manual</type>
+        <description>A manual for how to survive in the wilderness.</description>
+    </item>
+
+    <item>
+        <type>Journal</type>
+        <description>A journal to write into</description>
+    </item>
+
+    <item>
+        <type>Wood</type>
+        <description>A piece of wood</description>
+    </item>
+
+    <item>
+        <type>Metal</type>
+        <description>A piece of metal, unknown type.</description>
+    </item>
+</items>

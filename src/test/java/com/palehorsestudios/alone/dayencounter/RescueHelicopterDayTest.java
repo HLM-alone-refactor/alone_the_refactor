@@ -1,7 +1,7 @@
 package com.palehorsestudios.alone.dayencounter;
 
 import com.palehorsestudios.alone.Choice;
-import com.palehorsestudios.alone.Item;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.activity.GetItemActivity;
 import com.palehorsestudios.alone.player.Player;
 import org.junit.Before;
@@ -20,20 +20,17 @@ public class RescueHelicopterDayTest {
 
     @Before
     public void setUp() throws Exception {
-        Set<Item> items =
-                new HashSet<>(
-                        Arrays.asList(
-                                Item.AXE,
-                                Item.KNIFE,
-                                Item.FISHING_LINE,
-                                Item.FISHING_HOOKS,
-                                Item.WIRE,
-                                Item.HARMONICA,
-                                Item.FLINT_AND_STEEL,
-                                Item.FLARE,
-                                Item.FIRST_AID_KIT,
-                                Item.COLD_WEATHER_GEAR));
-        player = new Player(items);
+        player = new Player(ItemFactory.getNewInstances(
+                "Axe",
+                "Knife",
+                "Fishing Line",
+                "Fishing Hooks",
+                "Wire",
+                "Harmonica",
+                "Flint and Steel",
+                "Flare",
+                "First Aid Kit",
+                "Cold Weather Gear"));
     }
 
     @Test
@@ -49,7 +46,7 @@ public class RescueHelicopterDayTest {
 
     @Test
     public void testEncounterWithFlare() {
-        GetItemActivity.getInstance().act(new Choice("get", player, Item.FLARE));
+        GetItemActivity.getInstance().act(new Choice("get", player, ItemFactory.getNewInstance("Flare")));
         assertEquals("You hear a helicopter approaching your position rapidly from the north."
                         + " You ignite your flare and wave it wildly over your head."
                         + " Incredibly, they spot your flare and land on a nearby beach."

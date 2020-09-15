@@ -1,8 +1,9 @@
 package com.palehorsestudios.alone.dayencounter;
 
 import com.palehorsestudios.alone.Choice;
-import com.palehorsestudios.alone.Food;
-import com.palehorsestudios.alone.Item;
+import com.palehorsestudios.alone.Foods.Food;
+import com.palehorsestudios.alone.Foods.FoodFactory;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.activity.Activity;
 import com.palehorsestudios.alone.activity.GetItemActivity;
 import com.palehorsestudios.alone.player.Player;
@@ -28,11 +29,8 @@ public class BearEncounterDayTest {
     public void setUp() {
         bearEncounterDay = BearEncounterDay.getInstance();
         getItemFromShelter = GetItemActivity.getInstance();
-        Set<Item> items =
-                new HashSet<>(
-                        Arrays.asList(Item.KNIFE, Item.PISTOL, Item.PISTOL_CARTRIDGES));
-        player = new Player(items);
-        player.getShelter().addFoodToCache(Food.BEAR, 1000);
+        player = new Player(ItemFactory.getNewInstances("Knife", "Pistol", "Pistol Cartridge"));
+        player.getShelter().addFoodToCache(FoodFactory.getNewInstance("Bear"), 1000);
     }
 
     @Test
@@ -59,8 +57,8 @@ public class BearEncounterDayTest {
 
     @Test
     public void testBearEncounterDayWithPistolAndCartridgesItems() {
-        getItemFromShelter.act(new Choice("pistol", player, (Item.PISTOL)));
-        getItemFromShelter.act(new Choice("ammo", player, (Item.PISTOL_CARTRIDGES)));
+        getItemFromShelter.act(new Choice("pistol", player, (ItemFactory.getNewInstance("Pistol"))));
+        getItemFromShelter.act(new Choice("ammo", player, (ItemFactory.getNewInstance("Pistol Cartridge"))));
         int previousMorale = player.getMorale();
         double previousWeight = player.getWeight();
         int previousHydration = player.getHydration();
@@ -84,17 +82,18 @@ public class BearEncounterDayTest {
         if (encounterResult.equals(expectedString)) {
             validResult = true;
         }
+        Food bear = FoodFactory.getNewInstance("Bear");
         assertTrue(validResult);
         assertEquals(previousHydration - 1, player.getHydration(), .001);
         assertEquals(previousMorale + 3, player.getMorale(), .001);
         assertEquals(previousWeight - 1.8, player.getWeight(), .001);
-        assertEquals(Optional.of(1000.0 + Food.BEAR.getGrams()).get(), player.getShelter().getFoodCache().get(Food.BEAR), .001);
+        assertEquals(Optional.of(1000.0 + bear.getGrams()).get(), player.getShelter().getFoodCache().get(bear), .001);
     }
 
     @Test
     public void testBearEncounterDayWithKnifeAndSurvivalManualItemsPlayerSurvives() {
-        player.getShelter().addEquipment(Item.SURVIVAL_MANUAL, 1);
-        getItemFromShelter.act(new Choice("knife", player, (Item.KNIFE)));
+        player.getShelter().addEquipment(ItemFactory.getNewInstance("Survival Manual"), 1);
+        getItemFromShelter.act(new Choice("knife", player, (ItemFactory.getNewInstance("Knife"))));
         int previousMorale = player.getMorale();
         double previousWeight = player.getWeight();
         int previousHydration = player.getHydration();
@@ -124,8 +123,8 @@ public class BearEncounterDayTest {
 
     @Test
     public void testBearEncounterDayWithKnifeAndSurvivalManualItemsPlayerDies() {
-        player.getShelter().addEquipment(Item.SURVIVAL_MANUAL, 1);
-        getItemFromShelter.act(new Choice("knife", player, (Item.KNIFE)));
+        player.getShelter().addEquipment(ItemFactory.getNewInstance("Survival Manual"), 1);
+        getItemFromShelter.act(new Choice("knife", player, (ItemFactory.getNewInstance("Knife"))));
         this.player.updateMorale(-1);
         this.player.updateWeight(-700);
         this.player.updateHydration(-2);

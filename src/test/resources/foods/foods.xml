@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<foods>
+    <food>
+        <name>Fish</name>
+        <caloriesPerGram>0.84</caloriesPerGram>
+        <grams>3401.94</grams>
+    </food>
+
+    <food>
+        <name>Squirrel</name>
+        <caloriesPerGram>1.20</caloriesPerGram>
+        <grams>340.1943</grams>
+    </food>
+</foods>

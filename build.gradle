@@ -14,6 +14,9 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.8'
     id 'org.beryx.jlink' version '2.12.0'
+
+    // for converting xml to java objects
+    id 'com.intershop.gradle.jaxb' version '4.3.1'
 }
 
 sourceSets.main {
@@ -42,6 +45,11 @@ dependencies {
 
     // slf4j logging
     compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.13.3'
+
+    compile('javax.xml.bind:jaxb-api:2.3.0')
+    compile('javax.activation:activation:1.1')
+    compile('org.glassfish.jaxb:jaxb-runtime:2.3.0')
+
 }
 
 application {

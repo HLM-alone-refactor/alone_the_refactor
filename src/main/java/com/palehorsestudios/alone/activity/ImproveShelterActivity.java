@@ -1,7 +1,7 @@
 package com.palehorsestudios.alone.activity;
 
 import com.palehorsestudios.alone.Choice;
-import com.palehorsestudios.alone.Item;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.SuccessRate;
 
 public class ImproveShelterActivity extends Activity {
@@ -25,7 +25,8 @@ public class ImproveShelterActivity extends Activity {
         choice.getPlayer().updateWeight(-caloriesBurned);
         int hydrationCost = ActivityLevel.HIGH.getHydrationCost(successRate);
         choice.getPlayer().setHydration(choice.getPlayer().getHydration() - hydrationCost);
-        double boostFactor = Activity.getActivityBoostFactor(new Item[]{Item.KNIFE, Item.PARACHUTE_CHORD, Item.AXE, Item.HATCHET, Item.SHOVEL, Item.SURVIVAL_MANUAL}, choice.getPlayer());
+        double boostFactor = Activity.getActivityBoostFactor(ItemFactory.getNewInstances("Knife",
+                "Parachute Chord", "Axe", "Hatchet", "Shovel", "Survival Manual"), choice.getPlayer());
         double improvementAmount;
         if (successRate == SuccessRate.LOW) {
             improvementAmount = 1 + 1 * boostFactor;

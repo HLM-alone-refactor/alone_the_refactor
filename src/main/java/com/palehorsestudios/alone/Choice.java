@@ -1,7 +1,10 @@
 package com.palehorsestudios.alone;
 
-import com.google.common.base.Objects;
+import com.palehorsestudios.alone.Foods.Food;
+import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.player.Player;
+
+import java.util.Objects;
 
 public class Choice {
     private String keyword;
@@ -55,14 +58,30 @@ public class Choice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Choice choice = (Choice) o;
-        return Objects.equal(keyword, choice.keyword) &&
-                item == choice.item &&
-                food == choice.food &&
-                Objects.equal(player, choice.player);
+        return Objects.equals(getKeyword(), choice.getKeyword()) &&
+                Objects.equals(getItem(), choice.getItem()) &&
+                Objects.equals(getFood(), choice.getFood()) &&
+                Objects.equals(getPlayer(), choice.getPlayer());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(keyword, item, food, player);
+        return Objects.hash(getKeyword(), getItem(), getFood(), getPlayer());
     }
+
+    //    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Choice choice = (Choice) o;
+//        return Objects.equal(keyword, choice.keyword) &&
+//                item.equals(choice.item) &&
+//                food.equals(choice.food) &&
+//                Objects.equal(player, choice.player);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hashCode(keyword, item, food, player);
+//    }
 }

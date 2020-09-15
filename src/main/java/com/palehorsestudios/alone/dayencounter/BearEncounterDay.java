@@ -1,9 +1,9 @@
 package com.palehorsestudios.alone.dayencounter;
 
-import com.palehorsestudios.alone.Food;
+import com.palehorsestudios.alone.Foods.Food;
+import com.palehorsestudios.alone.Foods.FoodFactory;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.Player;
-
-import static com.palehorsestudios.alone.Item.*;
 
 public class BearEncounterDay extends DayEncounter {
     private static DayEncounter encounter;
@@ -21,14 +21,16 @@ public class BearEncounterDay extends DayEncounter {
     @Override
     public String encounter(Player player) {
 
-        if (player.getItems().contains(PISTOL_CARTRIDGES) && player.getItems().contains(PISTOL)) {
+        if (player.getItems().contains(ItemFactory.getNewInstance("Pistol Cartridge"))
+                && player.getItems().contains(ItemFactory.getNewInstance("Pistol"))) {
 //        || player.getItems().contains(BOW) && player.getItems().contains(ARROWS))
 //      TODO: add else if for bow and arrow
             player.updateHydration(-1);
             ; //adjust according to ActivityLevel?
             player.updateWeight(-500); //adjust according to ActivityLevel?
             player.updateMorale(3);
-            player.getShelter().addFoodToCache(Food.BEAR, Food.BEAR.getGrams());
+            Food bear = FoodFactory.getNewInstance("Bear");
+            player.getShelter().addFoodToCache(bear, bear.getGrams());
             return "While in the northern territories, you're just another link in the food chain. Every time "
                     + "you leave to venture out into the wilderness, whatever you might be doing, "
                     + "this fact is never far from your thoughts. \n"
@@ -43,7 +45,8 @@ public class BearEncounterDay extends DayEncounter {
                     + "You stare in shock at the enormous bear before you, and several minutes pass before "
                     + "you can move. \n"
                     + "You set about the task of harvesting the bear, thankful you had your pistol on you!";
-        } else if (player.getShelter().getEquipment().containsKey(SURVIVAL_MANUAL) && player.getItems().contains(KNIFE)) {
+        } else if (player.getShelter().getEquipment().containsKey(ItemFactory.getNewInstance("Survival Manual"))
+                && player.getItems().contains(ItemFactory.getNewInstance("Knife"))) {
 //    || player.getItems().contains(HATCHET)
 //    || player.getItems().contains(AXE)); {
 //      TODO: add else if for hatchet and axe
