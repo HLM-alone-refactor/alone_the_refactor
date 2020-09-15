@@ -71,13 +71,9 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        boolean type = Objects.equals(getType(), item.getType());
-        boolean description = Objects.equals(getDescription(), item.getDescription());
-        boolean craft = Objects.equals(getCraft(), item.getCraft());
-        return type && description && craft;
-//        return Objects.equals(getType(), item.getType()) &&
-//                Objects.equals(getDescription(), item.getDescription()) &&
-//                Objects.equals(getCraft(), item.getCraft());
+        return Objects.equals(getType(), item.getType()) &&
+                Objects.equals(getDescription(), item.getDescription()) &&
+                Objects.equals(getCraft(), item.getCraft());
     }
 
     @Override
