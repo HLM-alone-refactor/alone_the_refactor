@@ -1,5 +1,10 @@
 package com.palehorsestudios.alone;
 
+import com.google.common.collect.ImmutableMap;
+import com.palehorsestudios.alone.Foods.Food;
+import com.palehorsestudios.alone.Foods.FoodFactory;
+import com.palehorsestudios.alone.Items.Item;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.activity.*;
 import com.palehorsestudios.alone.gui.GameApp;
 import com.palehorsestudios.alone.player.Player;
@@ -7,6 +12,7 @@ import javafx.application.Application;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Main {
@@ -261,154 +267,154 @@ public class Main {
             put("take a nap", "rest");
         }};
         Map<String, Food> choiceFoodMap = new HashMap<>() {{
-            put("eat moose", Food.MOOSE);
-            put("eat fish", Food.FISH);
-            put("eat bear", Food.BEAR);
-            put("eat squirrel", Food.SQUIRREL);
-            put("eat rabbit", Food.RABBIT);
-            put("eat porcupine", Food.PORCUPINE);
-            put("eat bug", Food.BUG);
-            put("eat bugs", Food.BUG);
-            put("eat mushroom", Food.MUSHROOM);
-            put("eat mushrooms", Food.MUSHROOM);
-            put("eat berry", Food.BERRIES);
-            put("eat berries", Food.BERRIES);
+            put("eat moose", FoodFactory.getNewInstance("Moose"));
+            put("eat fish", FoodFactory.getNewInstance("Fish"));
+            put("eat bear", FoodFactory.getNewInstance("Bear"));
+            put("eat squirrel", FoodFactory.getNewInstance("Squirrel"));
+            put("eat rabbit", FoodFactory.getNewInstance("Rabbit"));
+            put("eat porcupine", FoodFactory.getNewInstance("Porcupine"));
+            put("eat bug", FoodFactory.getNewInstance("Bug"));
+            put("eat bugs", FoodFactory.getNewInstance("Bug"));
+            put("eat mushroom", FoodFactory.getNewInstance("Mushroom"));
+            put("eat mushrooms", FoodFactory.getNewInstance("Mushroom"));
+            put("eat berry", FoodFactory.getNewInstance("Berries"));
+            put("eat berries", FoodFactory.getNewInstance("Berries"));
         }};
         Map<String, Item> choiceItemMap = new HashMap<>() {{
-            put("get fishing line", Item.FISHING_LINE);
-            put("get fishing lines", Item.FISHING_LINE);
-            put("get fishing hooks", Item.FISHING_HOOKS);
-            put("get fishing hook", Item.FISHING_HOOKS);
-            put("get fishing lure", Item.FISHING_LURES);
-            put("get fishing lures", Item.FISHING_LURES);
-            put("get knife", Item.KNIFE);
-            put("get flint and steel", Item.FLINT_AND_STEEL);
-            put("get bow", Item.BOW);
-            put("get arrow", Item.ARROWS);
-            put("get arrows", Item.ARROWS);
-            put("get family photo", Item.FAMILY_PHOTO);
-            put("get photo", Item.FAMILY_PHOTO);
-            put("get photograph", Item.FAMILY_PHOTO);
-            put("get rope", Item.PARACHUTE_CHORD);
-            put("get parachute chord", Item.PARACHUTE_CHORD);
-            put("get cordage", Item.PARACHUTE_CHORD);
-            put("get flare", Item.FLARE);
-            put("get flares", Item.FLARE);
-            put("get extra boots", Item.EXTRA_BOOTS);
-            put("get extra boot", Item.EXTRA_BOOTS);
-            put("get boots", Item.EXTRA_BOOTS);
-            put("get boot", Item.EXTRA_BOOTS);
-            put("get extra pants", Item.EXTRA_PANTS);
-            put("get pants", Item.EXTRA_PANTS);
-            put("get sleeping gear", Item.SLEEPING_GEAR);
-            put("get sleeping bag", Item.SLEEPING_GEAR);
-            put("get cold weather gear", Item.COLD_WEATHER_GEAR);
-            put("get cold gear", Item.COLD_WEATHER_GEAR);
-            put("get tarp", Item.TARP);
-            put("get matches", Item.MATCHES);
-            put("get match", Item.MATCHES);
-            put("get first aid", Item.FIRST_AID_KIT);
-            put("get first aid kit", Item.FIRST_AID_KIT);
-            put("get flashlight", Item.FLASHLIGHT);
-            put("get light", Item.FLASHLIGHT);
-            put("get batteries", Item.BATTERIES);
-            put("get battery", Item.BATTERIES);
-            put("get wire", Item.WIRE);
-            put("get 18 gauge wire", Item.WIRE);
-            put("get wires", Item.WIRE);
-            put("get 18 gauge wires", Item.WIRE);
-            put("get snare", Item.WIRE);
-            put("get pot", Item.POT);
-            put("get cooking pot", Item.POT);
-            put("get axe", Item.AXE);
-            put("get hatchet", Item.HATCHET);
-            put("get iodine tablets", Item.IODINE_TABLETS);
-            put("get iodine", Item.IODINE_TABLETS);
-            put("get tablets", Item.IODINE_TABLETS);
-            put("get pistol", Item.PISTOL);
-            put("get gun", Item.PISTOL);
-            put("get ammunition", Item.PISTOL_CARTRIDGES);
-            put("get cartridges", Item.PISTOL_CARTRIDGES);
-            put("get ammo", Item.PISTOL_CARTRIDGES);
-            put("get rounds", Item.PISTOL_CARTRIDGES);
-            put("get pistol ammo", Item.PISTOL_CARTRIDGES);
-            put("get pistol ammunition", Item.PISTOL_CARTRIDGES);
-            put("get pistol rounds", Item.PISTOL_CARTRIDGES);
-            put("get pistol cartridges", Item.PISTOL_CARTRIDGES);
-            put("get shovel", Item.SHOVEL);
-            put("get harmonica", Item.HARMONICA);
-            put("get lighter", Item.LIGHTER);
-            put("get survival manual", Item.SURVIVAL_MANUAL);
-            put("get manual", Item.SURVIVAL_MANUAL);
-            put("get journal and pen", Item.JOURNAL);
-            put("get journal", Item.JOURNAL);
-            put("put fishing line", Item.FISHING_LINE);
-            put("put fishing lines", Item.FISHING_LINE);
-            put("put fishing hooks", Item.FISHING_HOOKS);
-            put("put fishing hook", Item.FISHING_HOOKS);
-            put("put fishing lure", Item.FISHING_LURES);
-            put("put fishing lures", Item.FISHING_LURES);
-            put("put knife", Item.KNIFE);
-            put("put flint and steel", Item.FLINT_AND_STEEL);
-            put("put bow", Item.BOW);
-            put("put arrow", Item.ARROWS);
-            put("put arrows", Item.ARROWS);
-            put("put family photo", Item.FAMILY_PHOTO);
-            put("put photo", Item.FAMILY_PHOTO);
-            put("put photograph", Item.FAMILY_PHOTO);
-            put("put rope", Item.PARACHUTE_CHORD);
-            put("put parachute chord", Item.PARACHUTE_CHORD);
-            put("put cordage", Item.PARACHUTE_CHORD);
-            put("put flare", Item.FLARE);
-            put("put flares", Item.FLARE);
-            put("put extra boots", Item.EXTRA_BOOTS);
-            put("put extra boot", Item.EXTRA_BOOTS);
-            put("put boots", Item.EXTRA_BOOTS);
-            put("put boot", Item.EXTRA_BOOTS);
-            put("put extra pants", Item.EXTRA_PANTS);
-            put("put pants", Item.EXTRA_PANTS);
-            put("put sleeping gear", Item.SLEEPING_GEAR);
-            put("put sleeping bag", Item.SLEEPING_GEAR);
-            put("put cold weather gear", Item.COLD_WEATHER_GEAR);
-            put("put cold gear", Item.COLD_WEATHER_GEAR);
-            put("put tarp", Item.TARP);
-            put("put matches", Item.MATCHES);
-            put("put match", Item.MATCHES);
-            put("put first aid", Item.FIRST_AID_KIT);
-            put("put first aid kit", Item.FIRST_AID_KIT);
-            put("put flashlight", Item.FLASHLIGHT);
-            put("put light", Item.FLASHLIGHT);
-            put("put batteries", Item.BATTERIES);
-            put("put battery", Item.BATTERIES);
-            put("put wire", Item.WIRE);
-            put("put 18 gauge wire", Item.WIRE);
-            put("put wires", Item.WIRE);
-            put("put 18 gauge wires", Item.WIRE);
-            put("put snare", Item.WIRE);
-            put("put pot", Item.POT);
-            put("put cooking pot", Item.POT);
-            put("put axe", Item.AXE);
-            put("put hatchet", Item.HATCHET);
-            put("put iodine tablets", Item.IODINE_TABLETS);
-            put("put iodine", Item.IODINE_TABLETS);
-            put("put tablets", Item.IODINE_TABLETS);
-            put("put pistol", Item.PISTOL);
-            put("put gun", Item.PISTOL);
-            put("put ammunition", Item.PISTOL_CARTRIDGES);
-            put("put ammo", Item.PISTOL_CARTRIDGES);
-            put("put pistol ammo", Item.PISTOL_CARTRIDGES);
-            put("put pistol ammunition", Item.PISTOL_CARTRIDGES);
-            put("put pistol rounds", Item.PISTOL_CARTRIDGES);
-            put("put pistol cartridges", Item.PISTOL_CARTRIDGES);
-            put("put cartridges", Item.PISTOL_CARTRIDGES);
-            put("put rounds", Item.PISTOL_CARTRIDGES);
-            put("put shovel", Item.SHOVEL);
-            put("put harmonica", Item.HARMONICA);
-            put("put lighter", Item.LIGHTER);
-            put("put survival manual", Item.SURVIVAL_MANUAL);
-            put("put manual", Item.SURVIVAL_MANUAL);
-            put("put journal and pen", Item.JOURNAL);
-            put("put journal", Item.JOURNAL);
+            put("get fishing line", ItemFactory.getNewInstance("Fishing Line"));
+            put("get fishing lines", ItemFactory.getNewInstance("Fishing Line"));
+            put("get fishing hooks", ItemFactory.getNewInstance("Fishing Hooks"));
+            put("get fishing hook", ItemFactory.getNewInstance("Fishing Hooks"));
+            put("get fishing lure", ItemFactory.getNewInstance("Fishing Lures"));
+            put("get fishing lures", ItemFactory.getNewInstance("Fishing Lures"));
+            put("get knife", ItemFactory.getNewInstance("Knife"));
+            put("get flint and steel", ItemFactory.getNewInstance("Flint and Steel"));
+            put("get bow", ItemFactory.getNewInstance("Bow"));
+            put("get arrow", ItemFactory.getNewInstance("Arrow"));
+            put("get arrows", ItemFactory.getNewInstance("Arrow"));
+            put("get family photo", ItemFactory.getNewInstance("Family Photo"));
+            put("get photo", ItemFactory.getNewInstance("Family Photo"));
+            put("get photograph", ItemFactory.getNewInstance("Family Photo"));
+            put("get rope", ItemFactory.getNewInstance("Parachute Chord"));
+            put("get parachute chord", ItemFactory.getNewInstance("Parachute Chord"));
+            put("get cordage", ItemFactory.getNewInstance("Parachute Chord"));
+            put("get flare", ItemFactory.getNewInstance("Flare"));
+            put("get flares", ItemFactory.getNewInstance("Flare"));
+            put("get extra boots", ItemFactory.getNewInstance("Boots"));
+            put("get extra boot", ItemFactory.getNewInstance("Boots"));
+            put("get boots", ItemFactory.getNewInstance("Boots"));
+            put("get boot", ItemFactory.getNewInstance("Boots"));
+            put("get extra pants", ItemFactory.getNewInstance("Pants"));
+            put("get pants", ItemFactory.getNewInstance("Pants"));
+            put("get sleeping gear", ItemFactory.getNewInstance("Sleeping Gear"));
+            put("get sleeping bag", ItemFactory.getNewInstance("Sleeping Gear"));
+            put("get cold weather gear", ItemFactory.getNewInstance("Cold Weather Gear"));
+            put("get cold gear", ItemFactory.getNewInstance("Cold Weather Gear"));
+            put("get tarp", ItemFactory.getNewInstance("Tarp"));
+            put("get matches", ItemFactory.getNewInstance("Matches"));
+            put("get match", ItemFactory.getNewInstance("Matches"));
+            put("get first aid", ItemFactory.getNewInstance("First Aid Kit"));
+            put("get first aid kit", ItemFactory.getNewInstance("First Aid Kit"));
+            put("get flashlight", ItemFactory.getNewInstance("Flashlight"));
+            put("get light", ItemFactory.getNewInstance("Flashlight"));
+            put("get batteries", ItemFactory.getNewInstance("Batteries"));
+            put("get battery", ItemFactory.getNewInstance("Batteries"));
+            put("get wire", ItemFactory.getNewInstance("Wire"));
+            put("get 18 gauge wire", ItemFactory.getNewInstance("Wire"));
+            put("get wires", ItemFactory.getNewInstance("Wire"));
+            put("get 18 gauge wires", ItemFactory.getNewInstance("Wire"));
+            put("get snare", ItemFactory.getNewInstance("Wire"));
+            put("get pot", ItemFactory.getNewInstance("Pot"));
+            put("get cooking pot", ItemFactory.getNewInstance("Pot"));
+            put("get axe", ItemFactory.getNewInstance("Axe"));
+            put("get hatchet", ItemFactory.getNewInstance("Hatchet"));
+            put("get iodine tablets", ItemFactory.getNewInstance("Iodine Tablets"));
+            put("get iodine", ItemFactory.getNewInstance("Iodine Tablets"));
+            put("get tablets", ItemFactory.getNewInstance("Iodine Tablets"));
+            put("get pistol", ItemFactory.getNewInstance("Pistol"));
+            put("get gun", ItemFactory.getNewInstance("Pistol"));
+            put("get ammunition", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("get cartridges", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("get ammo", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("get rounds", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("get pistol ammo", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("get pistol ammunition", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("get pistol rounds", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("get pistol cartridges", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("get shovel", ItemFactory.getNewInstance("Shovel"));
+            put("get harmonica", ItemFactory.getNewInstance("Harmonica"));
+            put("get lighter", ItemFactory.getNewInstance("Lighter"));
+            put("get survival manual", ItemFactory.getNewInstance("Survival Manual"));
+            put("get manual", ItemFactory.getNewInstance("Survival Manual"));
+            put("get journal and pen", ItemFactory.getNewInstance("Journal"));
+            put("get journal", ItemFactory.getNewInstance("Journal"));
+            put("put fishing line", ItemFactory.getNewInstance("Fishing Line"));
+            put("put fishing lines", ItemFactory.getNewInstance("Fishing Line"));
+            put("put fishing hooks", ItemFactory.getNewInstance("Fishing Hooks"));
+            put("put fishing hook", ItemFactory.getNewInstance("Fishing Hooks"));
+            put("put fishing lure", ItemFactory.getNewInstance("Fishing Lures"));
+            put("put fishing lures", ItemFactory.getNewInstance("Fishing Lures"));
+            put("put knife", ItemFactory.getNewInstance("Knife"));
+            put("put flint and steel", ItemFactory.getNewInstance("Flint and Steel"));
+            put("put bow", ItemFactory.getNewInstance("Bow"));
+            put("put arrow", ItemFactory.getNewInstance("Arrow"));
+            put("put arrows", ItemFactory.getNewInstance("Arrow"));
+            put("put family photo", ItemFactory.getNewInstance("Family Photo"));
+            put("put photo", ItemFactory.getNewInstance("Family Photo"));
+            put("put photograph", ItemFactory.getNewInstance("Family Photo"));
+            put("put rope", ItemFactory.getNewInstance("Parachute Chord"));
+            put("put parachute chord", ItemFactory.getNewInstance("Parachute Chord"));
+            put("put cordage", ItemFactory.getNewInstance("Parachute Chord"));
+            put("put flare", ItemFactory.getNewInstance("Flare"));
+            put("put flares", ItemFactory.getNewInstance("Flare"));
+            put("put extra boots", ItemFactory.getNewInstance("Boots"));
+            put("put extra boot", ItemFactory.getNewInstance("Boots"));
+            put("put boots", ItemFactory.getNewInstance("Boots"));
+            put("put boot", ItemFactory.getNewInstance("Boots"));
+            put("put extra pants", ItemFactory.getNewInstance("Pants"));
+            put("put pants", ItemFactory.getNewInstance("Pants"));
+            put("put sleeping gear", ItemFactory.getNewInstance("Sleeping Gear"));
+            put("put sleeping bag", ItemFactory.getNewInstance("Sleeping Gear"));
+            put("put cold weather gear", ItemFactory.getNewInstance("Cold Weather Gear"));
+            put("put cold gear", ItemFactory.getNewInstance("Cold Weather Gear"));
+            put("put tarp", ItemFactory.getNewInstance("Tarp"));
+            put("put matches", ItemFactory.getNewInstance("Matches"));
+            put("put match", ItemFactory.getNewInstance("Matches"));
+            put("put first aid", ItemFactory.getNewInstance("First Aid Kit"));
+            put("put first aid kit", ItemFactory.getNewInstance("First Aid Kit"));
+            put("put flashlight", ItemFactory.getNewInstance("Flashlight"));
+            put("put light", ItemFactory.getNewInstance("Flashlight"));
+            put("put batteries", ItemFactory.getNewInstance("Batteries"));
+            put("put battery", ItemFactory.getNewInstance("Batteries"));
+            put("put wire", ItemFactory.getNewInstance("Wire"));
+            put("put 18 gauge wire", ItemFactory.getNewInstance("Wire"));
+            put("put wires", ItemFactory.getNewInstance("Wire"));
+            put("put 18 gauge wires", ItemFactory.getNewInstance("Wire"));
+            put("put snare", ItemFactory.getNewInstance("Wire"));
+            put("put pot", ItemFactory.getNewInstance("Pot"));
+            put("put cooking pot", ItemFactory.getNewInstance("Pot"));
+            put("put axe", ItemFactory.getNewInstance("Axe"));
+            put("put hatchet", ItemFactory.getNewInstance("Hatchet"));
+            put("put iodine tablets", ItemFactory.getNewInstance("Iodine Tablets"));
+            put("put iodine", ItemFactory.getNewInstance("Iodine Tablets"));
+            put("put tablets", ItemFactory.getNewInstance("Iodine Tablets"));
+            put("put pistol", ItemFactory.getNewInstance("Pistol"));
+            put("put gun", ItemFactory.getNewInstance("Pistol"));
+            put("put ammunition", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("put ammo", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("put pistol ammo", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("put pistol ammunition", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("put pistol rounds", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("put pistol cartridges", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("put cartridges", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("put rounds", ItemFactory.getNewInstance("Pistol Cartridge"));
+            put("put shovel", ItemFactory.getNewInstance("Shovel"));
+            put("put harmonica", ItemFactory.getNewInstance("Harmonica"));
+            put("put lighter", ItemFactory.getNewInstance("Lighter"));
+            put("put survival manual", ItemFactory.getNewInstance("Survival Manual"));
+            put("put manual", ItemFactory.getNewInstance("Survival Manual"));
+            put("put journal and pen", ItemFactory.getNewInstance("Journal"));
+            put("put journal", ItemFactory.getNewInstance("Journal"));
         }};
 
         // uses input to build a choice by looking up keywords in a choice map
@@ -442,42 +448,29 @@ public class Main {
     }
 
     public static Activity parseActivityChoice(Choice choice) {
-        Activity activity;
+        Map<String, Activity> options = new HashMap<>() {{
+                put("get", GetItemActivity.getInstance());
+                put("put", PutItemActivity.getInstance());
+                put("eat", EatActivity.getInstance());
+                put("drink", DrinkWaterActivity.getInstance());
+                put("fish", FishActivity.getInstance());
+                put("hunt", HuntActivity.getInstance());
+                put("trap", TrapActivity.getInstance());
+                put("forage", ForageActivity.getInstance());
+                put("improve", ImproveShelterActivity.getInstance());
+                put("gather", GatherFirewoodActivity.getInstance());
+                put("fire", BuildFireActivity.getInstance());
+                put("water", GetWaterActivity.getInstance());
+                put("morale", BoostMoraleActivity.getInstance());
+                put("craft", CraftActivity.getInstance());
+        }};
+
         if (choice == null) {
-            // display help menu
-            activity = null;
+            return null;
         } else {
-            if (choice.getKeyword().equals("get")) {
-                activity = GetItemActivity.getInstance();
-            } else if (choice.getKeyword().equals("put")) {
-                activity = PutItemActivity.getInstance();
-            } else if (choice.getKeyword().equals("eat")) {
-                activity = EatActivity.getInstance();
-            } else if (choice.getKeyword().equals("drink")) {
-                activity = DrinkWaterActivity.getInstance();
-            } else if (choice.getKeyword().equals("fish")) {
-                activity = FishActivity.getInstance();
-            } else if (choice.getKeyword().equals("hunt")) {
-                activity = HuntActivity.getInstance();
-            } else if (choice.getKeyword().equals("trap")) {
-                activity = TrapActivity.getInstance();
-            } else if (choice.getKeyword().equals("forage")) {
-                activity = ForageActivity.getInstance();
-            } else if (choice.getKeyword().equals("improve")) {
-                activity = ImproveShelterActivity.getInstance();
-            } else if (choice.getKeyword().equals("gather")) {
-                activity = GatherFirewoodActivity.getInstance();
-            } else if (choice.getKeyword().equals("fire")) {
-                activity = BuildFireActivity.getInstance();
-            } else if (choice.getKeyword().equals("water")) {
-                activity = GetWaterActivity.getInstance();
-            } else if (choice.getKeyword().equals("morale")) {
-                activity = BoostMoraleActivity.getInstance();
-            } else {
-                activity = RestActivity.getInstance();
-            }
+            return Objects.requireNonNullElse(options.get(choice.getKeyword()), RestActivity.getInstance());
         }
-        return activity;
+
     }
 
 }

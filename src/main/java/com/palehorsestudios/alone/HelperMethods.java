@@ -2,6 +2,8 @@ package com.palehorsestudios.alone;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class HelperMethods {
     /**
@@ -35,5 +37,17 @@ public class HelperMethods {
             sb.append(grams).append(" g");
         }
         return sb.toString();
+    }
+
+    public static String titleize(String input) {
+        return Arrays.stream(input.split(" "))
+                .map(HelperMethods::capitalize)
+                .collect(Collectors.joining(" "))
+                .replaceAll(" And ", "and")
+                .replaceAll(" Is ", " is ")
+                .replaceAll(" Of ", " of ");
+    }
+    public static String capitalize(String input) {
+        return input.substring(0,1).toUpperCase() + input.substring(1);
     }
 }

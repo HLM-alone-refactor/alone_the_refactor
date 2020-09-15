@@ -1,5 +1,9 @@
 package com.palehorsestudios.alone;
 
+import com.palehorsestudios.alone.Foods.Food;
+import com.palehorsestudios.alone.Foods.FoodFactory;
+import com.palehorsestudios.alone.Items.Item;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.activity.*;
 import com.palehorsestudios.alone.player.Player;
 import org.junit.Before;
@@ -18,36 +22,34 @@ public class MainTest {
 
     @Before
     public void setUp() {
-        Set<Item> items =
-                new HashSet<>(
-                        Arrays.asList(
-                                Item.AXE,
-                                Item.KNIFE,
-                                Item.FISHING_LINE,
-                                Item.FISHING_HOOKS,
-                                Item.WIRE,
-                                Item.HARMONICA,
-                                Item.FLINT_AND_STEEL,
-                                Item.POT,
-                                Item.FIRST_AID_KIT,
-                                Item.COLD_WEATHER_GEAR));
-        player = new Player(items);
+        player = new Player(ItemFactory.getNewInstances(
+                "Axe",
+                "Knife",
+                "Fishing Line",
+                "Fishing Hooks",
+                "Wire",
+                "Harmonica",
+                "Flint and Steel",
+                "Pot",
+                "First Aid Kit",
+                "Cold Weather Gear"
+        ));
     }
 
     @Test
     public void testParseChoiceEat() {
-        assertEquals(new Choice("eat", player, Food.MOOSE), Main.parseChoice("eat moose", player));
-        assertEquals(new Choice("eat", player, Food.FISH), Main.parseChoice("eat fish", player));
-        assertEquals(new Choice("eat", player, Food.SQUIRREL), Main.parseChoice("eat squirrel", player));
-        assertEquals(new Choice("eat", player, Food.BEAR), Main.parseChoice("eat bear", player));
-        assertEquals(new Choice("eat", player, Food.RABBIT), Main.parseChoice("eat rabbit", player));
-        assertEquals(new Choice("eat", player, Food.PORCUPINE), Main.parseChoice("eat porcupine", player));
-        assertEquals(new Choice("eat", player, Food.BUG), Main.parseChoice("eat bug", player));
-        assertEquals(new Choice("eat", player, Food.BUG), Main.parseChoice("eat bugs", player));
-        assertEquals(new Choice("eat", player, Food.MUSHROOM), Main.parseChoice("eat mushroom", player));
-        assertEquals(new Choice("eat", player, Food.MUSHROOM), Main.parseChoice("eat mushrooms", player));
-        assertEquals(new Choice("eat", player, Food.BERRIES), Main.parseChoice("eat berry", player));
-        assertEquals(new Choice("eat", player, Food.BERRIES), Main.parseChoice("eat berries", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Moose")), Main.parseChoice("eat moose", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Fish")), Main.parseChoice("eat fish", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Squirrel")), Main.parseChoice("eat squirrel", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Bear")), Main.parseChoice("eat bear", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Rabbit")), Main.parseChoice("eat rabbit", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Porcupine")), Main.parseChoice("eat porcupine", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Bug")), Main.parseChoice("eat bug", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Bug")), Main.parseChoice("eat bugs", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Mushroom")), Main.parseChoice("eat mushroom", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Mushroom")), Main.parseChoice("eat mushrooms", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Berries")), Main.parseChoice("eat berry", player));
+        assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Berries")), Main.parseChoice("eat berries", player));
     }
 
     @Test
@@ -116,136 +118,136 @@ public class MainTest {
 
     @Test
     public void testParseChoiceGet() {
-        assertEquals(new Choice("get", player, Item.FISHING_LINE), Main.parseChoice("get fishing line", player));
-        assertEquals(new Choice("get", player, Item.FISHING_LINE), Main.parseChoice("get fishing lines", player));
-        assertEquals(new Choice("get", player, Item.FISHING_HOOKS), Main.parseChoice("get fishing hooks", player));
-        assertEquals(new Choice("get", player, Item.FISHING_HOOKS), Main.parseChoice("get fishing hook", player));
-        assertEquals(new Choice("get", player, Item.FISHING_LURES), Main.parseChoice("get fishing lure", player));
-        assertEquals(new Choice("get", player, Item.FISHING_LURES), Main.parseChoice("get fishing lures", player));
-        assertEquals(new Choice("get", player, Item.KNIFE), Main.parseChoice("get knife", player));
-        assertEquals(new Choice("get", player, Item.FLINT_AND_STEEL), Main.parseChoice("get flint and steel", player));
-        assertEquals(new Choice("get", player, Item.BOW), Main.parseChoice("get bow", player));
-        assertEquals(new Choice("get", player, Item.ARROWS), Main.parseChoice("get arrow", player));
-        assertEquals(new Choice("get", player, Item.ARROWS), Main.parseChoice("get arrows", player));
-        assertEquals(new Choice("get", player, Item.FAMILY_PHOTO), Main.parseChoice("get family photo", player));
-        assertEquals(new Choice("get", player, Item.FAMILY_PHOTO), Main.parseChoice("get photo", player));
-        assertEquals(new Choice("get", player, Item.FAMILY_PHOTO), Main.parseChoice("get photograph", player));
-        assertEquals(new Choice("get", player, Item.PARACHUTE_CHORD), Main.parseChoice("get rope", player));
-        assertEquals(new Choice("get", player, Item.PARACHUTE_CHORD), Main.parseChoice("get parachute chord", player));
-        assertEquals(new Choice("get", player, Item.PARACHUTE_CHORD), Main.parseChoice("get cordage", player));
-        assertEquals(new Choice("get", player, Item.FLARE), Main.parseChoice("get flare", player));
-        assertEquals(new Choice("get", player, Item.FLARE), Main.parseChoice("get flares", player));
-        assertEquals(new Choice("get", player, Item.EXTRA_BOOTS), Main.parseChoice("get extra boots", player));
-        assertEquals(new Choice("get", player, Item.EXTRA_BOOTS), Main.parseChoice("get extra boot", player));
-        assertEquals(new Choice("get", player, Item.EXTRA_BOOTS), Main.parseChoice("get boots", player));
-        assertEquals(new Choice("get", player, Item.EXTRA_BOOTS), Main.parseChoice("get boot", player));
-        assertEquals(new Choice("get", player, Item.EXTRA_PANTS), Main.parseChoice("get extra pants", player));
-        assertEquals(new Choice("get", player, Item.EXTRA_PANTS), Main.parseChoice("get pants", player));
-        assertEquals(new Choice("get", player, Item.SLEEPING_GEAR), Main.parseChoice("get sleeping gear", player));
-        assertEquals(new Choice("get", player, Item.SLEEPING_GEAR), Main.parseChoice("get sleeping bag", player));
-        assertEquals(new Choice("get", player, Item.COLD_WEATHER_GEAR), Main.parseChoice("get cold weather gear", player));
-        assertEquals(new Choice("get", player, Item.COLD_WEATHER_GEAR), Main.parseChoice("get cold gear", player));
-        assertEquals(new Choice("get", player, Item.TARP), Main.parseChoice("get tarp", player));
-        assertEquals(new Choice("get", player, Item.MATCHES), Main.parseChoice("get matches", player));
-        assertEquals(new Choice("get", player, Item.MATCHES), Main.parseChoice("get match", player));
-        assertEquals(new Choice("get", player, Item.FIRST_AID_KIT), Main.parseChoice("get first aid kit", player));
-        assertEquals(new Choice("get", player, Item.FIRST_AID_KIT), Main.parseChoice("get first aid", player));
-        assertEquals(new Choice("get", player, Item.FLASHLIGHT), Main.parseChoice("get flashlight", player));
-        assertEquals(new Choice("get", player, Item.FLASHLIGHT), Main.parseChoice("get light", player));
-        assertEquals(new Choice("get", player, Item.BATTERIES), Main.parseChoice("get batteries", player));
-        assertEquals(new Choice("get", player, Item.BATTERIES), Main.parseChoice("get battery", player));
-        assertEquals(new Choice("get", player, Item.WIRE), Main.parseChoice("get wire", player));
-        assertEquals(new Choice("get", player, Item.WIRE), Main.parseChoice("get wires", player));
-        assertEquals(new Choice("get", player, Item.WIRE), Main.parseChoice("get 18 gauge wire", player));
-        assertEquals(new Choice("get", player, Item.WIRE), Main.parseChoice("get snare", player));
-        assertEquals(new Choice("get", player, Item.WIRE), Main.parseChoice("get 18 gauge wires", player));
-        assertEquals(new Choice("get", player, Item.POT), Main.parseChoice("get pot", player));
-        assertEquals(new Choice("get", player, Item.POT), Main.parseChoice("get cooking pot", player));
-        assertEquals(new Choice("get", player, Item.AXE), Main.parseChoice("get axe", player));
-        assertEquals(new Choice("get", player, Item.HATCHET), Main.parseChoice("get hatchet", player));
-        assertEquals(new Choice("get", player, Item.IODINE_TABLETS), Main.parseChoice("get iodine tablets", player));
-        assertEquals(new Choice("get", player, Item.IODINE_TABLETS), Main.parseChoice("get iodine", player));
-        assertEquals(new Choice("get", player, Item.IODINE_TABLETS), Main.parseChoice("get tablets", player));
-        assertEquals(new Choice("get", player, Item.PISTOL), Main.parseChoice("get pistol", player));
-        assertEquals(new Choice("get", player, Item.PISTOL), Main.parseChoice("get gun", player));
-        assertEquals(new Choice("get", player, Item.PISTOL_CARTRIDGES), Main.parseChoice("get ammunition", player));
-        assertEquals(new Choice("get", player, Item.PISTOL_CARTRIDGES), Main.parseChoice("get cartridges", player));
-        assertEquals(new Choice("get", player, Item.PISTOL_CARTRIDGES), Main.parseChoice("get ammo", player));
-        assertEquals(new Choice("get", player, Item.PISTOL_CARTRIDGES), Main.parseChoice("get rounds", player));
-        assertEquals(new Choice("get", player, Item.SHOVEL), Main.parseChoice("get shovel", player));
-        assertEquals(new Choice("get", player, Item.HARMONICA), Main.parseChoice("get harmonica", player));
-        assertEquals(new Choice("get", player, Item.LIGHTER), Main.parseChoice("get lighter", player));
-        assertEquals(new Choice("get", player, Item.SURVIVAL_MANUAL), Main.parseChoice("get survival manual", player));
-        assertEquals(new Choice("get", player, Item.SURVIVAL_MANUAL), Main.parseChoice("get manual", player));
-        assertEquals(new Choice("get", player, Item.JOURNAL), Main.parseChoice("get journal and pen", player));
-        assertEquals(new Choice("get", player, Item.JOURNAL), Main.parseChoice("get journal", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Fishing Line")), Main.parseChoice("get fishing line", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Fishing Line")), Main.parseChoice("get fishing lines", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Fishing Hooks")), Main.parseChoice("get fishing hooks", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Fishing Hooks")), Main.parseChoice("get fishing hook", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Fishing Lures")), Main.parseChoice("get fishing lure", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Fishing Lures")), Main.parseChoice("get fishing lures", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Knife")), Main.parseChoice("get knife", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Flint and Steel")), Main.parseChoice("get flint and steel", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Bow")), Main.parseChoice("get bow", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Arrow")), Main.parseChoice("get arrow", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Arrow")), Main.parseChoice("get arrows", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Family Photo")), Main.parseChoice("get family photo", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Family Photo")), Main.parseChoice("get photo", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Family Photo")), Main.parseChoice("get photograph", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Parachute Chord")), Main.parseChoice("get rope", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Parachute Chord")), Main.parseChoice("get parachute chord", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Parachute Chord")), Main.parseChoice("get cordage", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Flare")), Main.parseChoice("get flare", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Flare")), Main.parseChoice("get flares", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Boots")), Main.parseChoice("get extra boots", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Boots")), Main.parseChoice("get extra boot", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Boots")), Main.parseChoice("get boots", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Boots")), Main.parseChoice("get boot", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pants")), Main.parseChoice("get extra pants", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pants")), Main.parseChoice("get pants", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Sleeping Gear")), Main.parseChoice("get sleeping gear", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Sleeping Gear")), Main.parseChoice("get sleeping bag", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Cold Weather Gear")), Main.parseChoice("get cold weather gear", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Cold Weather Gear")), Main.parseChoice("get cold gear", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Tarp")), Main.parseChoice("get tarp", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Matches")), Main.parseChoice("get matches", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Matches")), Main.parseChoice("get match", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("First Aid Kit")), Main.parseChoice("get first aid kit", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("First Aid Kit")), Main.parseChoice("get first aid", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Flashlight")), Main.parseChoice("get flashlight", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Flashlight")), Main.parseChoice("get light", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Batteries")), Main.parseChoice("get batteries", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Batteries")), Main.parseChoice("get battery", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Wire")), Main.parseChoice("get wire", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Wire")), Main.parseChoice("get wires", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Wire")), Main.parseChoice("get 18 gauge wire", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Wire")), Main.parseChoice("get snare", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Wire")), Main.parseChoice("get 18 gauge wires", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pot")), Main.parseChoice("get pot", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pot")), Main.parseChoice("get cooking pot", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Axe")), Main.parseChoice("get axe", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Hatchet")), Main.parseChoice("get hatchet", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Iodine Tablets")), Main.parseChoice("get iodine tablets", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Iodine Tablets")), Main.parseChoice("get iodine", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Iodine Tablets")), Main.parseChoice("get tablets", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol")), Main.parseChoice("get pistol", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol")), Main.parseChoice("get gun", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol Cartridge")), Main.parseChoice("get ammunition", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol Cartridge")), Main.parseChoice("get cartridges", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol Cartridge")), Main.parseChoice("get ammo", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol Cartridge")), Main.parseChoice("get rounds", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Shovel")), Main.parseChoice("get shovel", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Harmonica")), Main.parseChoice("get harmonica", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Lighter")), Main.parseChoice("get lighter", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Survival Manual")), Main.parseChoice("get survival manual", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Survival Manual")), Main.parseChoice("get manual", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Journal")), Main.parseChoice("get journal and pen", player));
+        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Journal")), Main.parseChoice("get journal", player));
     }
 
     @Test
     public void testParseChoicePut() {
-        assertEquals(new Choice("put", player, Item.FISHING_LINE), Main.parseChoice("put fishing line", player));
-        assertEquals(new Choice("put", player, Item.FISHING_LINE), Main.parseChoice("put fishing lines", player));
-        assertEquals(new Choice("put", player, Item.FISHING_HOOKS), Main.parseChoice("put fishing hooks", player));
-        assertEquals(new Choice("put", player, Item.FISHING_HOOKS), Main.parseChoice("put fishing hook", player));
-        assertEquals(new Choice("put", player, Item.FISHING_LURES), Main.parseChoice("put fishing lure", player));
-        assertEquals(new Choice("put", player, Item.FISHING_LURES), Main.parseChoice("put fishing lures", player));
-        assertEquals(new Choice("put", player, Item.KNIFE), Main.parseChoice("put knife", player));
-        assertEquals(new Choice("put", player, Item.FLINT_AND_STEEL), Main.parseChoice("put flint and steel", player));
-        assertEquals(new Choice("put", player, Item.BOW), Main.parseChoice("put bow", player));
-        assertEquals(new Choice("put", player, Item.ARROWS), Main.parseChoice("put arrow", player));
-        assertEquals(new Choice("put", player, Item.ARROWS), Main.parseChoice("put arrows", player));
-        assertEquals(new Choice("put", player, Item.FAMILY_PHOTO), Main.parseChoice("put family photo", player));
-        assertEquals(new Choice("put", player, Item.FAMILY_PHOTO), Main.parseChoice("put photo", player));
-        assertEquals(new Choice("put", player, Item.FAMILY_PHOTO), Main.parseChoice("put photograph", player));
-        assertEquals(new Choice("put", player, Item.PARACHUTE_CHORD), Main.parseChoice("put rope", player));
-        assertEquals(new Choice("put", player, Item.PARACHUTE_CHORD), Main.parseChoice("put parachute chord", player));
-        assertEquals(new Choice("put", player, Item.PARACHUTE_CHORD), Main.parseChoice("put cordage", player));
-        assertEquals(new Choice("put", player, Item.FLARE), Main.parseChoice("put flare", player));
-        assertEquals(new Choice("put", player, Item.FLARE), Main.parseChoice("put flares", player));
-        assertEquals(new Choice("put", player, Item.EXTRA_BOOTS), Main.parseChoice("put extra boots", player));
-        assertEquals(new Choice("put", player, Item.EXTRA_BOOTS), Main.parseChoice("put extra boot", player));
-        assertEquals(new Choice("put", player, Item.EXTRA_BOOTS), Main.parseChoice("put boots", player));
-        assertEquals(new Choice("put", player, Item.EXTRA_BOOTS), Main.parseChoice("put boot", player));
-        assertEquals(new Choice("put", player, Item.EXTRA_PANTS), Main.parseChoice("put extra pants", player));
-        assertEquals(new Choice("put", player, Item.EXTRA_PANTS), Main.parseChoice("put pants", player));
-        assertEquals(new Choice("put", player, Item.SLEEPING_GEAR), Main.parseChoice("put sleeping gear", player));
-        assertEquals(new Choice("put", player, Item.SLEEPING_GEAR), Main.parseChoice("put sleeping bag", player));
-        assertEquals(new Choice("put", player, Item.COLD_WEATHER_GEAR), Main.parseChoice("put cold weather gear", player));
-        assertEquals(new Choice("put", player, Item.COLD_WEATHER_GEAR), Main.parseChoice("put cold gear", player));
-        assertEquals(new Choice("put", player, Item.TARP), Main.parseChoice("put tarp", player));
-        assertEquals(new Choice("put", player, Item.MATCHES), Main.parseChoice("put matches", player));
-        assertEquals(new Choice("put", player, Item.MATCHES), Main.parseChoice("put match", player));
-        assertEquals(new Choice("put", player, Item.FIRST_AID_KIT), Main.parseChoice("put first aid kit", player));
-        assertEquals(new Choice("put", player, Item.FIRST_AID_KIT), Main.parseChoice("put first aid", player));
-        assertEquals(new Choice("put", player, Item.FLASHLIGHT), Main.parseChoice("put flashlight", player));
-        assertEquals(new Choice("put", player, Item.FLASHLIGHT), Main.parseChoice("put light", player));
-        assertEquals(new Choice("put", player, Item.BATTERIES), Main.parseChoice("put batteries", player));
-        assertEquals(new Choice("put", player, Item.BATTERIES), Main.parseChoice("put battery", player));
-        assertEquals(new Choice("put", player, Item.WIRE), Main.parseChoice("put wire", player));
-        assertEquals(new Choice("put", player, Item.WIRE), Main.parseChoice("put wires", player));
-        assertEquals(new Choice("put", player, Item.WIRE), Main.parseChoice("put 18 gauge wire", player));
-        assertEquals(new Choice("put", player, Item.WIRE), Main.parseChoice("put snare", player));
-        assertEquals(new Choice("put", player, Item.WIRE), Main.parseChoice("put 18 gauge wires", player));
-        assertEquals(new Choice("put", player, Item.POT), Main.parseChoice("put pot", player));
-        assertEquals(new Choice("put", player, Item.POT), Main.parseChoice("put cooking pot", player));
-        assertEquals(new Choice("put", player, Item.AXE), Main.parseChoice("put axe", player));
-        assertEquals(new Choice("put", player, Item.HATCHET), Main.parseChoice("put hatchet", player));
-        assertEquals(new Choice("put", player, Item.IODINE_TABLETS), Main.parseChoice("put iodine tablets", player));
-        assertEquals(new Choice("put", player, Item.IODINE_TABLETS), Main.parseChoice("put iodine", player));
-        assertEquals(new Choice("put", player, Item.IODINE_TABLETS), Main.parseChoice("put tablets", player));
-        assertEquals(new Choice("put", player, Item.PISTOL), Main.parseChoice("put pistol", player));
-        assertEquals(new Choice("put", player, Item.PISTOL), Main.parseChoice("put gun", player));
-        assertEquals(new Choice("put", player, Item.PISTOL_CARTRIDGES), Main.parseChoice("put ammunition", player));
-        assertEquals(new Choice("put", player, Item.PISTOL_CARTRIDGES), Main.parseChoice("put cartridges", player));
-        assertEquals(new Choice("put", player, Item.PISTOL_CARTRIDGES), Main.parseChoice("put ammo", player));
-        assertEquals(new Choice("put", player, Item.PISTOL_CARTRIDGES), Main.parseChoice("put rounds", player));
-        assertEquals(new Choice("put", player, Item.SHOVEL), Main.parseChoice("put shovel", player));
-        assertEquals(new Choice("put", player, Item.HARMONICA), Main.parseChoice("put harmonica", player));
-        assertEquals(new Choice("put", player, Item.LIGHTER), Main.parseChoice("put lighter", player));
-        assertEquals(new Choice("put", player, Item.SURVIVAL_MANUAL), Main.parseChoice("put survival manual", player));
-        assertEquals(new Choice("put", player, Item.SURVIVAL_MANUAL), Main.parseChoice("put manual", player));
-        assertEquals(new Choice("put", player, Item.JOURNAL), Main.parseChoice("put journal and pen", player));
-        assertEquals(new Choice("put", player, Item.JOURNAL), Main.parseChoice("put journal", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Fishing Line")), Main.parseChoice("put fishing line", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Fishing Line")), Main.parseChoice("put fishing lines", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Fishing Hooks")), Main.parseChoice("put fishing hooks", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Fishing Hooks")), Main.parseChoice("put fishing hook", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Fishing Lures")), Main.parseChoice("put fishing lure", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Fishing Lures")), Main.parseChoice("put fishing lures", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Knife")), Main.parseChoice("put knife", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Flint and Steel")), Main.parseChoice("put flint and steel", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Bow")), Main.parseChoice("put bow", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Arrow")), Main.parseChoice("put arrow", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Arrow")), Main.parseChoice("put arrows", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Family Photo")), Main.parseChoice("put family photo", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Family Photo")), Main.parseChoice("put photo", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Family Photo")), Main.parseChoice("put photograph", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Parachute Chord")), Main.parseChoice("put rope", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Parachute Chord")), Main.parseChoice("put parachute chord", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Parachute Chord")), Main.parseChoice("put cordage", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Flare")), Main.parseChoice("put flare", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Flare")), Main.parseChoice("put flares", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Boots")), Main.parseChoice("put extra boots", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Boots")), Main.parseChoice("put extra boot", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Boots")), Main.parseChoice("put boots", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Boots")), Main.parseChoice("put boot", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pants")), Main.parseChoice("put extra pants", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pants")), Main.parseChoice("put pants", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Sleeping Gear")), Main.parseChoice("put sleeping gear", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Sleeping Gear")), Main.parseChoice("put sleeping bag", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Cold Weather Gear")), Main.parseChoice("put cold weather gear", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Cold Weather Gear")), Main.parseChoice("put cold gear", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Tarp")), Main.parseChoice("put tarp", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Matches")), Main.parseChoice("put matches", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Matches")), Main.parseChoice("put match", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("First Aid Kit")), Main.parseChoice("put first aid kit", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("First Aid Kit")), Main.parseChoice("put first aid", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Flashlight")), Main.parseChoice("put flashlight", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Flashlight")), Main.parseChoice("put light", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Batteries")), Main.parseChoice("put batteries", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Batteries")), Main.parseChoice("put battery", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Wire")), Main.parseChoice("put wire", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Wire")), Main.parseChoice("put wires", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Wire")), Main.parseChoice("put 18 gauge wire", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Wire")), Main.parseChoice("put snare", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Wire")), Main.parseChoice("put 18 gauge wires", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pot")), Main.parseChoice("put pot", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pot")), Main.parseChoice("put cooking pot", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Axe")), Main.parseChoice("put axe", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Hatchet")), Main.parseChoice("put hatchet", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Iodine Tablets")), Main.parseChoice("put iodine tablets", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Iodine Tablets")), Main.parseChoice("put iodine", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Iodine Tablets")), Main.parseChoice("put tablets", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol")), Main.parseChoice("put pistol", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol")), Main.parseChoice("put gun", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol Cartridge")), Main.parseChoice("put ammunition", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol Cartridge")), Main.parseChoice("put cartridges", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol Cartridge")), Main.parseChoice("put ammo", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol Cartridge")), Main.parseChoice("put rounds", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Shovel")), Main.parseChoice("put shovel", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Harmonica")), Main.parseChoice("put harmonica", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Lighter")), Main.parseChoice("put lighter", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Survival Manual")), Main.parseChoice("put survival manual", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Survival Manual")), Main.parseChoice("put manual", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Journal")), Main.parseChoice("put journal and pen", player));
+        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Journal")), Main.parseChoice("put journal", player));
     }
 
     @Test
@@ -333,21 +335,21 @@ public class MainTest {
 
     @Test
     public void testParseActivityChoiceGet() {
-        for (Item item : Item.values()) {
+        for (Item item : ItemFactory.getAllItems()) {
             assertEquals(GetItemActivity.getInstance(), parseActivityChoice(new Choice("get", player, item)));
         }
     }
 
     @Test
     public void testParseActivityChoicePut() {
-        for (Item item : Item.values()) {
+        for (Item item : ItemFactory.getAllItems()) {
             assertEquals(PutItemActivity.getInstance(), parseActivityChoice(new Choice("put", player, item)));
         }
     }
 
     @Test
     public void testParseActivityChoiceEat() {
-        for (Food food : Food.values()) {
+        for (Food food : FoodFactory.getAllFood()) {
             assertEquals(EatActivity.getInstance(), parseActivityChoice(new Choice("eat", player, food)));
         }
     }
@@ -405,5 +407,10 @@ public class MainTest {
     @Test
     public void testParseActivityChoiceRest() {
         assertEquals(RestActivity.getInstance(), parseActivityChoice(new Choice("rest", player)));
+    }
+
+    @Test
+    public void temp() {
+        System.out.println(HelperMethods.titleize("there Is nothing Here"));
     }
 }

@@ -1,9 +1,9 @@
 package com.palehorsestudios.alone.gui;
 
 import com.palehorsestudios.alone.Choice;
-import com.palehorsestudios.alone.Food;
+import com.palehorsestudios.alone.Foods.Food;
 import com.palehorsestudios.alone.HelperMethods;
-import com.palehorsestudios.alone.Item;
+import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.activity.*;
 import com.palehorsestudios.alone.dayencounter.BearEncounterDay;
 import com.palehorsestudios.alone.dayencounter.DayEncounter;
@@ -28,11 +28,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -48,7 +47,7 @@ public class GameApp extends Application {
     private String currentInput;
     private Player player;
     private static GameApp instance;
-    private static Set<Item> initItems;
+    private static List<Item> initItems;
     private static final int COUNT_DOWN = 30;
 
     public GameApp() {
@@ -522,7 +521,7 @@ public class GameApp extends Application {
                                 gameController
                                         .getEquipment()
                                         .getItems()
-                                        .add(entry.getValue() + " " + entry.getKey());
+                                        .add(entry.getValue() + " " + entry.getKey().getType());
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

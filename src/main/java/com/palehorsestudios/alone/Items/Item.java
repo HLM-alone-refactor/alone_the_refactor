@@ -1,8 +1,7 @@
 package com.palehorsestudios.alone.Items;
 
-import com.palehorsestudios.alone.Craft.Craft;
-
 import javax.xml.bind.annotation.*;
+import java.util.Objects;
 import java.util.Set;
 
 @XmlRootElement(name = "item")
@@ -37,9 +36,10 @@ public class Item {
      * Copies the contents from the given item into a new instance.
      * @param item
      */
-    public Item(Item item) {
+    Item(Item item) {
         this(item.getType(), item.getDescription(), item.getCraft());
     }
+
 
     public String getType() {
         return type;
@@ -53,6 +53,10 @@ public class Item {
         return craft;
     }
 
+    public boolean isCraftable() {
+        return (craft != null) && craft.size() > 0;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
@@ -60,5 +64,24 @@ public class Item {
                 ", description='" + description + '\'' +
                 ", craft=" + craft +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        boolean type = Objects.equals(getType(), item.getType());
+        boolean description = Objects.equals(getDescription(), item.getDescription());
+        boolean craft = Objects.equals(getCraft(), item.getCraft());
+        return type && description && craft;
+//        return Objects.equals(getType(), item.getType()) &&
+//                Objects.equals(getDescription(), item.getDescription()) &&
+//                Objects.equals(getCraft(), item.getCraft());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType(), getDescription(), getCraft());
     }
 }

@@ -4,7 +4,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.util.NoSuchElementException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class ItemFactory {
 
@@ -34,5 +36,17 @@ public class ItemFactory {
                 .filter(e -> e.getType().equals(type))
                 .findAny()
                 .orElseThrow(IllegalArgumentException::new));
+    }
+
+    public static List<Item> getNewInstances(String ... type) throws IllegalArgumentException {
+        List<Item> result = new ArrayList<>();
+        for (String s : type) {
+            result.add(getNewInstance(s));
+        }
+        return result;
+    }
+
+    public static Set<Item> getAllItems() {
+        return Set.copyOf(all_items.getItems());
     }
 }

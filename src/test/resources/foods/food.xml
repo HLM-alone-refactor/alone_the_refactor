@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<food>
+    <name>Fish</name>
+    <caloriesPerGram>0.84</caloriesPerGram>
+    <grams>3401.94</grams>
+</food>

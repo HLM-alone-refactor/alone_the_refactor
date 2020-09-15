@@ -1,6 +1,7 @@
 package com.palehorsestudios.alone.gui;
 
-import com.palehorsestudios.alone.Item;
+import com.palehorsestudios.alone.Items.Item;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -9,10 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ItemSelectionController {
     @FXML
@@ -85,41 +83,41 @@ public class ItemSelectionController {
     private CheckBox journalandpen;
 
     private static int count = 0;
-    private Set<Item> initItems = new HashSet<>();
+    private List<Item> initItems = new ArrayList<>();
 
     public void selectItems() {
         Map<CheckBox, Item> inventory = new HashMap<>();
-        inventory.put(fishingLine, Item.FISHING_LINE);
-        inventory.put(fishingHooks, Item.FISHING_HOOKS);
-        inventory.put(fishingLures, Item.FISHING_LURES);
-        inventory.put(knife, Item.KNIFE);
-        inventory.put(flintandsteel, Item.FLINT_AND_STEEL);
-        inventory.put(bow, Item.BOW);
-        inventory.put(arrows, Item.ARROWS);
-        inventory.put(familyPhoto, Item.FAMILY_PHOTO);
-        inventory.put(parachuteChord, Item.PARACHUTE_CHORD);
-        inventory.put(flare, Item.FLARE);
-        inventory.put(extraBoots, Item.EXTRA_BOOTS);
-        inventory.put(extraPants, Item.EXTRA_PANTS);
-        inventory.put(sleepingGear, Item.SLEEPING_GEAR);
-        inventory.put(coldWeatherGear, Item.COLD_WEATHER_GEAR);
-        inventory.put(footTarp, Item.TARP);
-        inventory.put(matches, Item.MATCHES);
-        inventory.put(firstAid, Item.FIRST_AID_KIT);
-        inventory.put(flashlight, Item.FLASHLIGHT);
-        inventory.put(extraBatteries, Item.BATTERIES);
-        inventory.put(gaugeWire, Item.WIRE);
-        inventory.put(cookingPot, Item.POT);
-        inventory.put(axe, Item.AXE);
-        inventory.put(hatchet, Item.HATCHET);
-        inventory.put(iodineTablets, Item.IODINE_TABLETS);
-        inventory.put(magnumRevolver, Item.PISTOL);
-        inventory.put(cartridges, Item.PISTOL_CARTRIDGES);
-        inventory.put(shovel, Item.SHOVEL);
-        inventory.put(harmonica, Item.HARMONICA);
-        inventory.put(lighter, Item.LIGHTER);
-        inventory.put(survivalManual, Item.SURVIVAL_MANUAL);
-        inventory.put(journalandpen, Item.JOURNAL);
+        inventory.put(fishingLine, ItemFactory.getNewInstance("Fishing Line"));
+        inventory.put(fishingHooks, ItemFactory.getNewInstance("Fishing Hooks"));
+        inventory.put(fishingLures, ItemFactory.getNewInstance("Fishing Lures"));
+        inventory.put(knife, ItemFactory.getNewInstance("Knife"));
+        inventory.put(flintandsteel, ItemFactory.getNewInstance("Flint and Steel"));
+        inventory.put(bow, ItemFactory.getNewInstance("Bow"));
+        inventory.put(arrows, ItemFactory.getNewInstance("Arrow"));
+        inventory.put(familyPhoto, ItemFactory.getNewInstance("Family Photo"));
+        inventory.put(parachuteChord, ItemFactory.getNewInstance("Parachute Chord"));
+        inventory.put(flare, ItemFactory.getNewInstance("Flare"));
+        inventory.put(extraBoots, ItemFactory.getNewInstance("Boots"));
+        inventory.put(extraPants, ItemFactory.getNewInstance("Pants"));
+        inventory.put(sleepingGear, ItemFactory.getNewInstance("Sleeping Gear"));
+        inventory.put(coldWeatherGear, ItemFactory.getNewInstance("Cold Weather Gear"));
+        inventory.put(footTarp, ItemFactory.getNewInstance("Tarp"));
+        inventory.put(matches, ItemFactory.getNewInstance("Matches"));
+        inventory.put(flashlight, ItemFactory.getNewInstance("Flashlight"));
+        inventory.put(firstAid, ItemFactory.getNewInstance("First Aid Kit"));
+        inventory.put(extraBatteries, ItemFactory.getNewInstance("Batteries"));
+        inventory.put(gaugeWire, ItemFactory.getNewInstance("Wire"));
+        inventory.put(cookingPot, ItemFactory.getNewInstance("Pot"));
+        inventory.put(axe, ItemFactory.getNewInstance("Axe"));
+        inventory.put(hatchet, ItemFactory.getNewInstance("Hatchet"));
+        inventory.put(iodineTablets, ItemFactory.getNewInstance("Iodine Tablets"));
+        inventory.put(magnumRevolver, ItemFactory.getNewInstance("Pistol"));
+        inventory.put(cartridges, ItemFactory.getNewInstance("Pistol Cartridge"));
+        inventory.put(shovel, ItemFactory.getNewInstance("Shovel"));
+        inventory.put(harmonica, ItemFactory.getNewInstance("Harmonica"));
+        inventory.put(lighter, ItemFactory.getNewInstance("Lighter"));
+        inventory.put(survivalManual, ItemFactory.getNewInstance("Survival Manual"));
+        inventory.put(journalandpen, ItemFactory.getNewInstance("Journal"));
 
         for (Map.Entry<CheckBox, Item> entry : inventory.entrySet()) {
             entry
@@ -158,7 +156,7 @@ public class ItemSelectionController {
         return paneSelected;
     }
 
-    public Set<Item> getInitItems() {
+    public List<Item> getInitItems() {
         return initItems;
     }
 }

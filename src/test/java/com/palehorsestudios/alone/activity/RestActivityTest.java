@@ -1,8 +1,8 @@
 package com.palehorsestudios.alone.activity;
 
 import com.palehorsestudios.alone.Choice;
-import com.palehorsestudios.alone.Food;
-import com.palehorsestudios.alone.Item;
+import com.palehorsestudios.alone.Foods.FoodFactory;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.Player;
 import com.palehorsestudios.alone.player.SuccessRate;
 import org.junit.Before;
@@ -27,25 +27,23 @@ public class RestActivityTest {
     @Before
     public void setUp() {
         rest = RestActivity.getInstance();
-        Set<Item> items =
-                new HashSet<>(
-                        Arrays.asList(
-                                Item.AXE,
-                                Item.KNIFE,
-                                Item.FISHING_LINE,
-                                Item.FISHING_HOOKS,
-                                Item.WIRE,
-                                Item.HARMONICA,
-                                Item.FLINT_AND_STEEL,
-                                Item.POT,
-                                Item.FIRST_AID_KIT,
-                                Item.COLD_WEATHER_GEAR));
-        player = new Player(items);
-        player.getShelter().addFoodToCache(Food.FISH, 1000);
-        player.getShelter().addFoodToCache(Food.SQUIRREL, 1000);
-        player.getShelter().addFoodToCache(Food.RABBIT, 1000);
-        player.getShelter().addFoodToCache(Food.PORCUPINE, 1000);
-        player.getShelter().addFoodToCache(Food.MOOSE, 1000);
+        player = new Player(ItemFactory.getNewInstances(
+                "Axe",
+                "Knife",
+                "Fishing Line",
+                "Fishing Hooks",
+                "Wire",
+                "Harmonica",
+                "Flint and Steel",
+                "Pot",
+                "First Aid Kit",
+                "Cold Weather Gear"
+        ));
+        player.getShelter().addFoodToCache(FoodFactory.getNewInstance("Fish"), 1000);
+        player.getShelter().addFoodToCache(FoodFactory.getNewInstance("Squirrel"), 1000);
+        player.getShelter().addFoodToCache(FoodFactory.getNewInstance("Rabbit"), 1000);
+        player.getShelter().addFoodToCache(FoodFactory.getNewInstance("Porcupine"), 1000);
+        player.getShelter().addFoodToCache(FoodFactory.getNewInstance("Moose"), 1000);
     }
 
     @Test

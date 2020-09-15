@@ -1,24 +1,29 @@
 package com.palehorsestudios.alone.Items;
 
-import com.palehorsestudios.alone.xmltesting_delme.Product;
 import junit.framework.TestCase;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.util.Map;
+import java.util.Set;
 
 public class ItemTest extends TestCase {
     Item item;
 
-    public void testtestXmlToObject() throws JAXBException, FileNotFoundException {
-        File file = new File("resources/items/items.xml");
+    @Override
+    public void setUp() throws Exception {
+        File file = new File("src/test/resources/items/item.xml");
         JAXBContext jaxbContext = JAXBContext.newInstance(Item.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         item = (Item) unmarshaller.unmarshal(file);
+    }
 
-        System.out.println(item);
+    public void testXmlToObject() {
+        Item item1 = new Item("knife", "A sharp, short blade.",
+                Set.of(new Craft(Map.of("steel", 1, "wood", 2)),
+                new Craft(Map.of("iron", 1, "wood", 2))));
+        assertEquals(item1, item);
     }
 
 }

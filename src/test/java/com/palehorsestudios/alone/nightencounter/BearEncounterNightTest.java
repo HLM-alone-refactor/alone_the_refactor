@@ -1,17 +1,14 @@
 package com.palehorsestudios.alone.nightencounter;
 
 import com.palehorsestudios.alone.Choice;
-import com.palehorsestudios.alone.Item;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.activity.Activity;
 import com.palehorsestudios.alone.activity.GetItemActivity;
 import com.palehorsestudios.alone.player.Player;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Logger;
 
 import static org.junit.Assert.assertEquals;
@@ -32,12 +29,9 @@ public class BearEncounterNightTest {
 
     @Test
     public void testBearEncounterNightKnifeAndSurvivalManualPlayerLives() {
-        Set<Item> items =
-                new HashSet<>(
-                        Arrays.asList(Item.KNIFE, Item.SURVIVAL_MANUAL));
-        player = new Player(items);
-        player.getShelter().addEquipment(Item.KNIFE, 1);
-        player.getShelter().addEquipment(Item.SURVIVAL_MANUAL, 1);
+        player = new Player(ItemFactory.getNewInstances("Knife", "Survival Manual"));
+        player.getShelter().addEquipment(ItemFactory.getNewInstance("Knife"), 1);
+        player.getShelter().addEquipment(ItemFactory.getNewInstance("Survival Manual"), 1);
         String encounterResult = bearEncounterNight.encounter(player);
         String expectedString =
                 "You wake in the middle of the night... something is nearby. \n"
@@ -63,10 +57,7 @@ public class BearEncounterNightTest {
 
     @Test
     public void testBearEncounterNightNoItemsPlayerDies() {
-        Set<Item> items =
-                new HashSet<>(
-                        Arrays.asList());
-        player = new Player(items);
+        player = new Player(List.of());
         this.player.updateMorale(-1);
         String encounterResult = bearEncounterNight.encounter(player);
         Map foodCacheExpected = player.getShelter().getFoodCache();
@@ -101,10 +92,7 @@ public class BearEncounterNightTest {
 
     @Test
     public void testBearEncounterNightNoItemsPlayerLives() {
-        Set<Item> items =
-                new HashSet<>(
-                        Arrays.asList());
-        player = new Player(items);
+        player = new Player(List.of());
         String encounterResult = bearEncounterNight.encounter(player);
         Map foodCacheExpected = player.getShelter().getFoodCache();
         String expectedString =
@@ -135,12 +123,9 @@ public class BearEncounterNightTest {
 
     @Test
     public void testBearEncounterNightWithPistolAndCartridgesItems() {
-        Set<Item> items =
-                new HashSet<>(
-                        Arrays.asList(Item.PISTOL_CARTRIDGES, Item.PISTOL));
-        player = new Player(items);
-        getItemFromShelter.act(new Choice("pistol", player, (Item.PISTOL)));
-        getItemFromShelter.act(new Choice("ammo", player, (Item.PISTOL_CARTRIDGES)));
+        player = new Player(ItemFactory.getNewInstances("Pistol Cartridge", "Pistol"));
+        getItemFromShelter.act(new Choice("pistol", player, (ItemFactory.getNewInstance("Pistol"))));
+        getItemFromShelter.act(new Choice("ammo", player, (ItemFactory.getNewInstance("Pistol Cartridge"))));
         String encounterResult = bearEncounterNight.encounter(player);
         String expectedString =
                 "You wake in the middle of the night... something is nearby. \n"
@@ -164,9 +149,9 @@ public class BearEncounterNightTest {
 
     @Test
     public void testBearEncounterNightWithKnifeAndSurvivalManualItemsPlayerSurvives() {
-        player.getShelter().addEquipment(Item.KNIFE, 1);
-        player.getShelter().addEquipment(Item.SURVIVAL_MANUAL, 1);
-        getItemFromShelter.act(new Choice("knife", player, (Item.KNIFE)));
+        player.getShelter().addEquipment(ItemFactory.getNewInstance("Knife"), 1);
+        player.getShelter().addEquipment(ItemFactory.getNewInstance("Survival Manual"), 1);
+        getItemFromShelter.act(new Choice("knife", player, (ItemFactory.getNewInstance("Knife"))));
         String encounterResult = bearEncounterNight.encounter(player);
         String expectedString =
                 "You wake in the middle of the night... something is nearby. \n"

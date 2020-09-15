@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <item>
+        <type>knife</type>
+        <description>A sharp, short blade.</description>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>wood</key>
+                    <value>2</value>
+                </entry>
+                <entry>
+                    <key>steel</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>wood</key>
+                    <value>2</value>
+                </entry>
+                <entry>
+                    <key>iron</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
+    </item>
+
+    <item>
+        <type>sword</type>
+        <description>A sharp, long blade.</description>
+    </item>
+</items>

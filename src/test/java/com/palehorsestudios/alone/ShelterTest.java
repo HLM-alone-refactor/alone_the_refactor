@@ -1,5 +1,8 @@
 package com.palehorsestudios.alone;
 
+import com.palehorsestudios.alone.Foods.Food;
+import com.palehorsestudios.alone.Foods.FoodFactory;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,38 +23,38 @@ public class ShelterTest {
 
     @Test
     public void testAddFoodToCacheHappy() {
-        shelter.addFoodToCache(Food.FISH, 1000);
-        assertEquals(Optional.of(1000.0).get(), shelter.getFoodCache().get(Food.FISH));
+        shelter.addFoodToCache(FoodFactory.getNewInstance("Fish"), 1000);
+        assertEquals(Optional.of(1000.0).get(), shelter.getFoodCache().get(FoodFactory.getNewInstance("Fish")));
     }
 
     @Test
     public void testRemoveFoodHappy() {
-        shelter.addFoodToCache(Food.SQUIRREL, 1000.0);
-        assertEquals(500.0, shelter.removeFoodFromCache(Food.SQUIRREL, 500.0), 0.001);
-        assertEquals(500.0, shelter.getFoodCache().get(Food.SQUIRREL), 0.001);
+        shelter.addFoodToCache(FoodFactory.getNewInstance("Squirrel"), 1000.0);
+        assertEquals(500.0, shelter.removeFoodFromCache(FoodFactory.getNewInstance("Squirrel"), 500.0), 0.001);
+        assertEquals(500.0, shelter.getFoodCache().get(FoodFactory.getNewInstance("Squirrel")), 0.001);
     }
 
     @Test
     public void testRemoveFoodFail() {
-        assertEquals(0.0, shelter.removeFoodFromCache(Food.RABBIT, 2000.0), 0.001);
+        assertEquals(0.0, shelter.removeFoodFromCache(FoodFactory.getNewInstance("Rabbit"), 2000.0), 0.001);
     }
 
     @Test
     public void addEquipmentHappy() {
-        shelter.addEquipment(Item.WIRE, 1);
-        assertEquals(1, shelter.getEquipment().get(Item.WIRE), 0.0);
+        shelter.addEquipment(ItemFactory.getNewInstance("Wire"), 1);
+        assertEquals(1, shelter.getEquipment().get(ItemFactory.getNewInstance("Wire")), 0.0);
     }
 
     @Test
     public void removeEquipmentHappy() {
-        shelter.addEquipment(Item.FISHING_HOOKS, 3);
-        assertEquals(1, shelter.removeEquipment(Item.FISHING_HOOKS, 1));
-        assertEquals(Optional.of(2).get(), shelter.getEquipment().get(Item.FISHING_HOOKS));
+        shelter.addEquipment(ItemFactory.getNewInstance("Fishing Hooks"), 3);
+        assertEquals(1, shelter.removeEquipment(ItemFactory.getNewInstance("Fishing Hooks"), 1));
+        assertEquals(Optional.of(2).get(), shelter.getEquipment().get(ItemFactory.getNewInstance("Fishing Hooks")));
     }
 
     @Test
     public void removeEquipmentFail() {
-        assertEquals(0, shelter.removeEquipment(Item.FAMILY_PHOTO, 500));
+        assertEquals(0, shelter.removeEquipment(ItemFactory.getNewInstance("Family Photo"), 500));
     }
 
     @Test

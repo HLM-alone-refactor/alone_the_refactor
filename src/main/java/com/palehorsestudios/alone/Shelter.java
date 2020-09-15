@@ -1,6 +1,8 @@
 package com.palehorsestudios.alone;
 
 import com.google.common.collect.ImmutableMap;
+import com.palehorsestudios.alone.Foods.Food;
+import com.palehorsestudios.alone.Items.Item;
 
 import java.util.HashMap;
 import java.util.Map;
