@@ -10,10 +10,10 @@ import java.util.Set;
 
 public class ItemFactory {
 
-    private static Items all_items = getGameItems();
+    private static final Items ALL_ITEMS = getGameItems();
 
     private ItemFactory() {
-
+        // do nothing for static class
     }
 
     private static Items getGameItems() {
@@ -31,7 +31,7 @@ public class ItemFactory {
     }
 
     public static Item getNewInstance(String type) throws IllegalArgumentException {
-        return new Item(all_items.getItems()
+        return new Item(ALL_ITEMS.getItems()
                 .stream()
                 .filter(e -> e.getType().equals(type))
                 .findAny()
@@ -47,6 +47,10 @@ public class ItemFactory {
     }
 
     public static Set<Item> getAllItems() {
-        return Set.copyOf(all_items.getItems());
+        return Set.copyOf(ALL_ITEMS.getItems());
+    }
+
+    private static Set<Item> getAll() {
+        return getAllItems();
     }
 }

@@ -2,7 +2,7 @@ package com.palehorsestudios.alone.gui;
 
 import com.palehorsestudios.alone.Choice;
 import com.palehorsestudios.alone.Foods.Food;
-import com.palehorsestudios.alone.HelperMethods;
+import com.palehorsestudios.alone.util.HelperMethods;
 import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.activity.*;
 import com.palehorsestudios.alone.dayencounter.BearEncounterDay;
@@ -33,11 +33,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.palehorsestudios.alone.Main.parseActivityChoice;
-import static com.palehorsestudios.alone.Main.parseChoice;
+import static com.palehorsestudios.alone.util.Parser.parseActivityChoice;
+import static com.palehorsestudios.alone.util.Parser.parseChoice;
 import static javafx.util.Duration.seconds;
 
 public class GameApp extends Application {

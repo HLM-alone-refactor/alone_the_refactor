@@ -1,4 +1,6 @@
-package com.palehorsestudios.alone;
+package com.palehorsestudios.alone.util;
+
+import org.tartarus.snowball.ext.PorterStemmer;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -6,6 +8,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class HelperMethods {
+
     /**
      * Helper method for rounding double values. Thank you to https://www.baeldung.com/java-round-decimal-number
      *

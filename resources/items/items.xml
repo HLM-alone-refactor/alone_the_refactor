@@ -6,7 +6,7 @@
         <craft>
             <requirements>
                 <entry>
-                    <key>wire</key>
+                    <key>Wire</key>
                     <value>1</value>
                 </entry>
             </requirements>
@@ -134,11 +134,14 @@
     <item>
         <type>Family Photo</type>
         <description>A photo of your family. In color too.</description>
+        <synonym></synonym>
     </item>
 
     <item>
         <type>Parachute Chord</type>
         <description>Parachute chord. This stuff is very strong.</description>
+        <synonym>Rope</synonym>
+        <synonym>Cordage</synonym>
     </item>
 
     <item>
