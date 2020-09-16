@@ -1,7 +1,5 @@
 package com.palehorsestudios.alone.util;
 
-import org.tartarus.snowball.ext.PorterStemmer;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
@@ -24,6 +22,11 @@ public class HelperMethods {
         return bd.doubleValue();
     }
 
+    /**
+     * Converts grams to appropiate weight unit
+     * @param grams
+     * @return amount in appropiate unit
+     */
     public static String getLargestFoodUnit(double grams) {
         StringBuilder sb = new StringBuilder();
         if (grams > 456) {
@@ -42,6 +45,11 @@ public class HelperMethods {
         return sb.toString();
     }
 
+    /**
+     * Capitalizes each word in a given string, excluding 'and', 'is', and 'of'
+     * @param input
+     * @return
+     */
     public static String titleize(String input) {
         return Arrays.stream(input.split(" "))
                 .map(HelperMethods::capitalize)
@@ -50,6 +58,12 @@ public class HelperMethods {
                 .replaceAll(" Is ", " is ")
                 .replaceAll(" Of ", " of ");
     }
+
+    /**
+     * Capitalize the given string (uppercase first character)
+     * @param input
+     * @return
+     */
     public static String capitalize(String input) {
         return input.substring(0,1).toUpperCase() + input.substring(1);
     }

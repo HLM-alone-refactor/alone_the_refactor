@@ -50,7 +50,4 @@ public class ItemFactory {
         return Set.copyOf(ALL_ITEMS.getItems());
     }
 
-    private static Set<Item> getAll() {
-        return getAllItems();
-    }
 }

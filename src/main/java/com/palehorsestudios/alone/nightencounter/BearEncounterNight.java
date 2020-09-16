@@ -6,6 +6,8 @@ import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.Player;
 
+import java.util.Set;
+
 public class BearEncounterNight extends NightEncounter {
 
     private static NightEncounter encounter;

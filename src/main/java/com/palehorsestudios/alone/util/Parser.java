@@ -15,46 +15,78 @@ import java.util.stream.Collectors;
 
 public class Parser {
 
-    private static final PorterStemmer STEMMER =  new PorterStemmer();
-    private static final Map<String, Activity> ACTIVITIES = getActivities();
-    private static final Map<String, String> PARSERS = getParsers();
+    private static final PorterStemmer STEMMER = new PorterStemmer(); // object to find the stem of words
+    private static final Map<String, Activity> ACTIVITIES = getActivities(); // activity map
+    private static final Map<String, String> PARSERS = getParsers(); // stem to correct version (for getting correct activity)
     private static final Map<String, String> ITEM_STEM_MAP = makeStemMapping(ItemFactory.getAllItems(), Item::getType,
-            Optional.of(Item::getSynonym));
-    private static final Map<String, String> FOOD_STEM_MAP = makeStemMapping(FoodFactory.getAllFood(), Food::toString);
+            Optional.of(Item::getSynonym)); // stem to correct item type
+    private static final Map<String, String> FOOD_STEM_MAP = makeStemMapping(FoodFactory.getAllFood(), Food::toString); // stem to correct food type
 
+
+    /**
+     * @param choice
+     * @return
+     */
+    public static Activity parseActivityChoice(Choice choice) {
+        if (choice == null) {
+            return null;
+        } else {
+            return Objects.requireNonNullElse(ACTIVITIES.get(choice.getKeyword()), RestActivity.getInstance());
+        }
+    }
+
+
+    /**
+     * Parses the given input to get a choice object. Filters out to find the keyword needed for getting the correct
+     * activity.
+     *
+     * @param input  String to parse
+     * @param player
+     * @return constructed choice from parsing. If not an activity, returns null.
+     */
     public static Choice parseChoice(String input, Player player) {
         // make sure input is lowercase
         input = input.toLowerCase();
 
+        // find the activity key from activity map
+        String keyword = findKey(input);
+
         // set up needed variables
         Choice choice = null;
-        String keyword = findKey(input);
+
         Food food;
         Item item;
 
+        // set up choice object
         if (keyword != null) {
-            if (keyword.equals("eat")) {
+            if (keyword.equals("eat")) { // needs figure out what food is being eaten
                 try {
                     food = FoodFactory.getNewInstance(getStemMapValue(input, FOOD_STEM_MAP));
                     choice = new Choice(keyword, player, food);
                 } catch (IllegalArgumentException e) {
                     // do nothing
+                    // was not a legal food
                 }
 
-            } else if (keyword.equals("get") || keyword.equals("put")) {
+            } else if (keyword.equals("get") || keyword.equals("put")) { // needs to figure out what item is being used
                 try {
                     item = ItemFactory.getNewInstance(getStemMapValue(input, ITEM_STEM_MAP));
                     choice = new Choice(keyword, player, item);
                 } catch (IllegalArgumentException e) {
                     // do nothing
+                    // was not a legal item
                 }
-            } else {
+            } else { // doesn't need other things, only keyword and player
                 choice = new Choice(keyword, player);
             }
         }
         return choice;
     }
 
+    /*
+    Get the value from given map via the input. This assumes input is '<action> <thing>' where trying to figure out what
+    <thing> is.
+     */
     private static String getStemMapValue(String input, Map<String, String> map) {
         String result = null;
 
@@ -69,6 +101,15 @@ public class Parser {
         return result;
     }
 
+    /*
+    Finds the key from PARSERS to be used for correct lookup in activities map. If the input has 'get', checks if rest
+    of input is another key in activites, and switches to that one if found.
+
+    e.g.    'get water' -> water
+            'get knife' -> get
+            'get fish' -> fish
+            'get fishing line' -> get
+     */
     private static String findKey(String input) {
         String key = null;
         String[] words = input.split(" ");
@@ -90,6 +131,9 @@ public class Parser {
         return PARSERS.get(key); // returns null if key is null or not found
     }
 
+    /*
+    makes activities map to be used. These are all of the keywords to refer to an activity
+     */
     private static Map<String, Activity> getActivities() {
         return new HashMap<>() {{
             put("get", GetItemActivity.getInstance());
@@ -110,13 +154,18 @@ public class Parser {
         }};
     }
 
+    /*
+    make the stem map from stem -> activity keyword. Add synonyms of keywords to add more versatility in how to reference
+    activities.
+     */
     private static Map<String, String> getParsers() {
+        // get all of the keywords in activities, and stem each one
         Map<String, String> result = ACTIVITIES.keySet()
                 .stream()
                 .collect(Collectors.toMap(Parser::stemIt, e -> e));
 
         // input some synonyms for things to parse with
-        addToParser(result,"rest", Set.of("nap", "break", "relax"));
+        addToParser(result, "rest", Set.of("nap", "break", "relax"));
         addToParser(result, "hunt", Set.of("kill"));
         addToParser(result, "improve", Set.of("camp", "shelter"));
         addToParser(result, "morale", Set.of("write", "play", "look"));
@@ -125,18 +174,16 @@ public class Parser {
         return result;
     }
 
+    /*
+    adds each synonym to the given map, stem(synonym) is key, target is the activity it is mapping to
+     */
     private static void addToParser(Map<String, String> map, String target, Set<String> synonym) {
         synonym.forEach(e -> map.put(stemIt(e), target));
     }
 
-    public static Activity parseActivityChoice(Choice choice) {
-        if (choice == null) {
-            return null;
-        } else {
-            return Objects.requireNonNullElse(ACTIVITIES.get(choice.getKeyword()), RestActivity.getInstance());
-        }
-    }
-
+    /*
+    Stems the given string and returns its stemmed value. Ensure lowercase (some strings behave erratic with cases)
+     */
     public static String stemIt(String input) {
         input = input.strip().toLowerCase();
         STEMMER.setCurrent(HelperMethods.capitalize(input));
@@ -145,9 +192,13 @@ public class Parser {
     }
 
 
+    /*
+    Refers to other mapping function
+     */
     private static <T> Map<String, String> makeStemMapping(Set<T> things, Function<T, String> function) {
         return makeStemMapping(things, function, Optional.empty());
     }
+
     // stem each thing and put it in a mapping. If spaces between thing's function's return, add all of them to mapping
     // as well
     private static <T> Map<String, String> makeStemMapping(Set<T> things, Function<T, String> function,
@@ -168,11 +219,15 @@ public class Parser {
         return result;
     }
 
+    /*
+    splits str on white spaces and attempts to add it to the given map (stem each part for the key), maps to passed
+    target string. Also adds entire str to map for multi word possibilities.
+     */
     private static void updateMap(Map<String, String> map, String str, String target) {
         for (String s : str.split(" ")) {
             map.put(stemIt(s), target);
         }
-        if (map.get(stemIt(str)) != target)
-        map.put(stemIt(str), target);
+        if (!map.get(stemIt(str)).equals(target))
+            map.put(stemIt(str), target);
     }
 }
