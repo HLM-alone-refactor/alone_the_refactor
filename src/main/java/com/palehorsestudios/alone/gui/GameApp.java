@@ -197,11 +197,14 @@ public class GameApp extends Application {
     // game thread logic, so we should also wrap the UI access calls
     private void executeGameLoop() {
         player = new Player(initItems);
+
         // flag for encounter results
         boolean encounterDeath = false;
         boolean encounterRescue = false;
+
         // encounter results
         String encounterResults = "Killed by the encounter";
+
         // must run in ui thread
         Platform.runLater(
                 new Runnable() {
@@ -211,18 +214,24 @@ public class GameApp extends Application {
                         getNarrative(new File("resources/scene1.txt"));
                     }
                 });
-        final int[] day = {1};
-        final String[] dayHalf = {"Morning"};
-        gameController.getDateAndTime().setText("Day " + day[0] + " " + dayHalf[0]);
-        while (!player.isDead() && !player.isRescued() && !player.isRescued(day[0])) {
+
+        int day = 1; // which day
+        String dayHalf = "Morning"; // which part of day
+
+        gameController.getDateAndTime().setText("Day " + day + " " + dayHalf);
+
+        while (!player.isDead() && !player.isRescued() && !player.isRescued(day)) {
             // update the UI fields
             updateUI();
+
+            // find the action user wants to do
             String input = getInput();
             Choice choice = parseChoice(input, player);
             Activity activity = parseActivityChoice(choice);
-            if (activity == null) {
+
+            if (activity == null) { // no activity, must be startup
                 getNarrative(new File("resources/parserHelp.txt"));
-            } else if (activity == EatActivity.getInstance()
+            } else if (activity == EatActivity.getInstance() // if any of these activities, don't increment day/dayhalf
                     || activity == DrinkWaterActivity.getInstance()
                     || activity == GetItemActivity.getInstance()
                     || activity == PutItemActivity.getInstance()
@@ -230,35 +239,43 @@ public class GameApp extends Application {
                 String activityResult = activity.act(choice);
                 gameController
                         .getDailyLog()
-                        .appendText("Day " + day[0] + " " + dayHalf[0] + ": " + activityResult + "\n");
-            } else {
-                final int[] seed = {(int) Math.floor(Math.random() * 10)};
+                        .appendText("Day " + day + " " + dayHalf + ": " + activityResult + "\n");
+            } else { // do activity or have an encounter
+                double seed = Math.random();
                 String activityResult;
-                if (seed[0] > 7) {
+
+                if (seed > 0.7) { // 30% of time hit an encounter
                     DayEncounter[] dayEncounters = new DayEncounter[]{
                             BearEncounterDay.getInstance(),
                             RescueHelicopterDay.getInstance()};
+
                     int randomDayEncounterIndex = (int) Math.floor(Math.random() * dayEncounters.length);
                     activityResult = dayEncounters[randomDayEncounterIndex].encounter(player);
+
                     if (player.isDead()) {
                         encounterDeath = true;
                     } else if (player.isRescued()) {
                         encounterRescue = true;
                     }
+
                     encounterResults = activityResult;
-                } else {
+
+                } else { // do activity
                     activityResult = activity.act(choice);
                 }
+
                 gameController
                         .getDailyLog()
-                        .appendText("Day " + day[0] + " " + dayHalf[0] + ": " + activityResult + "\n");
-                if (dayHalf[0].equals("Morning")) {
-                    dayHalf[0] = "Afternoon";
-                } else {
-                    if (!player.isDead() && !player.isRescued(day[0])) {
-                        seed[0] = (int) Math.floor(Math.random() * 10);
+                        .appendText("Day " + day + " " + dayHalf + ": " + activityResult + "\n");
+
+                if (dayHalf.equals("Morning")) {
+                    dayHalf = "Afternoon"; // transition to afternoon
+                } else { // transition to night
+                    if (!player.isDead() && !player.isRescued(day)) { // still in game
+                        seed = Math.random();
                         String nightResult;
-                        if (seed[0] > 7) {
+
+                        if (seed > 0.7) { // 30% of time hit encounter
                             NightEncounter[] nightEncounters =
                                     new NightEncounter[]{
                                             RainStorm.getInstance(),
@@ -276,21 +293,24 @@ public class GameApp extends Application {
                         } else {
                             nightResult = overnightStatusUpdate(player);
                         }
+
                         gameController
                                 .getDailyLog()
-                                .appendText("Day " + day[0] + " Night: " + nightResult + "\n");
-                        dayHalf[0] = "Morning";
-                        day[0]++;
+                                .appendText("Day " + day + " Night: " + nightResult + "\n");
+                        dayHalf = "Morning";
+                        day++;
                     }
                 }
-                gameController.getDateAndTime().setText("Day " + day[0] + " " + dayHalf[0]);
+                gameController.getDateAndTime().setText("Day " + day + " " + dayHalf);
             }
         }
+
         gameController.getPlayerInput().setVisible(false);
         gameController.getEnterButton().setVisible(false);
         updateUI();
         getGameController().getGameOver().setVisible(true);
         getGameController().getGameOver().setStyle("-fx-text-alignment: center");
+
         if (player.isDead()) {
             if (encounterDeath) {
                 getGameController().getGameOver().appendText("GAME OVER\n" + encounterResults);
