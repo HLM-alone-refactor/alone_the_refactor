@@ -82,15 +82,12 @@ public class GameWindowController extends BaseController implements Initializabl
     private Player player;
     private static List<Item> initItems;
     private final InputSignal inputSignal = new InputSignal();
+    public static class InputSignal { }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         runGameThread();
     }
-
-    public static class InputSignal {
-    }
-
 
     public GameWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
         super(gameManager, viewFactory, fxmlName);

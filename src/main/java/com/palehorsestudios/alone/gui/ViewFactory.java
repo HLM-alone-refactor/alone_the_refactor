@@ -19,8 +19,15 @@ public class ViewFactory {
         this.activeStages = new ArrayList<>();
     }
 
+    public void showGameMenuWindow() {
+        System.out.println("show game menu window called");
+
+        BaseController controller = new GameMenuWindowController(gameManager,this, "view/gameMenu.fxml");
+        initializeStage(controller);
+    }
+
     public void showIntroWindow() {
-        System.out.println("Show Intro window called");
+        System.out.println("show Intro window called");
 
         BaseController controller = new IntroWindowController(gameManager,this, "view/intro.fxml");
         initializeStage(controller);
@@ -34,7 +41,7 @@ public class ViewFactory {
     }
 
     public void showGameWindow() {
-        System.out.println("Show select items window called");
+        System.out.println("how game window called");
 
         BaseController controller = new GameWindowController(gameManager,this, "view/game.fxml");
         initializeStage(controller);
@@ -43,7 +50,7 @@ public class ViewFactory {
     public void showGameOver() {
         System.out.println("Show game over window");
 
-        BaseController controller = new GameOverController(gameManager, this, "view/gameOver.fxml");
+        BaseController controller = new GameOverWindowController(gameManager, this, "view/gameOver.fxml");
         initializeStage(controller);
     }
 
