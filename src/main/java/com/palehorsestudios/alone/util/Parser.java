@@ -94,8 +94,7 @@ public class Parser {
             put("hunt", HuntActivity.getInstance());
             put("trap", TrapActivity.getInstance());
             put("forage", ForageActivity.getInstance());
-            put("camp", ImproveShelterActivity.getInstance());
-            put("shelter", ImproveShelterActivity.getInstance());
+            put("improve", ImproveShelterActivity.getInstance());
             put("gather", GatherFirewoodActivity.getInstance());
             put("fire", BuildFireActivity.getInstance());
             put("water", GetWaterActivity.getInstance());
@@ -106,9 +105,21 @@ public class Parser {
     }
 
     private static Map<String, String> getParsers() {
-        return ACTIVITIES.keySet()
+        Map<String, String> result = ACTIVITIES.keySet()
                 .stream()
                 .collect(Collectors.toMap(Parser::stemIt, e -> e));
+
+        // input some synonyms for things to parse with
+        addToParsers(result,"rest", Set.of("nap", "break", "relax"));
+        addToParsers(result, "hunt", Set.of("kill"));
+        addToParsers(result, "improve", Set.of("camp", "shelter"));
+        addToParsers(result, "morale", Set.of("write", "play", "look"));
+
+        return result;
+    }
+
+    private static void addToParsers(Map<String, String> map, String target, Set<String> synonym) {
+        synonym.forEach(e -> map.put(stemIt(e), target));
     }
 
     public static Activity parseActivityChoice(Choice choice) {
@@ -120,7 +131,7 @@ public class Parser {
     }
 
     public static String stemIt(String input) {
-        STEMMER.setCurrent(input);
+        STEMMER.setCurrent(HelperMethods.capitalize(input));
         STEMMER.stem();
         return STEMMER.getCurrent().toLowerCase();
     }
@@ -140,6 +151,12 @@ public class Parser {
             otherFun.ifPresent(tSetFunction -> tSetFunction.apply(thing).forEach(e -> updateMap(result, e, name)));
         }
 
+        // ensure their names where not overwritten when calling updateMap. May happen while trying to get many combos
+        for (T thing : things) {
+            String name = function.apply(thing);
+            result.put(stemIt(name), name);
+        }
+
         return result;
     }
 
@@ -147,6 +164,7 @@ public class Parser {
         for (String s : str.split(" ")) {
             map.put(stemIt(s), target);
         }
+        if (map.get(stemIt(str)) != target)
         map.put(stemIt(str), target);
     }
 }

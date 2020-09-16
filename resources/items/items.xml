@@ -134,7 +134,7 @@
     <item>
         <type>Family Photo</type>
         <description>A photo of your family. In color too.</description>
-        <synonym></synonym>
+        <synonym>Photograph</synonym>
     </item>
 
     <item>
@@ -162,11 +162,13 @@
     <item>
         <type>Sleeping Gear</type>
         <description>Sleeping bag and pillow. Allows for comfortable resting</description>
+        <synonym>Sleeping Bag</synonym>
     </item>
 
     <item>
         <type>Cold Weather Gear</type>
         <description>Cold weather gear. This will keep you warmer during those cold flashes</description>
+        <synonym>Cold Gear</synonym>
     </item>
 
     <item>
@@ -182,11 +184,13 @@
     <item>
         <type>First Aid Kit</type>
         <description>A first aid kit, heals some broken wounds</description>
+        <synonym>First Aid</synonym>
     </item>
 
     <item>
         <type>Flashlight</type>
         <description>A bright flashlight</description>
+        <synonym>Light</synonym>
     </item>
 
     <item>
@@ -197,11 +201,14 @@
     <item>
         <type>Wire</type>
         <description>18 gauge wire</description>
+        <synonym>18 Gauge Wire</synonym>
+        <synonym>Snare</synonym>
     </item>
 
     <item>
         <type>Pot</type>
         <description>A cooking pot</description>
+        <synonym>Cooking Pot</synonym>
     </item>
 
     <item>
@@ -217,21 +224,28 @@
     <item>
         <type>Iodine Tablets</type>
         <description>Iodine Tablets</description>
+        <synonym>Iodine</synonym>
     </item>
 
     <item>
         <type>Pistol</type>
         <description>A 9M Berreta in good condition</description>
+        <synonym>Gun</synonym>
     </item>
 
     <item>
         <type>Pistol Round</type>
         <description>A 9M pistol round</description>
+        <synonym>Round</synonym>
     </item>
 
     <item>
         <type>Pistol Cartridge</type>
         <description>A pistol cartridge, fits 12 pistol rounds</description>
+        <synonym>Magazine</synonym>
+        <synonym>Mag</synonym>
+        <synonym>Ammo</synonym>
+        <synonym>Ammunition</synonym>
     </item>
 
     <item>
@@ -252,6 +266,7 @@
     <item>
         <type>Survival Manual</type>
         <description>A manual for how to survive in the wilderness.</description>
+        <synonym>Manual</synonym>
     </item>
 
     <item>

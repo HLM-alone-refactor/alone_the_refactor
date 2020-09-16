@@ -61,10 +61,6 @@ public class ParserTest {
         assertEquals(new Choice("hunt", player), Parser.parseChoice("kill squirrel", player));
         assertEquals(new Choice("hunt", player), Parser.parseChoice("kill rabbit", player));
         assertEquals(new Choice("hunt", player), Parser.parseChoice("kill porcupine", player));
-        assertEquals(new Choice("hunt", player), Parser.parseChoice("get moose", player));
-        assertEquals(new Choice("hunt", player), Parser.parseChoice("get squirrel", player));
-        assertEquals(new Choice("hunt", player), Parser.parseChoice("get rabbit", player));
-        assertEquals(new Choice("hunt", player), Parser.parseChoice("get porcupine", player));
     }
 
     @Test
@@ -72,24 +68,6 @@ public class ParserTest {
         assertEquals(new Choice("forage", player), Parser.parseChoice("forage", player));
         assertEquals(new Choice("forage", player), Parser.parseChoice("go forage", player));
         assertEquals(new Choice("forage", player), Parser.parseChoice("go foraging", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("hunt bug", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("hunt bugs", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("hunt mushrooms", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("hunt mushroom", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("hunt berry", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("hunt berries", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("get bug", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("get bugs", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("get mushrooms", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("get mushroom", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("get berry", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("get berries", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("kill bug", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("kill bugs", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("kill mushrooms", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("kill mushroom", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("kill berry", player));
-        assertEquals(new Choice("forage", player), Parser.parseChoice("kill berries", player));
     }
 
     @Test
@@ -133,11 +111,8 @@ public class ParserTest {
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Parachute Chord")), Parser.parseChoice("get cordage", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Flare")), Parser.parseChoice("get flare", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Flare")), Parser.parseChoice("get flares", player));
-        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Boots")), Parser.parseChoice("get extra boots", player));
-        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Boots")), Parser.parseChoice("get extra boot", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Boots")), Parser.parseChoice("get boots", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Boots")), Parser.parseChoice("get boot", player));
-        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pants")), Parser.parseChoice("get extra pants", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pants")), Parser.parseChoice("get pants", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Sleeping Gear")), Parser.parseChoice("get sleeping gear", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Sleeping Gear")), Parser.parseChoice("get sleeping bag", player));
@@ -163,19 +138,16 @@ public class ParserTest {
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Hatchet")), Parser.parseChoice("get hatchet", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Iodine Tablets")), Parser.parseChoice("get iodine tablets", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Iodine Tablets")), Parser.parseChoice("get iodine", player));
-        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Iodine Tablets")), Parser.parseChoice("get tablets", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol")), Parser.parseChoice("get pistol", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol")), Parser.parseChoice("get gun", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol Cartridge")), Parser.parseChoice("get ammunition", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol Cartridge")), Parser.parseChoice("get cartridges", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol Cartridge")), Parser.parseChoice("get ammo", player));
-        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Pistol Cartridge")), Parser.parseChoice("get rounds", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Shovel")), Parser.parseChoice("get shovel", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Harmonica")), Parser.parseChoice("get harmonica", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Lighter")), Parser.parseChoice("get lighter", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Survival Manual")), Parser.parseChoice("get survival manual", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Survival Manual")), Parser.parseChoice("get manual", player));
-        assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Journal")), Parser.parseChoice("get journal and pen", player));
         assertEquals(new Choice("get", player, ItemFactory.getNewInstance("Journal")), Parser.parseChoice("get journal", player));
     }
 
@@ -200,11 +172,8 @@ public class ParserTest {
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Parachute Chord")), Parser.parseChoice("put cordage", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Flare")), Parser.parseChoice("put flare", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Flare")), Parser.parseChoice("put flares", player));
-        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Boots")), Parser.parseChoice("put extra boots", player));
-        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Boots")), Parser.parseChoice("put extra boot", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Boots")), Parser.parseChoice("put boots", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Boots")), Parser.parseChoice("put boot", player));
-        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pants")), Parser.parseChoice("put extra pants", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pants")), Parser.parseChoice("put pants", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Sleeping Gear")), Parser.parseChoice("put sleeping gear", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Sleeping Gear")), Parser.parseChoice("put sleeping bag", player));
@@ -230,29 +199,26 @@ public class ParserTest {
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Hatchet")), Parser.parseChoice("put hatchet", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Iodine Tablets")), Parser.parseChoice("put iodine tablets", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Iodine Tablets")), Parser.parseChoice("put iodine", player));
-        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Iodine Tablets")), Parser.parseChoice("put tablets", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol")), Parser.parseChoice("put pistol", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol")), Parser.parseChoice("put gun", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol Cartridge")), Parser.parseChoice("put ammunition", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol Cartridge")), Parser.parseChoice("put cartridges", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol Cartridge")), Parser.parseChoice("put ammo", player));
-        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Pistol Cartridge")), Parser.parseChoice("put rounds", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Shovel")), Parser.parseChoice("put shovel", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Harmonica")), Parser.parseChoice("put harmonica", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Lighter")), Parser.parseChoice("put lighter", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Survival Manual")), Parser.parseChoice("put survival manual", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Survival Manual")), Parser.parseChoice("put manual", player));
-        assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Journal")), Parser.parseChoice("put journal and pen", player));
         assertEquals(new Choice("put", player, ItemFactory.getNewInstance("Journal")), Parser.parseChoice("put journal", player));
     }
 
     @Test
     public void testParseChoiceImprove() {
         assertEquals(new Choice("improve", player), Parser.parseChoice("build shelter", player));
-        assertEquals(new Choice("improve", player), Parser.parseChoice("make camp", player));
-        assertEquals(new Choice("improve", player), Parser.parseChoice("work on camp", player));
         assertEquals(new Choice("improve", player), Parser.parseChoice("work on shelter", player));
         assertEquals(new Choice("improve", player), Parser.parseChoice("improve shelter", player));
+        assertEquals(new Choice("improve", player), Parser.parseChoice("make camp", player));
+        assertEquals(new Choice("improve", player), Parser.parseChoice("work on camp", player));
         assertEquals(new Choice("improve", player), Parser.parseChoice("improve camp", player));
         assertEquals(new Choice("improve", player), Parser.parseChoice("build camp", player));
     }
@@ -261,9 +227,7 @@ public class ParserTest {
     public void testParseChoiceDrink() {
         assertEquals(new Choice("drink", player), Parser.parseChoice("drink", player));
         assertEquals(new Choice("drink", player), Parser.parseChoice("drink water", player));
-        assertEquals(new Choice("drink", player), Parser.parseChoice("get a drink", player));
         assertEquals(new Choice("drink", player), Parser.parseChoice("take a drink", player));
-        assertEquals(new Choice("drink", player), Parser.parseChoice("get drink", player));
         assertEquals(new Choice("drink", player), Parser.parseChoice("take drink", player));
     }
 
@@ -271,13 +235,7 @@ public class ParserTest {
     public void testParseChoiceGather() {
         assertEquals(new Choice("gather", player), Parser.parseChoice("gather", player));
         assertEquals(new Choice("gather", player), Parser.parseChoice("gather firewood", player));
-        assertEquals(new Choice("gather", player), Parser.parseChoice("get firewood", player));
-        assertEquals(new Choice("gather", player), Parser.parseChoice("collect firewood", player));
-        assertEquals(new Choice("gather", player), Parser.parseChoice("cut firewood", player));
         assertEquals(new Choice("gather", player), Parser.parseChoice("gather wood", player));
-        assertEquals(new Choice("gather", player), Parser.parseChoice("get wood", player));
-        assertEquals(new Choice("gather", player), Parser.parseChoice("collect wood", player));
-        assertEquals(new Choice("gather", player), Parser.parseChoice("cut wood", player));
     }
 
     @Test
@@ -296,7 +254,6 @@ public class ParserTest {
     @Test
     public void testParseChoiceWater() {
         assertEquals(new Choice("water", player), Parser.parseChoice("water", player));
-        assertEquals(new Choice("water", player), Parser.parseChoice("get water", player));
         assertEquals(new Choice("water", player), Parser.parseChoice("fetch water", player));
         assertEquals(new Choice("water", player), Parser.parseChoice("collect water", player));
     }
@@ -304,14 +261,10 @@ public class ParserTest {
     @Test
     public void testParseChoiceMorale() {
         assertEquals(new Choice("morale", player), Parser.parseChoice("morale", player));
-        assertEquals(new Choice("morale", player), Parser.parseChoice("improve morale", player));
         assertEquals(new Choice("morale", player), Parser.parseChoice("boost morale", player));
-        assertEquals(new Choice("morale", player), Parser.parseChoice("photo", player));
         assertEquals(new Choice("morale", player), Parser.parseChoice("look at photo", player));
         assertEquals(new Choice("morale", player), Parser.parseChoice("look at family photo", player));
-        assertEquals(new Choice("morale", player), Parser.parseChoice("harmonica", player));
         assertEquals(new Choice("morale", player), Parser.parseChoice("play harmonica", player));
-        assertEquals(new Choice("morale", player), Parser.parseChoice("journal", player));
         assertEquals(new Choice("morale", player), Parser.parseChoice("write in journal", player));
     }
 
