@@ -1,22 +1,27 @@
 package com.palehorsestudios.alone;
 
-import com.google.common.collect.ImmutableMap;
 import com.palehorsestudios.alone.Foods.Food;
 import com.palehorsestudios.alone.Foods.FoodFactory;
 import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.activity.*;
-import com.palehorsestudios.alone.gui.GameApp;
+import com.palehorsestudios.alone.gui.GameManager;
+import com.palehorsestudios.alone.gui.ViewFactory;
 import com.palehorsestudios.alone.player.Player;
 import javafx.application.Application;
+import javafx.stage.Stage;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public class Main {
+import com.palehorsestudios.alone.gui.GameApp;
+
+public class Main  {
+
     public static void main(String[] args) {
+
         Application.launch(GameApp.class, args);
     }
 

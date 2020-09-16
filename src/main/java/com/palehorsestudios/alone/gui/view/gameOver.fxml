@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="583.0" prefWidth="1129.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="443.0" layoutY="26.0" prefHeight="81.0" prefWidth="243.0" text="Game Over">
+         <font>
+            <Font name="Malgun Gothic Semilight" size="48.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="gameOverImage" fitHeight="376.0" fitWidth="517.0" layoutX="306.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
