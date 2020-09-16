@@ -88,6 +88,7 @@ public class ParserTest {
         assertEquals(new Choice("fish", player), Parser.parseChoice("fishing", player));
         assertEquals(new Choice("fish", player), Parser.parseChoice("go fish", player));
         assertEquals(new Choice("fish", player), Parser.parseChoice("go fishing", player));
+        assertEquals(new Choice("fish", player), Parser.parseChoice("get fish", player));
     }
 
     @Test
@@ -236,6 +237,7 @@ public class ParserTest {
         assertEquals(new Choice("gather", player), Parser.parseChoice("gather", player));
         assertEquals(new Choice("gather", player), Parser.parseChoice("gather firewood", player));
         assertEquals(new Choice("gather", player), Parser.parseChoice("gather wood", player));
+        assertEquals(new Choice("gather", player), Parser.parseChoice("get firewood", player));
     }
 
     @Test
@@ -256,6 +258,7 @@ public class ParserTest {
         assertEquals(new Choice("water", player), Parser.parseChoice("water", player));
         assertEquals(new Choice("water", player), Parser.parseChoice("fetch water", player));
         assertEquals(new Choice("water", player), Parser.parseChoice("collect water", player));
+        assertEquals(new Choice("water", player), Parser.parseChoice("get water", player));
     }
 
     @Test

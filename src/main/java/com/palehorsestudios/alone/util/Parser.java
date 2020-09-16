@@ -35,7 +35,6 @@ public class Parser {
         if (keyword != null) {
             if (keyword.equals("eat")) {
                 try {
-                    String temp = getStemMapValue(input, FOOD_STEM_MAP);
                     food = FoodFactory.getNewInstance(getStemMapValue(input, FOOD_STEM_MAP));
                     choice = new Choice(keyword, player, food);
                 } catch (IllegalArgumentException e) {
@@ -44,7 +43,6 @@ public class Parser {
 
             } else if (keyword.equals("get") || keyword.equals("put")) {
                 try {
-                    String temp = getStemMapValue(input, ITEM_STEM_MAP);
                     item = ItemFactory.getNewInstance(getStemMapValue(input, ITEM_STEM_MAP));
                     choice = new Choice(keyword, player, item);
                 } catch (IllegalArgumentException e) {
@@ -73,11 +71,19 @@ public class Parser {
 
     private static String findKey(String input) {
         String key = null;
-        for (String s : input.split(" ")) {
+        String[] words = input.split(" ");
+        for (String s : words) {
             s = stemIt(s);
             if (PARSERS.containsKey(s)) {
-                key = s; // found first one
-                break;
+                key = s; // found it
+                if (key.equals("get") && words.length > 1) { // check if latter half is some other activity
+                    String latter = input.split(" ", 2)[1]; // get the string after "get"
+                    latter = stemIt(latter);
+                    if (PARSERS.containsKey(latter)) { // check if other activity and set if true
+                        key = latter;
+                    }
+                }
+                break; // we done here **drops mic**
             }
         }
 
@@ -114,6 +120,7 @@ public class Parser {
         addToParser(result, "hunt", Set.of("kill"));
         addToParser(result, "improve", Set.of("camp", "shelter"));
         addToParser(result, "morale", Set.of("write", "play", "look"));
+        addToParser(result, "gather", Set.of("firewood"));
 
         return result;
     }
@@ -131,6 +138,7 @@ public class Parser {
     }
 
     public static String stemIt(String input) {
+        input = input.strip().toLowerCase();
         STEMMER.setCurrent(HelperMethods.capitalize(input));
         STEMMER.stem();
         return STEMMER.getCurrent().toLowerCase();
@@ -140,7 +148,7 @@ public class Parser {
     private static <T> Map<String, String> makeStemMapping(Set<T> things, Function<T, String> function) {
         return makeStemMapping(things, function, Optional.empty());
     }
-    // stem each thing and put it in a mapping. If spaces between thing's function return, add all of them to mapping
+    // stem each thing and put it in a mapping. If spaces between thing's function's return, add all of them to mapping
     // as well
     private static <T> Map<String, String> makeStemMapping(Set<T> things, Function<T, String> function,
                                                            Optional<Function<T, Set<String>>> otherFun) {
