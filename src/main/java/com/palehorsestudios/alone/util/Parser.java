@@ -110,15 +110,15 @@ public class Parser {
                 .collect(Collectors.toMap(Parser::stemIt, e -> e));
 
         // input some synonyms for things to parse with
-        addToParsers(result,"rest", Set.of("nap", "break", "relax"));
-        addToParsers(result, "hunt", Set.of("kill"));
-        addToParsers(result, "improve", Set.of("camp", "shelter"));
-        addToParsers(result, "morale", Set.of("write", "play", "look"));
+        addToParser(result,"rest", Set.of("nap", "break", "relax"));
+        addToParser(result, "hunt", Set.of("kill"));
+        addToParser(result, "improve", Set.of("camp", "shelter"));
+        addToParser(result, "morale", Set.of("write", "play", "look"));
 
         return result;
     }
 
-    private static void addToParsers(Map<String, String> map, String target, Set<String> synonym) {
+    private static void addToParser(Map<String, String> map, String target, Set<String> synonym) {
         synonym.forEach(e -> map.put(stemIt(e), target));
     }
 
