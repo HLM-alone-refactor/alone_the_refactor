@@ -234,7 +234,7 @@ public class Parser {
         for (String s : str.split(" ")) {
             map.put(stemIt(s), target);
         }
-        if (!map.get(stemIt(str)).equals(target))
+        if (!map.containsKey(stemIt(str)) || !map.get(stemIt(str)).equals(target))
             map.put(stemIt(str), target);
     }
 }
