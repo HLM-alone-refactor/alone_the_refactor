@@ -154,7 +154,7 @@ public class ItemSelectionWindowController extends BaseController implements Ini
                             // initItems.size() instead of count....
                             new ChangeListener<Boolean>() {
                                 public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
-                                    if (initItems.size() == 10) {
+                                    if (initItems.size() >= 10) {
                                         entry.getKey().setSelected(false);
                                         if (initItems.contains(entry.getValue())) {
                                             initItems.remove(entry.getValue());
