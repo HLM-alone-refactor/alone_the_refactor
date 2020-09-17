@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.MediaView?>
+
+<AnchorPane fx:id="mediaViewPane" prefHeight="561.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MediaView fx:id="mediaView" fitHeight="${mediaViewPane.height}" fitWidth="${mediaViewPane.width}" layoutX="306.0" layoutY="154.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="sceneLabel" layoutX="573.0" layoutY="72.0" />
+   </children>
+</AnchorPane>

@@ -246,6 +246,9 @@
                                         <InnerShadow/>
                                     </effect>
                                 </Button>
+<!--                                This is an invisible button to fire the gameOver event-->
+                                <Button fx:id="gameOverBtn">
+                                </Button>
                             </children>
                         </AnchorPane>
                     </items>
@@ -254,6 +257,6 @@
         </AnchorPane>
     </children>
     <stylesheets>
-        <URL value="@BasicApplication.css"/>
+        <URL value="@css/BasicApplication.css"/>
     </stylesheets>
 </VBox>

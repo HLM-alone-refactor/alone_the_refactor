@@ -2,10 +2,10 @@ package com.palehorsestudios.alone.player;
 
 import com.google.common.base.Objects;
 import com.palehorsestudios.alone.Foods.Food;
-import com.palehorsestudios.alone.util.HelperMethods;
 import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.Shelter;
+import com.palehorsestudios.alone.util.HelperMethods;
 
 import java.util.ArrayList;
 import java.util.List;
