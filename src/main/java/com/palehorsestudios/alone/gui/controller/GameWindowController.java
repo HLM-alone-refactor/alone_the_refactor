@@ -2,9 +2,7 @@ package com.palehorsestudios.alone.gui.controller;
 
 import com.palehorsestudios.alone.Choice;
 import com.palehorsestudios.alone.Foods.Food;
-import com.palehorsestudios.alone.util.HelperMethods;
 import com.palehorsestudios.alone.Items.Item;
-import com.palehorsestudios.alone.Main;
 import com.palehorsestudios.alone.activity.*;
 import com.palehorsestudios.alone.dayencounter.BearEncounterDay;
 import com.palehorsestudios.alone.dayencounter.DayEncounter;
@@ -32,7 +30,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -54,10 +51,6 @@ public class GameWindowController extends BaseController implements Initializabl
     @FXML
     private Button enterBtn;
 
-    //    game over button (hidden)
-    @FXML
-    private Button gameOverBtn;
-
     @FXML
     private TextField weight;
     @FXML
@@ -76,8 +69,6 @@ public class GameWindowController extends BaseController implements Initializabl
     private ListView<String> foodCache;
     @FXML
     private ListView<String> equipment;
-    @FXML
-    private TextArea gameOver;
 
     // private Vars
     private String currentInput;
@@ -89,6 +80,24 @@ public class GameWindowController extends BaseController implements Initializabl
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         runGameThread();
+    }
+
+    @FXML
+    void restartGameMenuAction() {
+        viewFactory.showSelectItemsWindow();
+        Stage stage = (Stage) integrity.getScene().getWindow();
+        viewFactory.closeStage(stage);
+    }
+
+    @FXML
+    void quitGameAction() {
+        Stage stage = (Stage) integrity.getScene().getWindow();
+        viewFactory.closeStage(stage);
+    }
+
+    @FXML
+    void aboutMenuAction() {
+        viewFactory.showAboutWindow();
     }
 
     public GameWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
@@ -514,11 +523,4 @@ public class GameWindowController extends BaseController implements Initializabl
         return enterBtn;
     }
 
-    public Button getGameOverButton() {
-        return gameOverBtn;
-    }
-
-    public TextArea getGameOver() {
-        return gameOver;
-    }
 }
