@@ -18,7 +18,7 @@ class Items {
     }
 
     Set<Item> getItems() {
-        return items;
+        return Set.copyOf(items);
     }
 
 }

@@ -4,7 +4,7 @@ import com.palehorsestudios.alone.Choice;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.SuccessRate;
 
-import static com.palehorsestudios.alone.HelperMethods.round;
+import static com.palehorsestudios.alone.util.HelperMethods.round;
 
 public class GatherFirewoodActivity extends Activity {
     private static final double FIREWOOD_BUNDLE = 1;

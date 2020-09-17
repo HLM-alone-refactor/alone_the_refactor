@@ -2,7 +2,7 @@ package com.palehorsestudios.alone.gui.controller;
 
 import com.palehorsestudios.alone.Choice;
 import com.palehorsestudios.alone.Foods.Food;
-import com.palehorsestudios.alone.HelperMethods;
+import com.palehorsestudios.alone.util.HelperMethods;
 import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Main;
 import com.palehorsestudios.alone.activity.*;
@@ -17,6 +17,8 @@ import com.palehorsestudios.alone.nightencounter.RainStorm;
 import com.palehorsestudios.alone.nightencounter.RescueHelicopterNight;
 import com.palehorsestudios.alone.player.Player;
 import com.palehorsestudios.alone.player.SuccessRate;
+import com.palehorsestudios.alone.util.HelperMethods;
+import com.palehorsestudios.alone.util.Parser;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -157,8 +159,8 @@ public class GameWindowController extends BaseController implements Initializabl
             updateUI();
             String input = getInput();
             // hmm had to use main here?
-            Choice choice = Main.parseChoice(input, player);
-            Activity activity = Main.parseActivityChoice(choice);
+            Choice choice = Parser.parseChoice(input, player);
+            Activity activity = Parser.parseActivityChoice(choice);
             if (activity == null) {
                 getNarrative(new File("resources/parserHelp.txt"));
             } else if (activity == EatActivity.getInstance()

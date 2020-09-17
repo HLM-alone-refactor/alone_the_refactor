@@ -11,12 +11,18 @@ public class Item {
     private String type;
     private String description;
     private Set<Craft> craft;
+    private Set<String> synonym;
 
     /**
      * Set as package private to only be usable in ItemFactory
      * @param type
      * @param description
      */
+    Item(String type, String description, Set<Craft> craft, Set<String> synonym) {
+        this(type, description, craft);
+        this.synonym = synonym;
+    }
+
     Item(String type, String description, Set<Craft> craft) {
         this.type = type;
         this.description = description;
@@ -37,7 +43,7 @@ public class Item {
      * @param item
      */
     Item(Item item) {
-        this(item.getType(), item.getDescription(), item.getCraft());
+        this(item.getType(), item.getDescription(), item.getCraft(), item.getSynonym());
     }
 
 
@@ -50,7 +56,11 @@ public class Item {
     }
 
     public Set<Craft> getCraft() {
-        return craft;
+        return Objects.requireNonNullElse(craft, Set.of());
+    }
+
+    public Set<String> getSynonym() {
+        return Objects.requireNonNullElse(synonym, Set.of());
     }
 
     public boolean isCraftable() {
@@ -71,13 +81,9 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        boolean type = Objects.equals(getType(), item.getType());
-        boolean description = Objects.equals(getDescription(), item.getDescription());
-        boolean craft = Objects.equals(getCraft(), item.getCraft());
-        return type && description && craft;
-//        return Objects.equals(getType(), item.getType()) &&
-//                Objects.equals(getDescription(), item.getDescription()) &&
-//                Objects.equals(getCraft(), item.getCraft());
+        return Objects.equals(getType(), item.getType()) &&
+                Objects.equals(getDescription(), item.getDescription()) &&
+                Objects.equals(getCraft(), item.getCraft());
     }
 
     @Override
