@@ -6,6 +6,8 @@ import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.Player;
 
+import java.util.Set;
+
 public class BearEncounterNight extends NightEncounter {
 
     private static NightEncounter encounter;
@@ -37,8 +39,7 @@ public class BearEncounterNight extends NightEncounter {
             player.updateHydration(-1);
             player.updateWeight(-500);
             player.updateMorale(-1);
-            Food bear = FoodFactory.getNewInstance("Bear");
-            player.getShelter().addFoodToCache(bear, bear.getGrams());
+            player.getShelter().addFoodToCache(FoodFactory.getNewInstance("Bear"), FoodFactory.getNewInstance("Bear").getGrams());
             // description for if the player defends the camp with pistol
             return "You wake in the middle of the night... something is nearby. \n"
                     + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
