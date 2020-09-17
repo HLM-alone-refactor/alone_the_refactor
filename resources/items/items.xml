@@ -265,4 +265,9 @@
         <type>Metal</type>
         <description>A piece of metal, unknown type.</description>
     </item>
+
+    <item>
+        <type>Waterproof Bag</type>
+        <description>A 55L dry bag, waterproof type.</description>
+    </item>
 </items>

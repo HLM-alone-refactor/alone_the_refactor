@@ -13,7 +13,6 @@ public class ItemFactory {
     private static Items all_items = getGameItems();
 
     private ItemFactory() {
-
     }
 
     private static Items getGameItems() {
@@ -26,7 +25,6 @@ public class ItemFactory {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-
         return items;
     }
 

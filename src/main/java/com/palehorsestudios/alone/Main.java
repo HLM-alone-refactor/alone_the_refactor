@@ -415,6 +415,7 @@ public class Main {
             put("put manual", ItemFactory.getNewInstance("Survival Manual"));
             put("put journal and pen", ItemFactory.getNewInstance("Journal"));
             put("put journal", ItemFactory.getNewInstance("Journal"));
+            put("put waterproof bag", ItemFactory.getNewInstance("Waterproof Bag"));
         }};
 
         // uses input to build a choice by looking up keywords in a choice map
