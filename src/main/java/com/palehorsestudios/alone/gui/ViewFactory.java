@@ -26,6 +26,13 @@ public class ViewFactory {
         initializeStage(controller);
     }
 
+    public void showAboutWindow() {
+        System.out.println("show game menu window called");
+
+        BaseController controller = new AboutWindowController(gameManager,this, "view/about.fxml");
+        initializeStage(controller);
+    }
+
     public void showIntroWindow() {
         System.out.println("show Intro window called");
 
