@@ -19,6 +19,7 @@ import com.palehorsestudios.alone.player.Player;
 import com.palehorsestudios.alone.player.SuccessRate;
 import com.palehorsestudios.alone.util.HelperMethods;
 import com.palehorsestudios.alone.util.Parser;
+import com.palehorsestudios.alone.util.Saving;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -456,6 +457,14 @@ public class GameWindowController extends BaseController implements Initializabl
             }
         }
     }
+
+    @FXML
+    private void saveGameAction() {
+        Saving saving = new Saving();
+
+        saving.saveState("temp.ser", gameManager.getPlayer(), getDailyLog().getText());
+    }
+
     /* GETTERS AND SETTERS*/
     public TextField getWeight() {
         return weight;

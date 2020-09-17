@@ -22,4 +22,5 @@ public class GameManager {
     public void setWinCondition(String winCondition) {
         this.winCondition = winCondition;
     }
+
 }

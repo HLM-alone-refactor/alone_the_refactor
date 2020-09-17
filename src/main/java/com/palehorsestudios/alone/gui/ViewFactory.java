@@ -41,10 +41,17 @@ public class ViewFactory {
     }
 
     public void showGameWindow() {
+        showGameWindow("");
+    }
+
+    public void showGameWindow(String startingLog) {
         System.out.println("how game window called");
 
-        BaseController controller = new GameWindowController(gameManager,this, "view/game.fxml");
+//        BaseController controller = new GameWindowController(gameManager,this, "view/game.fxml");
+        GameWindowController controller = new GameWindowController(gameManager,this, "view/game.fxml");
         initializeStage(controller);
+        controller.getDailyLog().setText(startingLog);
+
     }
 
     public void showGameOver() {
