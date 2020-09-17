@@ -15,19 +15,26 @@ import java.util.stream.Collectors;
 
 public class Parser {
 
-    private static final PorterStemmer STEMMER = new PorterStemmer(); // object to find the stem of words
-    private static final Map<String, Activity> ACTIVITIES = getActivities(); // activity map
-    private static final Map<String, String> PARSERS = getParsers(); // stem to correct version (for getting correct activity)
-    private static final Map<String, String> ITEM_STEM_MAP = makeStemMapping(ItemFactory.getAllItems(), Item::getType,
-            Optional.of(Item::getSynonym)); // stem to correct item type
-    private static final Map<String, String> FOOD_STEM_MAP = makeStemMapping(FoodFactory.getAllFood(), Food::toString); // stem to correct food type
+    private PorterStemmer STEMMER ; // object to find the stem of words
+    private Map<String, Activity> ACTIVITIES; // activity map
+    private Map<String, String> PARSERS; // stem to correct version (for getting correct activity)
+    private Map<String, String> ITEM_STEM_MAP; // stem to correct item type
+    private Map<String, String> FOOD_STEM_MAP; // stem to correct food type
 
 
+    public Parser() {
+        STEMMER = new PorterStemmer();
+        ACTIVITIES = getActivities();
+        PARSERS = getParsers();
+        ITEM_STEM_MAP = makeStemMapping(ItemFactory.getAllItems(), Item::getType,
+                Optional.of(Item::getSynonym));
+        FOOD_STEM_MAP = makeStemMapping(FoodFactory.getAllFood(), Food::toString);
+    }
     /**
      * @param choice
      * @return
      */
-    public static Activity parseActivityChoice(Choice choice) {
+    public Activity parseActivityChoice(Choice choice) {
         if (choice == null) {
             return null;
         } else {
@@ -44,7 +51,7 @@ public class Parser {
      * @param player
      * @return constructed choice from parsing. If not an activity, returns null.
      */
-    public static Choice parseChoice(String input, Player player) {
+    public  Choice parseChoice(String input, Player player) {
         // make sure input is lowercase
         input = input.toLowerCase();
 
@@ -87,7 +94,7 @@ public class Parser {
     Get the value from given map via the input. This assumes input is '<action> <thing>' where trying to figure out what
     <thing> is.
      */
-    private static String getStemMapValue(String input, Map<String, String> map) {
+    private  String getStemMapValue(String input, Map<String, String> map) {
         String result = null;
 
         // assume input is of style <action> <thing>, and only want <thing>
@@ -110,7 +117,7 @@ public class Parser {
             'get fish' -> fish
             'get fishing line' -> get
      */
-    private static String findKey(String input) {
+    private  String findKey(String input) {
         String key = null;
         String[] words = input.split(" ");
         for (String s : words) {
@@ -134,7 +141,7 @@ public class Parser {
     /*
     makes activities map to be used. These are all of the keywords to refer to an activity
      */
-    private static Map<String, Activity> getActivities() {
+    private  Map<String, Activity> getActivities() {
         return new HashMap<>() {{
             put("get", GetItemActivity.getInstance());
             put("put", PutItemActivity.getInstance());
@@ -158,11 +165,11 @@ public class Parser {
     make the stem map from stem -> activity keyword. Add synonyms of keywords to add more versatility in how to reference
     activities.
      */
-    private static Map<String, String> getParsers() {
+    private Map<String, String> getParsers() {
         // get all of the keywords in activities, and stem each one
         Map<String, String> result = ACTIVITIES.keySet()
                 .stream()
-                .collect(Collectors.toMap(Parser::stemIt, e -> e));
+                .collect(Collectors.toMap(e -> stemIt(e),e -> e));
 
         // input some synonyms for things to parse with
         addToParser(result, "rest", Set.of("nap", "break", "relax"));
@@ -177,14 +184,14 @@ public class Parser {
     /*
     adds each synonym to the given map, stem(synonym) is key, target is the activity it is mapping to
      */
-    private static void addToParser(Map<String, String> map, String target, Set<String> synonym) {
+    private void addToParser(Map<String, String> map, String target, Set<String> synonym) {
         synonym.forEach(e -> map.put(stemIt(e), target));
     }
 
     /*
     Stems the given string and returns its stemmed value. Ensure lowercase (some strings behave erratic with cases)
      */
-    public static String stemIt(String input) {
+    public String stemIt(String input) {
         input = input.strip().toLowerCase();
         STEMMER.setCurrent(HelperMethods.capitalize(input));
         STEMMER.stem();
@@ -195,13 +202,13 @@ public class Parser {
     /*
     Refers to other mapping function
      */
-    private static <T> Map<String, String> makeStemMapping(Set<T> things, Function<T, String> function) {
+    private <T> Map<String, String> makeStemMapping(Set<T> things, Function<T, String> function) {
         return makeStemMapping(things, function, Optional.empty());
     }
 
     // stem each thing and put it in a mapping. If spaces between thing's function's return, add all of them to mapping
     // as well
-    private static <T> Map<String, String> makeStemMapping(Set<T> things, Function<T, String> function,
+    private <T> Map<String, String> makeStemMapping(Set<T> things, Function<T, String> function,
                                                            Optional<Function<T, Set<String>>> otherFun) {
         Map<String, String> result = new HashMap<>();
         for (T thing : things) {
@@ -223,7 +230,7 @@ public class Parser {
     splits str on white spaces and attempts to add it to the given map (stem each part for the key), maps to passed
     target string. Also adds entire str to map for multi word possibilities.
      */
-    private static void updateMap(Map<String, String> map, String str, String target) {
+    private void updateMap(Map<String, String> map, String str, String target) {
         for (String s : str.split(" ")) {
             map.put(stemIt(s), target);
         }

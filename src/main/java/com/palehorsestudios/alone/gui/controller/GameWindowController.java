@@ -154,13 +154,15 @@ public class GameWindowController extends BaseController implements Initializabl
         final int[] day = {1};
         final String[] dayHalf = {"Morning"};
         getDateAndTime().setText("Day " + day[0] + " " + dayHalf[0]);
+
+        Parser parser = new Parser();
         while (!player.isDead() && !player.isRescued() && !player.isRescued(day[0])) {
             // update the UI fields
             updateUI();
             String input = getInput();
             // hmm had to use main here?
-            Choice choice = Parser.parseChoice(input, player);
-            Activity activity = Parser.parseActivityChoice(choice);
+            Choice choice = parser.parseChoice(input, player);
+            Activity activity = parser.parseActivityChoice(choice);
             if (activity == null) {
                 getNarrative(new File("resources/parserHelp.txt"));
             } else if (activity == EatActivity.getInstance()
