@@ -37,7 +37,8 @@ public class RainStorm extends NightEncounter {
                 && player.getShelter().getEquipment().containsKey(manual)
                 && player.getShelter().getEquipment().containsKey(chord)) {
 
-            // description for if the player keeps equipment dry with Tarp and survival knowledge
+            // description if the player keeps equipment dry with Tarp
+            // and survival knowledge at shelter
             player.updateMorale(-1);
             return "Rain storm with Tarp / Chord and no backpack";
         } else {
