@@ -4,8 +4,10 @@ import com.palehorsestudios.alone.gui.controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -93,6 +95,21 @@ public class ViewFactory {
 
     public ArrayList<Stage> getActiveStages() {
         return activeStages;
+    }
+
+    public FileChooser getFileChooser() {
+        // make sure default file and directory are there
+        gameManager.getDefaultGameFile().getParentFile().mkdirs();
+
+        FileChooser fileChooser =new FileChooser();
+        fileChooser.setTitle("Saved Files");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Serial Files", "*.ser")
+        );
+        fileChooser.setInitialDirectory(gameManager.getDefaultGameFile().getParentFile());
+        fileChooser.setInitialFileName(gameManager.getDefaultGameFile().getName());
+
+        return fileChooser;
     }
 
 }

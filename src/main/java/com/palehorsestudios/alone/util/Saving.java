@@ -18,15 +18,31 @@ public class Saving {
         // remove any surrounding whitespace or file separators in name
         filename = filename.strip().replaceAll(File.pathSeparator, "");
 
+        // add in the extension if not there
+        filename = ensureExtension(filename);
+
         File file = DEFAULT_PATH.resolve(filename).toFile();
 
         return saveState(file, player, log);
     }
 
+    private String ensureExtension(String filename) {
+        int split = filename.lastIndexOf(".");
+        split = split != -1 ? split : filename.length();
+        String[] parts = {filename.substring(0, split), filename.substring(split + 1)};
+        if (!parts[1].equals("ser")) {
+            parts[1] = "ser";
+        }
+        return parts[0] + "." + parts[1];
+    }
+
     /*
     package private for testing to use
      */
-    boolean saveState(File file, Player player, String log) {
+    public boolean saveState(File file, Player player, String log) {
+        String filename = ensureExtension(file.getName());
+
+        file = Paths.get(file.getParent(), filename).toFile();
 
         // make sure file is there to write to.
         try {

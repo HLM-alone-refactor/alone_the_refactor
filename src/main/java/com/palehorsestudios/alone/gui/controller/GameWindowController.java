@@ -29,6 +29,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -99,6 +100,25 @@ public class GameWindowController extends BaseController implements Initializabl
     @FXML
     void aboutMenuAction() {
         viewFactory.showAboutWindow();
+    }
+
+    @FXML
+    void saveGameAction() {
+        Saving saving = new Saving();
+        saving.saveState(gameManager.getDefaultGameFile(), gameManager.getPlayer(), getDailyLog().getText());
+    }
+
+    @FXML
+    void saveAsGameAction() {
+
+        File file = viewFactory.getFileChooser().showSaveDialog((Stage) integrity.getScene().getWindow());
+
+        if (file != null) {
+            gameManager.setDefaultGameFile(file);
+            Saving saving = new Saving();
+
+            saving.saveState(file, gameManager.getPlayer(), getDailyLog().getText());
+        }
     }
 
     public GameWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
@@ -465,13 +485,6 @@ public class GameWindowController extends BaseController implements Initializabl
                 e.printStackTrace();
             }
         }
-    }
-
-    @FXML
-    private void saveGameAction() {
-        Saving saving = new Saving();
-
-        saving.saveState("temp.ser", gameManager.getPlayer(), getDailyLog().getText());
     }
 
     /* GETTERS AND SETTERS*/
