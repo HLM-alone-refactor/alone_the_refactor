@@ -43,7 +43,7 @@ public class ViewFactory {
     public void showSelectItemsWindow() {
         System.out.println("Show select items window called");
 
-        BaseController controller = new ItemSelectionWindowController(gameManager,this, "view/selectItems.fxml");
+        BaseController controller = new ItemSelectionWindowController(gameManager,this, "view/testSelectItems.fxml");
         initializeStage(controller);
     }
 
