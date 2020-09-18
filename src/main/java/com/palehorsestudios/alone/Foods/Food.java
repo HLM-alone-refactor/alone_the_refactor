@@ -3,11 +3,15 @@ package com.palehorsestudios.alone.Foods;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.Objects;
 
 @XmlRootElement(name = "food")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Food {
+public class Food implements Serializable {
+
+    // serializable requirment
+    private static final long serialVersionUID = 4L;
 
     private String name;
     private double caloriesPerGram;

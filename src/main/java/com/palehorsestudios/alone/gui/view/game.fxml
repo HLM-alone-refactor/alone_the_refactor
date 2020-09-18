@@ -31,7 +31,8 @@
                         <MenuItem mnemonicParsing="false" onAction="#restartGameMenuAction" text="New Game" />
                         <MenuItem mnemonicParsing="false" text="Open…" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveGameAction" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveAsGameAction" text="Save As" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#quitGameAction" text="Quit" />

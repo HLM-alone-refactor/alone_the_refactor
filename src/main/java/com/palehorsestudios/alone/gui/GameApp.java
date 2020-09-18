@@ -1,6 +1,5 @@
 package com.palehorsestudios.alone.gui;
 
-import com.palehorsestudios.alone.player.Player;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
