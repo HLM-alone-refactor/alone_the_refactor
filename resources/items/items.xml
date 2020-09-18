@@ -70,6 +70,7 @@
                 </entry>
             </requirements>
         </craft>
+        <weight>5</weight>
     </item>
 
     <item>
@@ -92,6 +93,7 @@
                 </entry>
             </requirements>
         </craft>
+        <weight>10</weight>
     </item>
 
     <item>
@@ -142,38 +144,45 @@
         <description>Parachute chord. This stuff is very strong.</description>
         <synonym>Rope</synonym>
         <synonym>Cordage</synonym>
+        <weight>15</weight>
     </item>
 
     <item>
         <type>Flare</type>
         <description>An emergency signal flare, probably very bright when ignited.</description>
+        <weight>5</weight>
     </item>
 
     <item>
         <type>Boots</type>
         <description>Heavy shoes that you wear on your feet.</description>
+        <weight>3.5</weight>
     </item>
 
     <item>
         <type>Pants</type>
         <description>Pants.</description>
+        <weight>2.1</weight>
     </item>
 
     <item>
         <type>Sleeping Gear</type>
         <description>Sleeping bag and pillow. Allows for comfortable resting</description>
         <synonym>Sleeping Bag</synonym>
+        <weight>8.7</weight>
     </item>
 
     <item>
         <type>Cold Weather Gear</type>
         <description>Cold weather gear. This will keep you warmer during those cold flashes</description>
         <synonym>Cold Gear</synonym>
+        <weight>4.5</weight>
     </item>
 
     <item>
         <type>Tarp</type>
         <description>A all-weather tarp</description>
+        <weight>2.5</weight>
     </item>
 
     <item>
@@ -185,12 +194,14 @@
         <type>First Aid Kit</type>
         <description>A first aid kit, heals some broken wounds</description>
         <synonym>First Aid</synonym>
+        <weight>5</weight>
     </item>
 
     <item>
         <type>Flashlight</type>
         <description>A bright flashlight</description>
         <synonym>Light</synonym>
+        <weight>5.9</weight>
     </item>
 
     <item>
@@ -209,16 +220,19 @@
         <type>Pot</type>
         <description>A cooking pot</description>
         <synonym>Cooking Pot</synonym>
+        <weight>3.3</weight>
     </item>
 
     <item>
         <type>Axe</type>
         <description>A sharp axe</description>
+        <weight>8.9</weight>
     </item>
 
     <item>
         <type>Hatchet</type>
         <description>A large hatchet</description>
+        <weight>14.5</weight>
     </item>
 
     <item>
@@ -231,12 +245,14 @@
         <type>Pistol</type>
         <description>A 9M Berreta in good condition</description>
         <synonym>Gun</synonym>
+        <weight>18.5</weight>
     </item>
 
     <item>
         <type>Pistol Round</type>
         <description>A 9M pistol round</description>
         <synonym>Round</synonym>
+        <weight>1.2</weight>
     </item>
 
     <item>
@@ -246,11 +262,13 @@
         <synonym>Mag</synonym>
         <synonym>Ammo</synonym>
         <synonym>Ammunition</synonym>
+        <weight>15</weight>
     </item>
 
     <item>
         <type>Shovel</type>
         <description>A sturdy shovel</description>
+        <weight>12</weight>
     </item>
 
     <item>

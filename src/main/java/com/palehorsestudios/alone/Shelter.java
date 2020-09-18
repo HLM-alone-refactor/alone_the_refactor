@@ -171,20 +171,7 @@ public class Shelter implements Serializable {
      * @return Result of attempting to remove Food from the cache.
      */
     public double removeFoodFromCache(Food food, double quantity) {
-        double removalQuantity;
-        Optional<Double> currentQuantity = Optional.ofNullable(this.foodCache.get(food));
-        if (currentQuantity.isPresent()) {
-            if (currentQuantity.get() < quantity) {
-                this.foodCache.put(food, 0.0);
-                removalQuantity = currentQuantity.get();
-            } else {
-                this.foodCache.put(food, currentQuantity.get() - quantity);
-                removalQuantity = quantity;
-            }
-        } else {
-            removalQuantity = 0;
-        }
-        return removalQuantity;
+        return removeFromMap(foodCache, food, quantity);
     }
 
     /**
@@ -210,19 +197,23 @@ public class Shelter implements Serializable {
      * @return Quantity of Item removed from equipment cache.
      */
     public int removeEquipment(Item item, int quantity) {
-        int removalQuantity;
-        Optional<Integer> currentQuantity = Optional.ofNullable(this.equipment.get(item));
-        if (currentQuantity.isPresent() && currentQuantity.get() > 0) {
-            if (currentQuantity.get() < quantity) {
-                this.equipment.put(item, 0);
-                removalQuantity = currentQuantity.get();
+        return (int) removeFromMap(equipment, item, quantity);
+    }
+
+    private <T, I extends Number> double removeFromMap(Map<T, I> map, T key, double quantity) {
+        double removalQuantity = 0;
+        Optional<I> currentQuantity = Optional.ofNullable(map.get(key));
+        if (currentQuantity.isPresent() && currentQuantity.get().doubleValue() > 0) {
+            double curr = currentQuantity.get().doubleValue();
+            if (curr < quantity || curr- quantity == 0) {
+                map.remove(key);
+                removalQuantity = curr;
             } else {
-                this.equipment.put(item, currentQuantity.get() - quantity);
+                map.put(key, (I) ((Double) (curr - quantity)));
                 removalQuantity = quantity;
             }
-        } else {
-            removalQuantity = 0;
         }
+
         return removalQuantity;
     }
 

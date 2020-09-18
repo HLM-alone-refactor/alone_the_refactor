@@ -16,20 +16,22 @@ public class Item implements Serializable {
     private String description;
     private Set<Craft> craft;
     private Set<String> synonym;
+    private double weight;
 
     /**
      * Set as package private to only be usable in ItemFactory
      * @param type
      * @param description
      */
-    Item(String type, String description, Set<Craft> craft, Set<String> synonym) {
-        this(type, description, craft);
+    Item(String type, String description, double weight, Set<Craft> craft, Set<String> synonym) {
+        this(type, description, weight, craft);
         this.synonym = synonym;
     }
 
-    Item(String type, String description, Set<Craft> craft) {
+    Item(String type, String description, double weight, Set<Craft> craft) {
         this.type = type;
         this.description = description;
+        this.weight = weight;
         this.craft = craft;
     }
 
@@ -47,7 +49,7 @@ public class Item implements Serializable {
      * @param item
      */
     Item(Item item) {
-        this(item.getType(), item.getDescription(), item.getCraft(), item.getSynonym());
+        this(item.getType(), item.getDescription(), item.getWeight(), item.getCraft(), item.getSynonym());
     }
 
 
@@ -65,6 +67,10 @@ public class Item implements Serializable {
 
     public Set<String> getSynonym() {
         return Objects.requireNonNullElse(synonym, Set.of());
+    }
+
+    public double getWeight() {
+        return Objects.requireNonNullElse(weight, 1.0);
     }
 
     public boolean isCraftable() {
