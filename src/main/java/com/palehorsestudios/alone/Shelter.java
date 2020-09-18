@@ -4,14 +4,18 @@ import com.google.common.collect.ImmutableMap;
 import com.palehorsestudios.alone.Foods.Food;
 import com.palehorsestudios.alone.Items.Item;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
  * Player's shelter to protect from environment and store food, water, and firewood.
  */
-public class Shelter {
+public class Shelter implements Serializable {
+    // serializable requirment
+    private static final long serialVersionUID = 5L;
     // static variables
     private static final int MAX_WATER = 10;
     private static final int MIN_WATER = 0;
@@ -243,5 +247,23 @@ public class Shelter {
                 + ", waterTank="
                 + waterTank
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shelter shelter = (Shelter) o;
+        return Double.compare(shelter.getIntegrity(), getIntegrity()) == 0 &&
+                Double.compare(shelter.getFirewood(), getFirewood()) == 0 &&
+                getWaterTank() == shelter.getWaterTank() &&
+                hasFire == shelter.hasFire &&
+                Objects.equals(getFoodCache(), shelter.getFoodCache()) &&
+                Objects.equals(getEquipment(), shelter.getEquipment());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFoodCache(), getEquipment(), getIntegrity(), getFirewood(), getWaterTank(), hasFire);
     }
 }

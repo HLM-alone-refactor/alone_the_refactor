@@ -96,7 +96,6 @@ public class ItemSelectionWindowController extends BaseController implements Ini
 
     // Private Variables
     private static final int COUNT_DOWN = 30;
-    private int count = 0;
     private List<Item> initItems = new ArrayList<>();
 
     public ItemSelectionWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
@@ -152,17 +151,20 @@ public class ItemSelectionWindowController extends BaseController implements Ini
                     .getKey()
                     .selectedProperty()
                     .addListener(
+                            // initItems.size() instead of count....
                             new ChangeListener<Boolean>() {
                                 public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
-                                    if (count == 9) {
-                                        paneSelected.setDisable(true);
+                                    if (initItems.size() >= 10) {
+                                        entry.getKey().setSelected(false);
+                                        if (initItems.contains(entry.getValue())) {
+                                            initItems.remove(entry.getValue());
+                                        }
+                                        //paneSelected.setDisable(true);
                                     } else {
                                         if (entry.getKey().isSelected()) {
                                             initItems.add(entry.getValue());
-                                            count++;
                                         } else if (!entry.getKey().isSelected()
                                                 && initItems.contains(entry.getValue())) {
-                                            count--;
                                             initItems.remove(entry.getValue());
                                         }
                                     }
