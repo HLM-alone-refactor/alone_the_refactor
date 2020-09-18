@@ -307,12 +307,12 @@
     <item>
         <type>Wood</type>
         <description>A piece of wood</description>
-        <isInitialItemChoice>true</isInitialItemChoice>
+        <isInitialItemChoice>false</isInitialItemChoice>
     </item>
 
     <item>
         <type>Metal</type>
         <description>A piece of metal, unknown type.</description>
-        <isInitialItemChoice>true</isInitialItemChoice>
+        <isInitialItemChoice>false</isInitialItemChoice>
     </item>
 </items>

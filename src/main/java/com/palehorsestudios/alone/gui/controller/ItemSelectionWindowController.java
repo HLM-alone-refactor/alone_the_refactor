@@ -166,7 +166,7 @@ public class ItemSelectionWindowController extends BaseController implements Ini
     private void addCheckBoxes(int colums) {
         List<Item> itemBank = ItemFactory.getAllItems()
                 .stream()
-                .filter(item -> item.isInitialItemChoice())
+                .filter(Item::isInitialItemChoice)
                 .collect(Collectors.toList());
         int row = 0, col = 0;
         for (Item item: itemBank) {
