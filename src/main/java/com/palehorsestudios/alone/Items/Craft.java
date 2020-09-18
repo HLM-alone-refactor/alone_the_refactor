@@ -2,11 +2,15 @@ package com.palehorsestudios.alone.Items;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
 @XmlRootElement(name = "craft")
-public class Craft {
+public class Craft implements Serializable {
+
+    // serializable requirment
+    private static final long serialVersionUID = 3L;
 
     @XmlElementWrapper(name = "requirements")
     private Map<String, Integer> requires;

@@ -2,10 +2,7 @@ package com.palehorsestudios.alone.gui.controller;
 
 import com.palehorsestudios.alone.Choice;
 import com.palehorsestudios.alone.Foods.Food;
-import com.palehorsestudios.alone.dayencounter.RainStormDay;
-import com.palehorsestudios.alone.util.HelperMethods;
 import com.palehorsestudios.alone.Items.Item;
-import com.palehorsestudios.alone.Main;
 import com.palehorsestudios.alone.activity.*;
 import com.palehorsestudios.alone.dayencounter.BearEncounterDay;
 import com.palehorsestudios.alone.dayencounter.DayEncounter;
@@ -20,6 +17,7 @@ import com.palehorsestudios.alone.player.Player;
 import com.palehorsestudios.alone.player.SuccessRate;
 import com.palehorsestudios.alone.util.HelperMethods;
 import com.palehorsestudios.alone.util.Parser;
+import com.palehorsestudios.alone.util.Saving;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,9 +29,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -55,10 +53,6 @@ public class GameWindowController extends BaseController implements Initializabl
     @FXML
     private Button enterBtn;
 
-    //    game over button (hidden)
-    @FXML
-    private Button gameOverBtn;
-
     @FXML
     private TextField weight;
     @FXML
@@ -77,8 +71,6 @@ public class GameWindowController extends BaseController implements Initializabl
     private ListView<String> foodCache;
     @FXML
     private ListView<String> equipment;
-    @FXML
-    private TextArea gameOver;
 
     // private Vars
     private String currentInput;
@@ -90,6 +82,43 @@ public class GameWindowController extends BaseController implements Initializabl
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         runGameThread();
+    }
+
+    @FXML
+    void restartGameMenuAction() {
+        viewFactory.showSelectItemsWindow();
+        Stage stage = (Stage) integrity.getScene().getWindow();
+        viewFactory.closeStage(stage);
+    }
+
+    @FXML
+    void quitGameAction() {
+        Stage stage = (Stage) integrity.getScene().getWindow();
+        viewFactory.closeStage(stage);
+    }
+
+    @FXML
+    void aboutMenuAction() {
+        viewFactory.showAboutWindow();
+    }
+
+    @FXML
+    void saveGameAction() {
+        Saving saving = new Saving();
+        saving.saveState(gameManager.getDefaultGameFile(), gameManager.getPlayer(), getDailyLog().getText());
+    }
+
+    @FXML
+    void saveAsGameAction() {
+
+        File file = viewFactory.getFileChooser().showSaveDialog((Stage) integrity.getScene().getWindow());
+
+        if (file != null) {
+            gameManager.setDefaultGameFile(file);
+            Saving saving = new Saving();
+
+            saving.saveState(file, gameManager.getPlayer(), getDailyLog().getText());
+        }
     }
 
     public GameWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
@@ -176,12 +205,10 @@ public class GameWindowController extends BaseController implements Initializabl
             } else {
                 final int[] seed = {(int) Math.floor(Math.random() * 10)};
                 String activityResult;
-                if (true){//(seed[0] > 7) {
+                if (seed[0] > 7) {
                     DayEncounter[] dayEncounters = new DayEncounter[]{
-                            RainStormDay.getInstance(),
-//                            BearEncounterDay.getInstance(),
-//                            RescueHelicopterDay.getInstance()
-                            };
+                            BearEncounterDay.getInstance(),
+                            RescueHelicopterDay.getInstance()};
                     int randomDayEncounterIndex = (int) Math.floor(Math.random() * dayEncounters.length);
                     activityResult = dayEncounters[randomDayEncounterIndex].encounter(player);
                     if (player.isDead()) {
@@ -200,13 +227,12 @@ public class GameWindowController extends BaseController implements Initializabl
                     if (!player.isDead() && !player.isRescued(day[0])) {
                         seed[0] = (int) Math.floor(Math.random() * 10);
                         String nightResult;
-                        if (true){//(seed[0] > 7) {
+                        if (seed[0] > 7) {
                             NightEncounter[] nightEncounters =
                                     new NightEncounter[]{
-                                            RainStorm.getInstance()
-//                                            BearEncounterNight.getInstance(),
-//                                            RescueHelicopterNight.getInstance()
-                                            };
+                                            RainStorm.getInstance(),
+                                            BearEncounterNight.getInstance(),
+                                            RescueHelicopterNight.getInstance()};
                             int randomNightEncounterIndex =
                                     (int) Math.floor(Math.random() * nightEncounters.length);
                             nightResult = nightEncounters[randomNightEncounterIndex].encounter(player);
@@ -460,6 +486,7 @@ public class GameWindowController extends BaseController implements Initializabl
             }
         }
     }
+
     /* GETTERS AND SETTERS*/
     public TextField getWeight() {
         return weight;
@@ -518,11 +545,4 @@ public class GameWindowController extends BaseController implements Initializabl
         return enterBtn;
     }
 
-    public Button getGameOverButton() {
-        return gameOverBtn;
-    }
-
-    public TextArea getGameOver() {
-        return gameOver;
-    }
 }
