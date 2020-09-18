@@ -2,6 +2,7 @@ package com.palehorsestudios.alone.gui.controller;
 
 import com.palehorsestudios.alone.Choice;
 import com.palehorsestudios.alone.Foods.Food;
+import com.palehorsestudios.alone.dayencounter.RainStormDay;
 import com.palehorsestudios.alone.util.HelperMethods;
 import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Main;
@@ -175,10 +176,12 @@ public class GameWindowController extends BaseController implements Initializabl
             } else {
                 final int[] seed = {(int) Math.floor(Math.random() * 10)};
                 String activityResult;
-                if (seed[0] > 7) {
+                if (true){//(seed[0] > 7) {
                     DayEncounter[] dayEncounters = new DayEncounter[]{
-                            BearEncounterDay.getInstance(),
-                            RescueHelicopterDay.getInstance()};
+                            RainStormDay.getInstance(),
+//                            BearEncounterDay.getInstance(),
+//                            RescueHelicopterDay.getInstance()
+                            };
                     int randomDayEncounterIndex = (int) Math.floor(Math.random() * dayEncounters.length);
                     activityResult = dayEncounters[randomDayEncounterIndex].encounter(player);
                     if (player.isDead()) {
@@ -197,12 +200,13 @@ public class GameWindowController extends BaseController implements Initializabl
                     if (!player.isDead() && !player.isRescued(day[0])) {
                         seed[0] = (int) Math.floor(Math.random() * 10);
                         String nightResult;
-                        if (seed[0] > 7) {
+                        if (true){//(seed[0] > 7) {
                             NightEncounter[] nightEncounters =
                                     new NightEncounter[]{
-                                            RainStorm.getInstance(),
-                                            BearEncounterNight.getInstance(),
-                                            RescueHelicopterNight.getInstance()};
+                                            RainStorm.getInstance()
+//                                            BearEncounterNight.getInstance(),
+//                                            RescueHelicopterNight.getInstance()
+                                            };
                             int randomNightEncounterIndex =
                                     (int) Math.floor(Math.random() * nightEncounters.length);
                             nightResult = nightEncounters[randomNightEncounterIndex].encounter(player);
