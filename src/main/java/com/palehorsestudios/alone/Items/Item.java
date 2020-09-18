@@ -1,12 +1,16 @@
 package com.palehorsestudios.alone.Items;
 
 import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
 @XmlRootElement(name = "item")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Item {
+public class Item implements Serializable {
+
+    // serializable requirement
+    private static final long serialVersionUID = 2L;
 
     private String type;
     private String description;

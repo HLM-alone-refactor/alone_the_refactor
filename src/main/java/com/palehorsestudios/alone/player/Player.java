@@ -7,10 +7,13 @@ import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.Shelter;
 import com.palehorsestudios.alone.util.HelperMethods;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements Serializable {
+    // serializable requirment
+    private static final long serialVersionUID = 1L;
     // static constants
     private static final int MIN_HYDRATION = 0;
     private static final int MAX_HYDRATION = 20;

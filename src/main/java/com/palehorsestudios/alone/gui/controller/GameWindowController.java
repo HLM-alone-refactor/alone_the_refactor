@@ -9,6 +9,8 @@ import com.palehorsestudios.alone.dayencounter.DayEncounter;
 import com.palehorsestudios.alone.dayencounter.RescueHelicopterDay;
 import com.palehorsestudios.alone.gui.GameManager;
 import com.palehorsestudios.alone.gui.ViewFactory;
+import com.palehorsestudios.alone.gui.model.PlayerStatus;
+import com.palehorsestudios.alone.gui.model.Status;
 import com.palehorsestudios.alone.nightencounter.BearEncounterNight;
 import com.palehorsestudios.alone.nightencounter.NightEncounter;
 import com.palehorsestudios.alone.nightencounter.RainStorm;
@@ -17,6 +19,7 @@ import com.palehorsestudios.alone.player.Player;
 import com.palehorsestudios.alone.player.SuccessRate;
 import com.palehorsestudios.alone.util.HelperMethods;
 import com.palehorsestudios.alone.util.Parser;
+import com.palehorsestudios.alone.util.Saving;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,16 +31,22 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+
+import static com.palehorsestudios.alone.gui.model.Status.*;
 
 public class GameWindowController extends BaseController implements Initializable {
     @FXML
@@ -70,6 +79,9 @@ public class GameWindowController extends BaseController implements Initializabl
     @FXML
     private ListView<String> equipment;
 
+    @FXML
+    private MediaView mediaView;
+
     // private Vars
     private String currentInput;
     private Player player;
@@ -77,13 +89,13 @@ public class GameWindowController extends BaseController implements Initializabl
     private final InputSignal inputSignal = new InputSignal();
     public static class InputSignal { }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         runGameThread();
     }
 
     /*
-
         Menu Options
     */
     @FXML
@@ -107,6 +119,25 @@ public class GameWindowController extends BaseController implements Initializabl
     @FXML
     void craftingMenuAction(ActionEvent event) {
         viewFactory.showCraftingWindow();
+    }
+
+    @FXML
+    void saveGameAction() {
+        Saving saving = new Saving();
+        saving.saveState(gameManager.getDefaultGameFile(), gameManager.getPlayer(), getDailyLog().getText());
+    }
+
+    @FXML
+    void saveAsGameAction() {
+
+        File file = viewFactory.getFileChooser().showSaveDialog((Stage) integrity.getScene().getWindow());
+
+        if (file != null) {
+            gameManager.setDefaultGameFile(file);
+            Saving saving = new Saving();
+
+            saving.saveState(file, gameManager.getPlayer(), getDailyLog().getText());
+        }
     }
 
     public GameWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
@@ -156,8 +187,7 @@ public class GameWindowController extends BaseController implements Initializabl
     // game thread logic, so we should also wrap the UI access calls
     private void executeGameLoop() {
         // flag for encounter results
-        boolean encounterDeath = false;
-        boolean encounterRescue = false;
+        Status status = STILL_ALIVE;
         // encounter results
         String encounterResults = "Killed by the encounter";
         // must run in ui thread
@@ -192,29 +222,27 @@ public class GameWindowController extends BaseController implements Initializabl
                 getDailyLog().appendText("Day " + day[0] + " " + dayHalf[0] + ": " + activityResult + "\n");
             } else {
                 final int[] seed = {(int) Math.floor(Math.random() * 10)};
-                String activityResult;
+                PlayerStatus dayResultObject;
+                String dayTextOutput;
                 if (seed[0] > 7) {
                     DayEncounter[] dayEncounters = new DayEncounter[]{
                             BearEncounterDay.getInstance(),
                             RescueHelicopterDay.getInstance()};
                     int randomDayEncounterIndex = (int) Math.floor(Math.random() * dayEncounters.length);
-                    activityResult = dayEncounters[randomDayEncounterIndex].encounter(player);
-                    if (player.isDead()) {
-                        encounterDeath = true;
-                    } else if (player.isRescued()) {
-                        encounterRescue = true;
-                    }
-                    encounterResults = activityResult;
+                    dayResultObject = dayEncounters[randomDayEncounterIndex].encounter(player);
+                    status = dayResultObject.getStatusUpdate();
+                    dayTextOutput = dayResultObject.getTextOutput();
                 } else {
-                    activityResult = activity.act(choice);
+                    dayTextOutput = activity.act(choice);
                 }
-                getDailyLog().appendText("Day " + day[0] + " " + dayHalf[0] + ": " + activityResult + "\n");
+                getDailyLog().appendText("Day " + day[0] + " " + dayHalf[0] + ": " + dayTextOutput + "\n");
                 if (dayHalf[0].equals("Morning")) {
                     dayHalf[0] = "Afternoon";
                 } else {
                     if (!player.isDead() && !player.isRescued(day[0])) {
                         seed[0] = (int) Math.floor(Math.random() * 10);
-                        String nightResult;
+                        PlayerStatus nightResultObject;
+                        String nightTextOutput;
                         if (seed[0] > 7) {
                             NightEncounter[] nightEncounters =
                                     new NightEncounter[]{
@@ -223,24 +251,56 @@ public class GameWindowController extends BaseController implements Initializabl
                                             RescueHelicopterNight.getInstance()};
                             int randomNightEncounterIndex =
                                     (int) Math.floor(Math.random() * nightEncounters.length);
-                            nightResult = nightEncounters[randomNightEncounterIndex].encounter(player);
-                            if (player.isDead()) {
-                                encounterDeath = true;
-                            } else if (player.isRescued()) {
-                                encounterRescue = true;
-                            }
-                            encounterResults = nightResult;
+                            // Get gamestate object from enounter
+                            nightResultObject = nightEncounters[randomNightEncounterIndex].encounter(player);
+                            status = nightResultObject.getStatusUpdate();
+                            nightTextOutput = nightResultObject.getTextOutput();
                         } else {
-                            nightResult = overnightStatusUpdate(player);
+                            nightResultObject = overnightStatusUpdate(player);
+                            status = nightResultObject.getStatusUpdate();
+                            nightTextOutput = nightResultObject.getTextOutput();
                         }
-                        getDailyLog().appendText("Day " + day[0] + " Night: " + nightResult + "\n");
-                        dayHalf[0] = "Morning";
-                        day[0]++;
+                        if (!player.isDead() || !player.isRescued()) {
+                            getDailyLog().appendText("Day " + day[0] + " Night: " + nightTextOutput + "\n");
+                            dayHalf[0] = "Morning";
+                            day[0]++;
+                        }
                     }
                 }
                 getDateAndTime().setText("Day " + day[0] + " " + dayHalf[0]);
             }
+            playStatusMedia(status);
         }
+    }
+
+    private void playStatusMedia(Status status) {
+        switch (status) {
+            case STILL_ALIVE -> {
+                System.out.println("Still alive");
+            }
+            case EATEN_BY_BEAR -> {
+                System.out.println("eaten by bear. you lose");
+                setMediaViewAndPlayVideo("resources/clips/dark_souls.mp4");
+            }
+            case RESCUED -> {
+                System.out.println("You were rescued!!");
+                setMediaViewAndPlayVideo("resources/clips/the_nod.mp4");
+            }
+            case MISSED_RESCUE -> {
+                System.out.println("You missed your chance of rescue, so sad!");
+            }
+            case HARD_RAIN -> {
+                System.out.println("Last night there was a torrential downpour!!!");
+            }
+        }
+    }
+
+    private void setMediaViewAndPlayVideo(String fileName) {
+        Media media = new Media(Paths.get(fileName).toUri().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        mediaView.setPreserveRatio(false);
+        mediaView.setMediaPlayer(player);
+        player.play();
     }
 
     public void updateUI() {
@@ -405,9 +465,21 @@ public class GameWindowController extends BaseController implements Initializabl
                 });
     }
 
-    public static String overnightStatusUpdate(Player player) {
+    private void getNarrative(File file) {
+        try {
+            String narrative = Files.lines(file.toPath()).collect(Collectors.joining("\n"));
+             getCurActivity().appendText(narrative);
+            //getCurActivity().appendText(narrative);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(
+                    "Whoops! We seemed to have misplaced the next segment of the story. We're working on it!");
+        }
+    }
+    public static PlayerStatus overnightStatusUpdate(Player player) {
         String result;
         SuccessRate successRate;
+        Status status = STILL_ALIVE;
         double overnightPreparedness = player.getShelter().getIntegrity();
         if (player.getShelter().hasFire()) {
             overnightPreparedness += 10;
@@ -431,26 +503,16 @@ public class GameWindowController extends BaseController implements Initializabl
         player.updateWeight(-caloriesBurned);
         if (player.getWeight() < 180.0 * 0.8) {
             result = result + " But you die of losing too much weight! /n/n Game Over!";
+            status = STARVED;
         }
         int hydrationCost = ActivityLevel.MEDIUM.getHydrationCost(successRate);
         player.setHydration(player.getHydration() - hydrationCost);
         if (player.getHydration() < 0) {
             result = result + " But you die of thirst! /n/n Game Over!";
+            status = DEHYDRATION;
         }
         player.getShelter().setFire(false);
-        return result;
-    }
-
-
-    public void getNarrative(File file) {
-        try {
-            String narrative = Files.lines(file.toPath()).collect(Collectors.joining("\n"));
-            getCurActivity().appendText(narrative);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println(
-                    "Whoops! We seemed to have misplaced the next segment of the story. We're working on it!");
-        }
+        return new PlayerStatus(status,result);
     }
 
     // call from game logic thread to get the input
@@ -474,6 +536,7 @@ public class GameWindowController extends BaseController implements Initializabl
             }
         }
     }
+
     /* GETTERS AND SETTERS*/
     public TextField getWeight() {
         return weight;
