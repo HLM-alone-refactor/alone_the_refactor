@@ -19,6 +19,7 @@
                 </entry>
             </requirements>
         </craft>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -36,6 +37,7 @@
                 </entry>
             </requirements>
         </craft>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -53,6 +55,7 @@
                 </entry>
             </requirements>
         </craft>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -70,6 +73,7 @@
                 </entry>
             </requirements>
         </craft>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -92,6 +96,7 @@
                 </entry>
             </requirements>
         </craft>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -129,12 +134,14 @@
                 </entry>
             </requirements>
         </craft>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Family Photo</type>
         <description>A photo of your family. In color too.</description>
         <synonym>Photograph</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -142,33 +149,39 @@
         <description>Parachute chord. This stuff is very strong.</description>
         <synonym>Rope</synonym>
         <synonym>Cordage</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Flare</type>
         <description>An emergency signal flare, probably very bright when ignited.</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Boots</type>
         <description>Heavy shoes that you wear on your feet.</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Pants</type>
         <description>Pants.</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Sleeping Gear</type>
         <description>Sleeping bag and pillow. Allows for comfortable resting</description>
         <synonym>Sleeping Bag</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Cold Weather Gear</type>
         <description>Cold weather gear. This will keep you warmer during those cold flashes</description>
         <synonym>Cold Gear</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -179,23 +192,27 @@
     <item>
         <type>Matches</type>
         <description>A box of matches</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>First Aid Kit</type>
         <description>A first aid kit, heals some broken wounds</description>
         <synonym>First Aid</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Flashlight</type>
         <description>A bright flashlight</description>
         <synonym>Light</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Batteries</type>
         <description>Standard AA batteries</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -203,40 +220,47 @@
         <description>18 gauge wire</description>
         <synonym>18 Gauge Wire</synonym>
         <synonym>Snare</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Pot</type>
         <description>A cooking pot</description>
         <synonym>Cooking Pot</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Axe</type>
         <description>A sharp axe</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Hatchet</type>
         <description>A large hatchet</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Iodine Tablets</type>
         <description>Iodine Tablets</description>
         <synonym>Iodine</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Pistol</type>
         <description>A 9M Berreta in good condition</description>
         <synonym>Gun</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Pistol Round</type>
         <description>A 9M pistol round</description>
         <synonym>Round</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -246,41 +270,49 @@
         <synonym>Mag</synonym>
         <synonym>Ammo</synonym>
         <synonym>Ammunition</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Shovel</type>
         <description>A sturdy shovel</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Harmonica</type>
         <description>A small harmonica. A pleasant sound.</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Lighter</type>
         <description>A cigarette lighter</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Survival Manual</type>
         <description>A manual for how to survive in the wilderness.</description>
         <synonym>Manual</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Journal</type>
         <description>A journal to write into</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Wood</type>
         <description>A piece of wood</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Metal</type>
         <description>A piece of metal, unknown type.</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 </items>

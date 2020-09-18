@@ -9,12 +9,12 @@ import javafx.scene.control.TextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AboutWindowController extends BaseController implements Initializable {
+public class AboutUsWindowController extends BaseController implements Initializable {
 
     @FXML
     private TextArea textAreaNotEditable;
 
-    public AboutWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
+    public AboutUsWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
         super(gameManager, viewFactory, fxmlName);
     }
 
