@@ -1,6 +1,5 @@
 package com.palehorsestudios.alone.gui;
 
-import com.palehorsestudios.alone.gui.controller.GameWindowController;
 import com.palehorsestudios.alone.player.Player;
 
 import java.io.File;

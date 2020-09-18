@@ -31,6 +31,7 @@ public class GameMenuWindowController extends BaseController {
         if (file != null) {
             Saving saving = new Saving();
 
+            gameManager.setDefaultGameFile(file);
             gameManager.setPlayer(saving.readPlayer(file));
             viewFactory.showGameWindow(saving.readLog(file));
             viewFactory.closeStage(stage);
