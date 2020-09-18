@@ -16,6 +16,7 @@ public class Item implements Serializable {
     private String description;
     private Set<Craft> craft;
     private Set<String> synonym;
+    private boolean isInitialItemChoice;
     private double weight;
 
     /**
@@ -100,4 +101,9 @@ public class Item implements Serializable {
     public int hashCode() {
         return Objects.hash(getType(), getDescription(), getCraft());
     }
+
+    public boolean isInitialItemChoice() {
+        return isInitialItemChoice;
+    }
+
 }

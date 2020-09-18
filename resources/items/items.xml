@@ -19,6 +19,7 @@
                 </entry>
             </requirements>
         </craft>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -36,6 +37,7 @@
                 </entry>
             </requirements>
         </craft>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -53,6 +55,7 @@
                 </entry>
             </requirements>
         </craft>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -71,6 +74,7 @@
             </requirements>
         </craft>
         <weight>5</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -94,6 +98,7 @@
             </requirements>
         </craft>
         <weight>10</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -131,12 +136,14 @@
                 </entry>
             </requirements>
         </craft>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Family Photo</type>
         <description>A photo of your family. In color too.</description>
         <synonym>Photograph</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -145,23 +152,27 @@
         <synonym>Rope</synonym>
         <synonym>Cordage</synonym>
         <weight>15</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Flare</type>
         <description>An emergency signal flare, probably very bright when ignited.</description>
         <weight>5</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Boots</type>
         <description>Heavy shoes that you wear on your feet.</description>
         <weight>3.5</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Pants</type>
         <description>Pants.</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
         <weight>2.1</weight>
     </item>
 
@@ -170,6 +181,7 @@
         <description>Sleeping bag and pillow. Allows for comfortable resting</description>
         <synonym>Sleeping Bag</synonym>
         <weight>8.7</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -177,6 +189,7 @@
         <description>Cold weather gear. This will keep you warmer during those cold flashes</description>
         <synonym>Cold Gear</synonym>
         <weight>4.5</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -188,6 +201,7 @@
     <item>
         <type>Matches</type>
         <description>A box of matches</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -195,6 +209,7 @@
         <description>A first aid kit, heals some broken wounds</description>
         <synonym>First Aid</synonym>
         <weight>5</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -202,11 +217,13 @@
         <description>A bright flashlight</description>
         <synonym>Light</synonym>
         <weight>5.9</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Batteries</type>
         <description>Standard AA batteries</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -214,6 +231,7 @@
         <description>18 gauge wire</description>
         <synonym>18 Gauge Wire</synonym>
         <synonym>Snare</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -221,24 +239,28 @@
         <description>A cooking pot</description>
         <synonym>Cooking Pot</synonym>
         <weight>3.3</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Axe</type>
         <description>A sharp axe</description>
         <weight>8.9</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Hatchet</type>
         <description>A large hatchet</description>
         <weight>14.5</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Iodine Tablets</type>
         <description>Iodine Tablets</description>
         <synonym>Iodine</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -246,6 +268,7 @@
         <description>A 9M Berreta in good condition</description>
         <synonym>Gun</synonym>
         <weight>18.5</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -253,6 +276,7 @@
         <description>A 9M pistol round</description>
         <synonym>Round</synonym>
         <weight>1.2</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
@@ -263,43 +287,51 @@
         <synonym>Ammo</synonym>
         <synonym>Ammunition</synonym>
         <weight>15</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Shovel</type>
         <description>A sturdy shovel</description>
         <weight>12</weight>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Harmonica</type>
         <description>A small harmonica. A pleasant sound.</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Lighter</type>
         <description>A cigarette lighter</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Survival Manual</type>
         <description>A manual for how to survive in the wilderness.</description>
         <synonym>Manual</synonym>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Journal</type>
         <description>A journal to write into</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
     </item>
 
     <item>
         <type>Wood</type>
         <description>A piece of wood</description>
+        <isInitialItemChoice>false</isInitialItemChoice>
     </item>
 
     <item>
         <type>Metal</type>
         <description>A piece of metal, unknown type.</description>
+        <isInitialItemChoice>false</isInitialItemChoice>
     </item>
 
     <item>
