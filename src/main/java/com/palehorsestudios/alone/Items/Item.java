@@ -16,6 +16,7 @@ public class Item implements Serializable {
     private String description;
     private Set<Craft> craft;
     private Set<String> synonym;
+    private boolean isInitialItemChoice;
 
     /**
      * Set as package private to only be usable in ItemFactory
@@ -94,4 +95,9 @@ public class Item implements Serializable {
     public int hashCode() {
         return Objects.hash(getType(), getDescription(), getCraft());
     }
+
+    public boolean isInitialItemChoice() {
+        return isInitialItemChoice;
+    }
+
 }

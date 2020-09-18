@@ -15,7 +15,7 @@ import java.nio.file.Files;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class IntroWindowController extends BaseController implements Initializable {
+public class GameIntroWindowController extends BaseController implements Initializable {
 
     @FXML
     private Button startGame;
@@ -23,7 +23,7 @@ public class IntroWindowController extends BaseController implements Initializab
     private TextArea intro;
 
     // Constructor
-    public IntroWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
+    public GameIntroWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
         super(gameManager, viewFactory, fxmlName);
     }
 
