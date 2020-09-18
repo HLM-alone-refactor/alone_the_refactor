@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ItemFactory {
 
@@ -25,6 +26,19 @@ public class ItemFactory {
 
         } catch (JAXBException e) {
             e.printStackTrace();
+        }
+
+        // make sure all items in game are available
+        // throw nullPointerException if one was not found
+        Set<String> itemNames = items.getItems().stream().map(Item::getType).collect(Collectors.toSet());
+        for (Item item : items.getItems()) {
+            for (Craft craft : item.getCraft()) {
+                craft.getRequirements().forEach( (s, integer) -> {
+                    if (!itemNames.contains(s)) {
+                        throw new NullPointerException("Cannot find item " + s + " in item xml file");
+                    }
+                });
+            }
         }
 
         return items;

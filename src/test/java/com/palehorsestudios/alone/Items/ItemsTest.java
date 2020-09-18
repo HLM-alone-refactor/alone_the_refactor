@@ -22,10 +22,10 @@ public class ItemsTest extends TestCase {
     }
 
     public void testGetItems() throws JAXBException {
-        Item item1 = new Item("knife", "A sharp, short blade.",
+        Item item1 = new Item("knife", "A sharp, short blade.", 5.0,
                 Set.of(new Craft(Map.of("steel", 1, "wood", 2)),
                         new Craft(Map.of("iron", 1, "wood", 2))));
-        Item item2 = new Item("sword", "A sharp, long blade.", null);
+        Item item2 = new Item("sword", "A sharp, long blade.", 5.0, null);
 
         Set<Item> testItems = Set.of(item1, item2);
 

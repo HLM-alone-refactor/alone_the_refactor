@@ -14,7 +14,7 @@
         <craft>
             <requirements>
                 <entry>
-                    <key>yarn</key>
+                    <key>Yarn</key>
                     <value>1</value>
                 </entry>
             </requirements>
@@ -44,7 +44,7 @@
         <craft>
             <requirements>
                 <entry>
-                    <key>Bait</key>
+                    <key>Fishing Bait</key>
                     <value>1</value>
                 </entry>
                 <entry>
@@ -300,5 +300,25 @@
     <item>
         <type>Metal</type>
         <description>A piece of metal, unknown type.</description>
+    </item>
+
+    <item>
+        <type>Yarn</type>
+        <description>A spool of yarn.</description>
+    </item>
+
+    <item>
+        <type>Feather</type>
+        <description>A feather from a bird</description>
+    </item>
+
+    <item>
+        <type>Leaf</type>
+        <description>A leaf from a tree</description>
+    </item>
+
+    <item>
+        <type>Fishing Bait</type>
+        <description>Bait to attach to the end of a Fishing Lure</description>
     </item>
 </items>
