@@ -5,7 +5,6 @@ import com.palehorsestudios.alone.gui.ViewFactory;
 import com.palehorsestudios.alone.util.Saving;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -27,7 +26,6 @@ public class GameMenuWindowController extends BaseController {
         Stage stage = (Stage) menuTitle.getScene().getWindow();
 
         // figure out which file to read from
-
         File file = viewFactory.getFileChooser().showOpenDialog(stage);
 
         if (file != null) {
