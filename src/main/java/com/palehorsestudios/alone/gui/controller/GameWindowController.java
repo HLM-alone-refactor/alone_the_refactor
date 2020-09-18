@@ -82,6 +82,10 @@ public class GameWindowController extends BaseController implements Initializabl
         runGameThread();
     }
 
+    /*
+
+        Menu Options
+    */
     @FXML
     void restartGameMenuAction() {
         viewFactory.showSelectItemsWindow();
@@ -98,6 +102,11 @@ public class GameWindowController extends BaseController implements Initializabl
     @FXML
     void aboutMenuAction() {
         viewFactory.showAboutWindow();
+    }
+
+    @FXML
+    void craftingMenuAction(ActionEvent event) {
+        viewFactory.showCraftingWindow();
     }
 
     public GameWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
