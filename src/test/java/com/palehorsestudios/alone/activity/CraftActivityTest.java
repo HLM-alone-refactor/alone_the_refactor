@@ -38,9 +38,9 @@ public class CraftActivityTest {
 
     @Test
     public void testCraft_playerHasItems() {
-        player.getItems().addAll(ItemFactory.getNewInstances("Wood", "Metal"));
+        player.getItems().addAll(ItemFactory.getNewInstances("Wood", "Rock"));
 
-        assertEquals(ItemFactory.getNewInstances("Wood", "Metal"), player.getItems());
+        assertEquals(ItemFactory.getNewInstances("Wood", "Rock"), player.getItems());
 
         assertEquals("Successfully crafted Knife!", CraftActivity.getInstance().act(new Choice("Knife", player)));
         assertEquals(ItemFactory.getNewInstances("Knife"), player.getItems());

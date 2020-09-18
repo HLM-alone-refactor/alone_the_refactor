@@ -28,7 +28,7 @@
         <craft>
             <requirements>
                 <entry>
-                    <key>Metal</key>
+                    <key>Rock</key>
                     <value>1</value>
                 </entry>
                 <entry>
@@ -68,7 +68,7 @@
                     <value>1</value>
                 </entry>
                 <entry>
-                    <key>Metal</key>
+                    <key>Rock</key>
                     <value>1</value>
                 </entry>
             </requirements>
@@ -80,6 +80,8 @@
     <item>
         <type>Flint and Steel</type>
         <description>Flint and steel, mainly used for staring fires</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
+        <findBy>Forage</findBy>
     </item>
 
     <item>
@@ -97,6 +99,18 @@
                 </entry>
             </requirements>
         </craft>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Wood</key>
+                    <value>1</value>
+                </entry>
+                <entry>
+                    <key>Yarn</key>
+                    <value>2</value>
+                </entry>
+            </requirements>
+        </craft>
         <weight>10</weight>
         <isInitialItemChoice>true</isInitialItemChoice>
     </item>
@@ -107,7 +121,7 @@
         <craft>
             <requirements>
                 <entry>
-                    <key>Metal</key>
+                    <key>Rock</key>
                     <value>1</value>
                 </entry>
                 <entry>
@@ -123,7 +137,7 @@
         <craft>
             <requirements>
                 <entry>
-                    <key>Metal</key>
+                    <key>Rock</key>
                     <value>1</value>
                 </entry>
                 <entry>
@@ -167,6 +181,18 @@
         <description>Heavy shoes that you wear on your feet.</description>
         <weight>3.5</weight>
         <isInitialItemChoice>true</isInitialItemChoice>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Fur Pelt</key>
+                    <value>2</value>
+                </entry>
+                <entry>
+                    <key>Pelt</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
     </item>
 
     <item>
@@ -174,6 +200,22 @@
         <description>Pants.</description>
         <isInitialItemChoice>true</isInitialItemChoice>
         <weight>2.1</weight>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Fur Pelt</key>
+                    <value>2</value>
+                </entry>
+                <entry>
+                    <key>Pelt</key>
+                    <value>1</value>
+                </entry>
+                <entry>
+                    <key>Yarn</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
     </item>
 
     <item>
@@ -182,6 +224,18 @@
         <synonym>Sleeping Bag</synonym>
         <weight>8.7</weight>
         <isInitialItemChoice>true</isInitialItemChoice>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Fur Pelt</key>
+                    <value>5</value>
+                </entry>
+                <entry>
+                    <key>Yarn</key>
+                    <value>2</value>
+                </entry>
+            </requirements>
+        </craft>
     </item>
 
     <item>
@@ -190,6 +244,22 @@
         <synonym>Cold Gear</synonym>
         <weight>4.5</weight>
         <isInitialItemChoice>true</isInitialItemChoice>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Fur Pelt</key>
+                    <value>5</value>
+                </entry>
+                <entry>
+                    <key>Pelt</key>
+                    <value>3</value>
+                </entry>
+                <entry>
+                    <key>Yarn</key>
+                    <value>2</value>
+                </entry>
+            </requirements>
+        </craft>
     </item>
 
     <item>
@@ -247,6 +317,18 @@
         <description>A sharp axe</description>
         <weight>8.9</weight>
         <isInitialItemChoice>true</isInitialItemChoice>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Rock</key>
+                    <value>1</value>
+                </entry>
+                <entry>
+                    <key>Wood</key>
+                    <value>1</value>
+                </entry>
+            </requirements>
+        </craft>
     </item>
 
     <item>
@@ -254,6 +336,18 @@
         <description>A large hatchet</description>
         <weight>14.5</weight>
         <isInitialItemChoice>true</isInitialItemChoice>
+        <craft>
+            <requirements>
+                <entry>
+                    <key>Rock</key>
+                    <value>2</value>
+                </entry>
+                <entry>
+                    <key>Wood</key>
+                    <value>2</value>
+                </entry>
+            </requirements>
+        </craft>
     </item>
 
     <item>
@@ -326,31 +420,59 @@
         <type>Wood</type>
         <description>A piece of wood</description>
         <isInitialItemChoice>false</isInitialItemChoice>
+        <findBy>Gather</findBy>
     </item>
 
     <item>
-        <type>Metal</type>
-        <description>A piece of metal, unknown type.</description>
+        <type>Rock</type>
+        <description>A rock, could be sharpened, it looks like that kind of rock.</description>
         <isInitialItemChoice>false</isInitialItemChoice>
+        <findBy>Forage</findBy>
+        <findBy>Fish</findBy>
+        <findBy>Gather</findBy>
     </item>
 
     <item>
         <type>Yarn</type>
-        <description>A spool of yarn.</description>
+        <description>Something that feels like yarn; at least yarn-like.</description>
+        <findBy>Forage</findBy>
+        <findBy>Trap</findBy>
     </item>
 
     <item>
         <type>Feather</type>
         <description>A feather from a bird</description>
+        <findBy>Forage</findBy>
+        <findBy>Hunt</findBy>
     </item>
 
     <item>
         <type>Leaf</type>
         <description>A leaf from a tree</description>
+        <findBy>Forage</findBy>
     </item>
 
     <item>
         <type>Fishing Bait</type>
         <description>Bait to attach to the end of a Fishing Lure</description>
+        <findBy>Fish</findBy>
+        <findBy>Forage</findBy>
     </item>
+
+    <item>
+        <type>Fur Pelt</type>
+        <description>A fur pelt, it feels warm and soft.</description>
+        <weight>3</weight>
+        <findBy>Hunt</findBy>
+        <findBy>Trap</findBy>
+    </item>
+
+    <item>
+        <type>Pelt</type>
+        <description>A skin pelt, tough and durable. Could be useful for something.</description>
+        <weight>3</weight>
+        <findBy>Hunt</findBy>
+        <findBy>Trap</findBy>
+    </item>
+
 </items>

@@ -3,8 +3,13 @@ package com.palehorsestudios.alone.activity;
 import com.palehorsestudios.alone.Choice;
 import com.palehorsestudios.alone.Foods.Food;
 import com.palehorsestudios.alone.Foods.FoodFactory;
+import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.SuccessRate;
+import com.palehorsestudios.alone.util.HelperMethods;
+
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class TrapActivity extends Activity {
     private static TrapActivity activityReference;
@@ -54,6 +59,9 @@ public class TrapActivity extends Activity {
             choice.getPlayer().updateMorale(2);
             result = "You'll have plenty of lucky rabbit feet now. Your snared three rabbits!";
         }
+
+        result += luckFindInActivity(ItemFactory.getByFind("Trap"), choice, successRate, .7, 0);
+
         return result;
     }
 }

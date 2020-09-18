@@ -41,6 +41,10 @@ public class GatherFirewoodActivity extends Activity {
         firewoodAmount = round(firewoodAmount, 1);
         choice.getPlayer().updateMorale((int) Math.ceil(firewoodAmount / 2.0));
         choice.getPlayer().getShelter().updateFirewood(firewoodAmount);
-        return "Good Job! You just gathered " + firewoodAmount + " bundles of firewood.";
+
+        String result = "Good Job! You just gathered " + firewoodAmount + " bundles of firewood.";
+        result += luckFindInActivity(ItemFactory.getByFind("Gather"), choice, successRate, 1, 1);
+
+        return result;
     }
 }

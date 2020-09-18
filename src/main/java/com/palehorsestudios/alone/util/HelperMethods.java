@@ -45,6 +45,10 @@ public class HelperMethods {
         return sb.toString();
     }
 
+    public static boolean doByPercentTarget(Double target) {
+        return Math.random() <= target;
+    }
+
     /**
      * Capitalizes each word in a given string, excluding 'and', 'is', and 'of'
      * @param input

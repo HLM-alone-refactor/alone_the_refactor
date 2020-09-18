@@ -3,8 +3,13 @@ package com.palehorsestudios.alone.activity;
 import com.palehorsestudios.alone.Choice;
 import com.palehorsestudios.alone.Foods.Food;
 import com.palehorsestudios.alone.Foods.FoodFactory;
+import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.SuccessRate;
+import com.palehorsestudios.alone.util.HelperMethods;
+
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class HuntActivity extends Activity {
     private static HuntActivity activityReference;
@@ -50,6 +55,9 @@ public class HuntActivity extends Activity {
             result = "Moose down! It took five trips, but you were able to process the meat and transport it back to " +
                     "your shelter before a predator got to it first.";
         }
+
+        result += luckFindInActivity(ItemFactory.getByFind("Hunt"), choice, successRate, 0.4, 1);
+
         return result;
     }
 }

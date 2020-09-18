@@ -64,4 +64,8 @@ public class ItemFactory {
         return Set.copyOf(ALL_ITEMS.getItems());
     }
 
+    public static List<Item> getByFind(String str) {
+        return getAllItems().stream().filter(e -> e.canFindAt(str)).collect(Collectors.toList());
+    }
+
 }

@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @XmlRootElement(name = "item")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -18,6 +19,7 @@ public class Item implements Serializable {
     private Set<String> synonym;
     private boolean isInitialItemChoice;
     private double weight;
+    private Set<String> findBy;
 
     /**
      * Set as package private to only be usable in ItemFactory
@@ -72,6 +74,17 @@ public class Item implements Serializable {
 
     public double getWeight() {
         return Objects.requireNonNullElse(weight, 1.0);
+    }
+
+    public Set<String> getFindBy() {
+        return Objects.requireNonNullElse(findBy, Set.of());
+    }
+
+    public boolean canFindAt(String str) {
+        if (findBy != null) {
+            return findBy.stream().map(String::toLowerCase).collect(Collectors.toSet()).contains(str.toLowerCase());
+        }
+        return false;
     }
 
     public boolean isCraftable() {

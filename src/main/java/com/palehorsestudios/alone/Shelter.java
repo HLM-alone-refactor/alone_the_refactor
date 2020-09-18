@@ -171,7 +171,20 @@ public class Shelter implements Serializable {
      * @return Result of attempting to remove Food from the cache.
      */
     public double removeFoodFromCache(Food food, double quantity) {
-        return removeFromMap(foodCache, food, quantity);
+        double removalQuantity = 0;
+        Optional<Double> currentQuantity = Optional.ofNullable(foodCache.get(food));
+        if (currentQuantity.isPresent() && currentQuantity.get() > 0) {
+            double curr = currentQuantity.get();
+            if (curr < quantity || curr - quantity == 0) {
+                foodCache.remove(food);
+                removalQuantity = curr;
+            } else {
+                foodCache.put(food, curr - quantity);
+                removalQuantity = quantity;
+            }
+        }
+
+        return removalQuantity;
     }
 
     /**
@@ -197,19 +210,15 @@ public class Shelter implements Serializable {
      * @return Quantity of Item removed from equipment cache.
      */
     public int removeEquipment(Item item, int quantity) {
-        return (int) removeFromMap(equipment, item, quantity);
-    }
-
-    private <T, I extends Number> double removeFromMap(Map<T, I> map, T key, double quantity) {
-        double removalQuantity = 0;
-        Optional<I> currentQuantity = Optional.ofNullable(map.get(key));
+        int removalQuantity = 0;
+        Optional<Integer> currentQuantity = Optional.ofNullable(equipment.get(item));
         if (currentQuantity.isPresent() && currentQuantity.get().doubleValue() > 0) {
-            double curr = currentQuantity.get().doubleValue();
-            if (curr < quantity || curr- quantity == 0) {
-                map.remove(key);
+            int curr = currentQuantity.get();
+            if (curr < quantity || curr - quantity == 0) {
+                equipment.remove(item);
                 removalQuantity = curr;
             } else {
-                map.put(key, (I) ((Double) (curr - quantity)));
+                equipment.put(item, curr - quantity);
                 removalQuantity = quantity;
             }
         }

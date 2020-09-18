@@ -3,8 +3,15 @@ package com.palehorsestudios.alone.activity;
 import com.palehorsestudios.alone.Choice;
 import com.palehorsestudios.alone.Foods.Food;
 import com.palehorsestudios.alone.Foods.FoodFactory;
+import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.SuccessRate;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ForageActivity extends Activity {
     private static ForageActivity activityReference;
@@ -23,6 +30,7 @@ public class ForageActivity extends Activity {
     public String act(Choice choice) {
         String result;
         SuccessRate successRate = generateSuccessRate();
+
         double caloriesBurned = ActivityLevel.LOW.getCaloriesBurned(successRate);
         choice.getPlayer().updateWeight(-caloriesBurned);
         int hydrationCost = ActivityLevel.LOW.getHydrationCost(successRate);
@@ -56,6 +64,10 @@ public class ForageActivity extends Activity {
             result = "You never thought you would say this, but you are thrilled to have found a large group "
                     + "of leaf beetles under a decayed log. These critters are packed full of protein!";
         }
+
+        // update player with items they found
+        result += luckFindInActivity(ItemFactory.getByFind("Forage"), choice, successRate, 0.8, 0);
+
         return result;
     }
 }
