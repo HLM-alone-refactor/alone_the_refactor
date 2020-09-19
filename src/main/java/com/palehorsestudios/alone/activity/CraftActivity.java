@@ -24,14 +24,12 @@ public class CraftActivity extends Activity {
 
     @Override
     public String act(Choice choice) {
-        Item newItem = null;
         try {
-            newItem = ItemFactory.getNewInstance(choice.getKeyword()); // get the item trying to make
             List<String> playerItems = choice.getPlayer().getItems().stream().map(Item::getType).collect(Collectors.toList());
 
-            if (newItem.isCraftable()) {
+            if (choice.getItem().isCraftable()) {
                 // go through each craft object and see if requirements for one of them is met
-                for (Craft craft : newItem.getCraft()) {
+                for (Craft craft : choice.getItem().getCraft()) {
                     // if player has all the items needed to craft it
                     if (craft.getRequirements().keySet().stream()
                             .filter(playerItems::contains).count() == craft.getRequirements().keySet().size()) {
@@ -43,8 +41,8 @@ public class CraftActivity extends Activity {
                         }
 
                         // return the new item
-                        choice.getPlayer().getItems().add(newItem);
-                        return "Successfully crafted " + choice.getKeyword() + "!";
+                        choice.getPlayer().getItems().add(choice.getItem());
+                        return "Successfully crafted " + choice.getItem().getType() + "!";
                     }
                 }
             }

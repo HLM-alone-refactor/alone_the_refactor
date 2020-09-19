@@ -57,7 +57,7 @@ public abstract class Activity {
             if (amount > 0) {
                 Item item = items.get(ThreadLocalRandom.current().nextInt(items.size()));
                 choice.getPlayer().getShelter().addEquipment(item, amount);
-                sb.append("\nLucky~You! You found " + amount + " " + item.getType() + "!");
+                sb.append("\n\tLucky~You! You found " + amount + " " + item.getType() + "!");
             }
 
         }

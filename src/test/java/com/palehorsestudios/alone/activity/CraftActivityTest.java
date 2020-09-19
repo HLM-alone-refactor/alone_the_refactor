@@ -42,8 +42,23 @@ public class CraftActivityTest {
 
         assertEquals(ItemFactory.getNewInstances("Wood", "Rock"), player.getItems());
 
-        assertEquals("Successfully crafted Knife!", CraftActivity.getInstance().act(new Choice("Knife", player)));
+        assertEquals("Successfully crafted Knife!", CraftActivity.getInstance().act(new Choice("Craft", player, ItemFactory.getNewInstance("Knife"))));
         assertEquals(ItemFactory.getNewInstances("Knife"), player.getItems());
+    }
+
+    @Test
+    public void testCraft_anArrow() {
+        player.getItems().addAll(ItemFactory.getNewInstances("Leaf", "Rock", "Wood"));
+
+        assertEquals("Successfully crafted Arrow!", CraftActivity.getInstance().act(new Choice("Craft", player, ItemFactory.getNewInstance("Arrow"))));
+    }
+
+    @Test
+    public void testCraft_requirementMoreThanOne() {
+        player.getItems().addAll(ItemFactory.getNewInstances("Wood", "Yarn", "Yarn"));
+        CraftActivity.getInstance().act(new Choice("Craft", player, ItemFactory.getNewInstance("Bow")));
+
+        assertTrue(player.getItems().contains(ItemFactory.getNewInstance("Bow")));
     }
 
     @Test
