@@ -61,44 +61,29 @@ public class Parser {
         // set up needed variables
         Choice choice = null;
 
-        Food food = null;
-        Item item = null;
-
-        // set up choice object
         if (keyword != null) {
-            try {
-                food = FoodFactory.getNewInstance(getStemMapValue(input, FOOD_STEM_MAP));
-            } catch (IllegalArgumentException e) {
-                // do nothing
-                // was not a legal food
+            Food food = null;
+            Item item = null;
+            switch (keyword) {
+                case "eat" -> {
+                    try {
+                        food = FoodFactory.getNewInstance(getStemMapValue(input, FOOD_STEM_MAP));
+                    } catch (IllegalArgumentException e) {
+                        // do nothing
+                        // was not a legal food
+                    }
+                }
+                case "get", "put" -> {
+                    try {
+                        item = ItemFactory.getNewInstance(getStemMapValue(input, ITEM_STEM_MAP));
+                    } catch (IllegalArgumentException e) {
+                        // do nothing
+                        // was not a legal item
+                    }
+                }
             }
-            try {
-                item = ItemFactory.getNewInstance(getStemMapValue(input, ITEM_STEM_MAP));
-            } catch (IllegalArgumentException e) {
-                // do nothing
-                // was not a legal item
-            }
+
             choice = new Choice(keyword, player, item, food);
-//            if (keyword.equals("eat")) { // needs figure out what food is being eaten
-//                try {
-//                    food = FoodFactory.getNewInstance(getStemMapValue(input, FOOD_STEM_MAP));
-//                    choice = new Choice(keyword, player, food);
-//                } catch (IllegalArgumentException e) {
-//                    // do nothing
-//                    // was not a legal food
-//                }
-//
-//            } else if (keyword.equals("get") || keyword.equals("put") || keyword.equals()) { // needs to figure out what item is being used
-//                try {
-//                    item = ItemFactory.getNewInstance(getStemMapValue(input, ITEM_STEM_MAP));
-//                    choice = new Choice(keyword, player, item, food);
-//                } catch (IllegalArgumentException e) {
-//                    // do nothing
-//                    // was not a legal item
-//                }
-//            } else { // doesn't need other things, only keyword and player
-//                choice = new Choice(keyword, player);
-//            }
         }
         return choice;
     }
@@ -138,7 +123,7 @@ public class Parser {
             if (PARSERS.containsKey(s)) {
                 key = s; // found it
                 if (key.equals("get") && words.length > 1) { // check if latter half is some other activity
-                    String latter = input.split(" ", 2)[1]; // get the string after "get"
+                    String latter = input.split("get", 2)[1]; // get the string after "get"
                     latter = stemIt(latter);
                     if (PARSERS.containsKey(latter)) { // check if other activity and set if true
                         key = latter;

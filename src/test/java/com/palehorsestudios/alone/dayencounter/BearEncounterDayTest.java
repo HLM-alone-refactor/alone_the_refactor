@@ -59,6 +59,7 @@ public class BearEncounterDayTest {
     public void testBearEncounterDayWithPistolAndCartridgesItems() {
         getItemFromShelter.act(new Choice("pistol", player, (ItemFactory.getNewInstance("Pistol"))));
         getItemFromShelter.act(new Choice("ammo", player, (ItemFactory.getNewInstance("Pistol Cartridge"))));
+        player.getItems().addAll(ItemFactory.getNewInstances("Pistol Round", "Pistol Round", "Pistol Round"));
         int previousMorale = player.getMorale();
         double previousWeight = player.getWeight();
         int previousHydration = player.getHydration();
@@ -88,6 +89,7 @@ public class BearEncounterDayTest {
         assertEquals(previousMorale + 3, player.getMorale(), .001);
         assertEquals(previousWeight - 1.8, player.getWeight(), .001);
         assertEquals(Optional.of(1000.0 + bear.getGrams()).get(), player.getShelter().getFoodCache().get(bear), .001);
+        assertTrue(!player.getShelter().getEquipment().containsKey(ItemFactory.getNewInstance("Pistol Round")));
     }
 
     @Test

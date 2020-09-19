@@ -418,7 +418,7 @@
 
     <item>
         <type>Wood</type>
-        <description>A piece of wood</description>
+        <description>A thin piece of wood, not very good for a fire.</description>
         <isInitialItemChoice>false</isInitialItemChoice>
         <findBy>Gather</findBy>
     </item>

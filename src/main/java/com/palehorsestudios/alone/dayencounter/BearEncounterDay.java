@@ -21,8 +21,11 @@ public class BearEncounterDay extends DayEncounter {
     @Override
     public String encounter(Player player) {
 
-        if (player.getItems().contains(ItemFactory.getNewInstance("Pistol Cartridge"))
-                && player.getItems().contains(ItemFactory.getNewInstance("Pistol"))) {
+        if (player.getItems().containsAll(ItemFactory.getNewInstances("Pistol Cartridge", "Pistol"))
+                && player.getItems()
+                    .stream()
+                    .filter(e -> e.equals(ItemFactory.getNewInstance("Pistol Round")))
+                    .count() >= 3) {
 //        || player.getItems().contains(BOW) && player.getItems().contains(ARROWS))
 //      TODO: add else if for bow and arrow
             player.updateHydration(-1);
@@ -31,6 +34,8 @@ public class BearEncounterDay extends DayEncounter {
             player.updateMorale(3);
             Food bear = FoodFactory.getNewInstance("Bear");
             player.getShelter().addFoodToCache(bear, bear.getGrams());
+            for (int i = 0; i < 3; i++)
+                player.getItems().remove(ItemFactory.getNewInstance("Pistol Round"));
             return "While in the northern territories, you're just another link in the food chain. Every time "
                     + "you leave to venture out into the wilderness, whatever you might be doing, "
                     + "this fact is never far from your thoughts. \n"
