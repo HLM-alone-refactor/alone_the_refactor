@@ -78,6 +78,8 @@ public class GameWindowController extends BaseController implements Initializabl
     private ListView<String> foodCache;
     @FXML
     private ListView<String> equipment;
+    @FXML
+    private TextField inventoryWeight;
 
     @FXML
     private MediaView mediaView;
@@ -188,8 +190,6 @@ public class GameWindowController extends BaseController implements Initializabl
     private void executeGameLoop() {
         // flag for encounter results
         Status status = STILL_ALIVE;
-        // encounter results
-        String encounterResults = "Killed by the encounter";
         // must run in ui thread
         Platform.runLater(
                 new Runnable() {
@@ -205,7 +205,7 @@ public class GameWindowController extends BaseController implements Initializabl
 
         Parser parser = new Parser();
         while (!player.isDead() && !player.isRescued() && !player.isRescued(day[0])) {
-            // update the UI fields
+            // update ui
             updateUI();
             String input = getInput();
             // hmm had to use main here?
@@ -251,7 +251,7 @@ public class GameWindowController extends BaseController implements Initializabl
                                             RescueHelicopterNight.getInstance()};
                             int randomNightEncounterIndex =
                                     (int) Math.floor(Math.random() * nightEncounters.length);
-                            // Get gamestate object from enounter
+                            // Get playerstatus object from encounter
                             nightResultObject = nightEncounters[randomNightEncounterIndex].encounter(player);
                             status = nightResultObject.getStatusUpdate();
                             nightTextOutput = nightResultObject.getTextOutput();
@@ -264,12 +264,14 @@ public class GameWindowController extends BaseController implements Initializabl
                             getDailyLog().appendText("Day " + day[0] + " Night: " + nightTextOutput + "\n");
                             dayHalf[0] = "Morning";
                             day[0]++;
+                        } else {
+                            updateUI();
                         }
                     }
                 }
+                playStatusMedia(status);
                 getDateAndTime().setText("Day " + day[0] + " " + dayHalf[0]);
             }
-            playStatusMedia(status);
         }
     }
 

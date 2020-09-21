@@ -10,12 +10,12 @@ import javafx.stage.Stage;
 import java.io.File;
 
 
-public class GameMenuWindowController extends BaseController {
+public class GameStartMenuWindowController extends BaseController {
 
     @FXML
     private Label menuTitle;
 
-    public GameMenuWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
+    public GameStartMenuWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
         super(gameManager, viewFactory, fxmlName);
     }
 
