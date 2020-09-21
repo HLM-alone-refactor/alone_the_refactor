@@ -62,6 +62,12 @@ public class ViewFactory {
         controller.getDailyLog().setText(startingLog);
 
     }
+    public void showCraftingWindow() {
+        System.out.println("Show crafting window called");
+
+        BaseController controller = new CraftItemsWindowController(gameManager,this, "view/crafting.fxml");
+        initializeStage(controller);
+    }
 
     public void showGameOver() {
         System.out.println("Show game over window");
