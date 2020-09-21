@@ -3,6 +3,8 @@ package com.palehorsestudios.alone.dayencounter;
 import com.palehorsestudios.alone.Foods.Food;
 import com.palehorsestudios.alone.Foods.FoodFactory;
 import com.palehorsestudios.alone.Items.ItemFactory;
+import com.palehorsestudios.alone.gui.model.PlayerStatus;
+import com.palehorsestudios.alone.gui.model.Status;
 import com.palehorsestudios.alone.player.Player;
 
 public class BearEncounterDay extends DayEncounter {
@@ -19,13 +21,10 @@ public class BearEncounterDay extends DayEncounter {
     }
 
     @Override
-    public String encounter(Player player) {
+    public PlayerStatus encounter(Player player) {
 
-        if (player.getItems().containsAll(ItemFactory.getNewInstances("Pistol Cartridge", "Pistol"))
-                && player.getItems()
-                    .stream()
-                    .filter(e -> e.equals(ItemFactory.getNewInstance("Pistol Round")))
-                    .count() >= 3) {
+        if (player.getItems().contains(ItemFactory.getNewInstance("Pistol Cartridge"))
+                && player.getItems().contains(ItemFactory.getNewInstance("Pistol"))) {
 //        || player.getItems().contains(BOW) && player.getItems().contains(ARROWS))
 //      TODO: add else if for bow and arrow
             player.updateHydration(-1);
@@ -34,9 +33,7 @@ public class BearEncounterDay extends DayEncounter {
             player.updateMorale(3);
             Food bear = FoodFactory.getNewInstance("Bear");
             player.getShelter().addFoodToCache(bear, bear.getGrams());
-            for (int i = 0; i < 3; i++)
-                player.getItems().remove(ItemFactory.getNewInstance("Pistol Round"));
-            return "While in the northern territories, you're just another link in the food chain. Every time "
+            return new PlayerStatus(Status.MEAT_ITS_WHATS_FOR_DINNER, "While in the northern territories, you're just another link in the food chain. Every time "
                     + "you leave to venture out into the wilderness, whatever you might be doing, "
                     + "this fact is never far from your thoughts. \n"
                     + "There's always the possibility of a run in with a Grizzly, and during this such outing, "
@@ -49,7 +46,7 @@ public class BearEncounterDay extends DayEncounter {
                     + "Your heart thunders in your ears and your skin is pocked with gooseflesh. "
                     + "You stare in shock at the enormous bear before you, and several minutes pass before "
                     + "you can move. \n"
-                    + "You set about the task of harvesting the bear, thankful you had your pistol on you!";
+                    + "You set about the task of harvesting the bear, thankful you had your pistol on you!");
         } else if (player.getShelter().getEquipment().containsKey(ItemFactory.getNewInstance("Survival Manual"))
                 && player.getItems().contains(ItemFactory.getNewInstance("Knife"))) {
 //    || player.getItems().contains(HATCHET)
@@ -59,7 +56,7 @@ public class BearEncounterDay extends DayEncounter {
             player.updateHydration(-3);
             player.updateWeight(-700);
             if (player.isDead()) {
-                return "While in the northern territories, you're just another link in the food chain. Every time "
+                return new PlayerStatus(Status.EATEN_BY_BEAR, "While in the northern territories, you're just another link in the food chain. Every time "
                         + "you leave to venture out into the wilderness, whatever you might be doing, "
                         + "this fact is never far from your thoughts. \n"
                         + "There's always the possibility of a run in with a Grizzly, and during this such outing, "
@@ -70,9 +67,9 @@ public class BearEncounterDay extends DayEncounter {
                         + "defend with an equal amount of ferocity! \n"
                         + "Though the bear has been wounded, he leaves you lying in a heap, battered and bloody. "
                         + "You have lost a lot of blood. Mother Nature is an unmerciful matron. \n"
-                        + "Although you were able to fend off the bear, you have died from your wounds. Game over.";
+                        + "Although you were able to fend off the bear, you have died from your wounds. Game over.");
             } else {
-                return "While in the northern territories, you're just another link in the food chain. Every time "
+                return new PlayerStatus(Status.DOWN_BUT_NOT_DEFEATED, "While in the northern territories, you're just another link in the food chain. Every time "
                         + "you leave to venture out into the wilderness, whatever you might be doing, "
                         + "this fact is never far from your thoughts. \n"
                         + "There's always the possibility of a run in with a Grizzly, and during this such outing, "
@@ -83,18 +80,18 @@ public class BearEncounterDay extends DayEncounter {
                         + "defend with an equal amount of ferocity! \n"
                         + "Though the bear has been wounded, he leaves you lying in a heap, battered and bloody. "
                         + "You have lost a lot of blood. You had better get some rest before you succumb to "
-                        + "your wounds!";
+                        + "your wounds!");
             }
         } else {
             player.updateMorale(-20);
-            return "While in the northern territories, you're just another link in the food chain. Every time "
+            return new PlayerStatus(Status.EATEN_BY_BEAR, "While in the northern territories, you're just another link in the food chain. Every time "
                     + "you leave to venture out into the wilderness, whatever you might be doing, "
                     + "this fact is never far from your thoughts. \n"
                     + "There's always the possibility of a run in with a Grizzly, and during this such outing, "
                     + "you are charged by a large male asserting his claim on the territory you're in. "
-                    + "Without much in the way to defend yourself, and no knowledge of what to do in the "
-                    + "event of a bear attack, the large grizzly descends upon you. "
-                    + "You have died!";
+                    + "Without much in the way to defend yourself, and no knowledge of what to do in the"
+                    + "event of a bear attack, the large grizzly descends upon you."
+                    + "You have died!");
         }
     }
 }

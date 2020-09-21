@@ -1,5 +1,7 @@
 package com.palehorsestudios.alone.nightencounter;
 
+import com.palehorsestudios.alone.gui.model.PlayerStatus;
+import com.palehorsestudios.alone.gui.model.Status;
 import com.palehorsestudios.alone.player.Player;
 
 public class RainStorm extends NightEncounter {
@@ -16,7 +18,7 @@ public class RainStorm extends NightEncounter {
     }
 
     @Override
-    public String encounter(Player player) {
-        return "It rained last night.";
+    public PlayerStatus encounter(Player player) {
+        return new PlayerStatus(Status.HARD_RAIN,"It rained last night.");
     }
 }
