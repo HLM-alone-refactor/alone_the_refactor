@@ -478,5 +478,7 @@
     <item>
         <type>Waterproof Bag</type>
         <description>A 55L dry bag, waterproof type.</description>
+        <isInitialItemChoice>true</isInitialItemChoice>
+        <weight>2</weight>
     </item>
 </items>
