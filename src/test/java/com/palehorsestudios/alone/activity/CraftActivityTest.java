@@ -38,12 +38,27 @@ public class CraftActivityTest {
 
     @Test
     public void testCraft_playerHasItems() {
-        player.getItems().addAll(ItemFactory.getNewInstances("Wood", "Metal"));
+        player.getItems().addAll(ItemFactory.getNewInstances("Wood", "Rock"));
 
-        assertEquals(ItemFactory.getNewInstances("Wood", "Metal"), player.getItems());
+        assertEquals(ItemFactory.getNewInstances("Wood", "Rock"), player.getItems());
 
-        assertEquals("Successfully crafted Knife!", CraftActivity.getInstance().act(new Choice("Knife", player)));
+        assertEquals("Successfully crafted Knife!", CraftActivity.getInstance().act(new Choice("Craft", player, ItemFactory.getNewInstance("Knife"))));
         assertEquals(ItemFactory.getNewInstances("Knife"), player.getItems());
+    }
+
+    @Test
+    public void testCraft_anArrow() {
+        player.getItems().addAll(ItemFactory.getNewInstances("Leaf", "Rock", "Wood"));
+
+        assertEquals("Successfully crafted Arrow!", CraftActivity.getInstance().act(new Choice("Craft", player, ItemFactory.getNewInstance("Arrow"))));
+    }
+
+    @Test
+    public void testCraft_requirementMoreThanOne() {
+        player.getItems().addAll(ItemFactory.getNewInstances("Wood", "Yarn", "Yarn"));
+        CraftActivity.getInstance().act(new Choice("Craft", player, ItemFactory.getNewInstance("Bow")));
+
+        assertTrue(player.getItems().contains(ItemFactory.getNewInstance("Bow")));
     }
 
     @Test
@@ -51,7 +66,8 @@ public class CraftActivityTest {
         player.getItems().addAll(ItemFactory.getNewInstances("Wood"));
 
         assertEquals(ItemFactory.getNewInstances("Wood"), player.getItems());
-        assertEquals("Failed at crafting Knife, missing required items.", CraftActivity.getInstance().act(new Choice("Knife", player)));
+        assertEquals("Failed at crafting Knife, missing required items.",
+                CraftActivity.getInstance().act(new Choice("Craft", player, ItemFactory.getNewInstance("Knife"))));
         assertEquals(ItemFactory.getNewInstances("Wood"), player.getItems());
     }
 

@@ -6,7 +6,8 @@ import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.Player;
 
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class BearEncounterNight extends NightEncounter {
 
@@ -27,19 +28,33 @@ public class BearEncounterNight extends NightEncounter {
 
         Item pistol = ItemFactory.getNewInstance("Pistol");
         Item cartridges = ItemFactory.getNewInstance("Pistol Cartridge");
+        Item rounds = ItemFactory.getNewInstance("Pistol Round");
         Item manual = ItemFactory.getNewInstance("Survival Manual");
         Item knife = ItemFactory.getNewInstance("Knife");
 
-        if (player.getItems().contains(cartridges)
-                && player.getItems().contains(pistol)
-                || player.getShelter().getEquipment().containsKey(pistol)
-                && player.getShelter().getEquipment().containsKey(cartridges)) {
+        int roundsInShelter = Optional.ofNullable(player.getShelter().getEquipment().get(rounds)).orElse(0);
+        long roundsPlayer = player.getItems().stream().filter(e -> e.equals(rounds)).count();
+
+        if (player.getItems().containsAll(List.of(pistol, cartridges))
+                || (player.getShelter().getEquipment().containsKey(pistol)
+                && player.getShelter().getEquipment().containsKey(cartridges))
+                && roundsInShelter + roundsPlayer >= 3) {
 //        || player.getItems().contains(BOW) && player.getItems().contains(ARROWS))
 //      TODO: add else if for bow and arrow
             player.updateHydration(-1);
             player.updateWeight(-500);
             player.updateMorale(-1);
             player.getShelter().addFoodToCache(FoodFactory.getNewInstance("Bear"), FoodFactory.getNewInstance("Bear").getGrams());
+
+            // decrement 3 rounds from player, then from shelter if they were in both
+            int temp = 0;
+            while (temp < 3) {
+                if (!player.getItems().remove(rounds)) {
+                    player.getShelter().removeEquipment(rounds, 1);
+                }
+                temp++;
+            }
+
             // description for if the player defends the camp with pistol
             return "You wake in the middle of the night... something is nearby. \n"
                     + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "

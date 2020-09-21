@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player implements Serializable {
-    // serializable requirment
+    // serializable requirement
     private static final long serialVersionUID = 1L;
     // static constants
     private static final int MIN_HYDRATION = 0;
@@ -182,6 +182,10 @@ public class Player implements Serializable {
         return this.isRescued;
     }
 
+    public double getItemsWeight() {
+        return items.stream().mapToDouble(Item::getWeight).sum();
+    }
+
     /**
      * Player toString override.
      *
@@ -211,7 +215,7 @@ public class Player implements Serializable {
         }
         sb.append("\nItems in Shelter");
         for (Item item : this.getShelter().getEquipment().keySet()) {
-            int itemCount = this.getShelter().getEquipment().get(item);
+            int itemCount = this.getShelter().getEquipment().get(item).intValue();
             sb.append("\n  ").append(item).append(": ").append(itemCount);
         }
         return sb.toString();

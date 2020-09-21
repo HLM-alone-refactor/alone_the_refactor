@@ -13,18 +13,22 @@ public class Choice {
     private Player player;
 
     public Choice(String keyword, Player player) {
-        this.keyword = keyword;
-        this.player = player;
+        this(keyword, player, null, null);
     }
 
     public Choice(String keyword, Player player, Food food) {
-        this(keyword, player);
-        this.food = food;
+        this(keyword, player, null, food);
     }
 
     public Choice(String keyword, Player player, Item item) {
-        this(keyword, player);
+        this(keyword, player, item, null);
+    }
+
+    public Choice(String keyword, Player player, Item item, Food food) {
+        this.keyword = keyword;
+        this.player = player;
         this.item = item;
+        this.food = food;
     }
 
     public Player getPlayer() {

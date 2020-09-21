@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @XmlRootElement(name = "item")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -17,20 +18,23 @@ public class Item implements Serializable {
     private Set<Craft> craft;
     private Set<String> synonym;
     private boolean isInitialItemChoice;
+    private double weight;
+    private Set<String> findBy;
 
     /**
      * Set as package private to only be usable in ItemFactory
      * @param type
      * @param description
      */
-    Item(String type, String description, Set<Craft> craft, Set<String> synonym) {
-        this(type, description, craft);
+    Item(String type, String description, double weight, Set<Craft> craft, Set<String> synonym) {
+        this(type, description, weight, craft);
         this.synonym = synonym;
     }
 
-    Item(String type, String description, Set<Craft> craft) {
+    Item(String type, String description, double weight, Set<Craft> craft) {
         this.type = type;
         this.description = description;
+        this.weight = weight;
         this.craft = craft;
     }
 
@@ -48,7 +52,7 @@ public class Item implements Serializable {
      * @param item
      */
     Item(Item item) {
-        this(item.getType(), item.getDescription(), item.getCraft(), item.getSynonym());
+        this(item.getType(), item.getDescription(), item.getWeight(), item.getCraft(), item.getSynonym());
     }
 
 
@@ -66,6 +70,21 @@ public class Item implements Serializable {
 
     public Set<String> getSynonym() {
         return Objects.requireNonNullElse(synonym, Set.of());
+    }
+
+    public double getWeight() {
+        return Objects.requireNonNullElse(weight, 1.0);
+    }
+
+    public Set<String> getFindBy() {
+        return Objects.requireNonNullElse(findBy, Set.of());
+    }
+
+    public boolean canFindAt(String str) {
+        if (findBy != null) {
+            return findBy.stream().map(String::toLowerCase).collect(Collectors.toSet()).contains(str.toLowerCase());
+        }
+        return false;
     }
 
     public boolean isCraftable() {
