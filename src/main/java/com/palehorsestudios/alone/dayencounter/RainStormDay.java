@@ -3,6 +3,8 @@ package com.palehorsestudios.alone.dayencounter;
 import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.dayencounter.DayEncounter;
+import com.palehorsestudios.alone.gui.model.PlayerStatus;
+import com.palehorsestudios.alone.gui.model.Status;
 import com.palehorsestudios.alone.player.Player;
 
 public class RainStormDay extends DayEncounter {
@@ -19,7 +21,7 @@ public class RainStormDay extends DayEncounter {
     }
 
     @Override
-    public String encounter(Player player) {
+    public PlayerStatus encounter(Player player) {
 
         Item bag = ItemFactory.getNewInstance("Waterproof Bag");
         Item tarp = ItemFactory.getNewInstance("Tarp");
@@ -31,7 +33,7 @@ public class RainStormDay extends DayEncounter {
             player.updateMorale(+2);
             // description if the player has waterproof bag
             // to protect his gear while foraging during the storm
-            return "Rain Storm with Backpack" + "The rainbow had been swallowed by a +" +
+            return new PlayerStatus(Status.STILL_ALIVE, "Rain Storm with Backpack" + "The rainbow had been swallowed by a +" +
                     "rushing thundercloud. The sun darkened and for a brief moment +" +
                     "raindrops fell on the woods. \n" +
                     "You see the first lightning descend in the distance, and the thunder +" +
@@ -43,7 +45,7 @@ public class RainStormDay extends DayEncounter {
                     "increased significantly. Previously only a few drops had fallen down here and +" +
                     "there. Now the rain pelted down so vehemently that that you could no +" +
                     "longer see in front of you.  The rain is getting stronger, and with +" +
-                    "those flashes, it's not good to sit under a tree! \n";
+                    "those flashes, it's not good to sit under a tree! \n");
         } else if (player.getShelter().getEquipment().containsKey(tarp)
                 && player.getShelter().getEquipment().containsKey(manual)
                 && player.getShelter().getEquipment().containsKey(chord)) {
@@ -51,7 +53,7 @@ public class RainStormDay extends DayEncounter {
             // description if the player keeps equipment dry with Tarp
             // and survival knowledge at shelter
             player.updateMorale(-1);
-            return "Rain storm with Tarp / Chord and no backpack" +
+            String result = "Rain storm with Tarp / Chord and no backpack" +
                     "The rainbow had been swallowed by a +" +
                     "rushing thundercloud. The sun darkened and for a brief moment +" +
                     "raindrops fell on the woods. \n" +
@@ -65,14 +67,19 @@ public class RainStormDay extends DayEncounter {
                     "there. Now the rain pelted down so vehemently that that you could no +" +
                     "longer see in front of you.  The rain is getting stronger, and with +" +
                     "those flashes, it's not good to sit under a tree! \n";
+            if (player.isDead()) {
+                return new PlayerStatus(Status.LOST_WILL_TO_LIVE, result);
+            } else {
+                return new PlayerStatus(Status.STILL_ALIVE, result);
+            }
         } else {
             player.updateMorale(-4);
             player.getItems().clear();
             // description for if the player does not have anything to shelter his items outside his shelter
             if (player.isDead()) {
-                return "Rain storm without items to protect equipment ";
+                return new PlayerStatus(Status.LOST_WILL_TO_LIVE, "Rain storm without items to protect equipment ");
             }
-            return "rain" + "Rain Storm with Backpack" +
+            return new PlayerStatus(Status.STILL_ALIVE, "rain" + "Rain Storm with Backpack" +
                     "The rainbow had been swallowed by a +" +
                     "rushing thundercloud. The sun darkened and for a brief moment +" +
                     "raindrops fell on the woods. \n" +
@@ -85,7 +92,7 @@ public class RainStormDay extends DayEncounter {
                     "increased significantly. Previously only a few drops had fallen down here and +" +
                     "there. Now the rain pelted down so vehemently that that you could no +" +
                     "longer see in front of you.  The rain is getting stronger, and with +" +
-                    "those flashes, it's not good to sit under a tree! \n";
+                    "those flashes, it's not good to sit under a tree! \n");
         }
     }
 }
