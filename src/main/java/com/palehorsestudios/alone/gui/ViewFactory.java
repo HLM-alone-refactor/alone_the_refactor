@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class ViewFactory {
     public void showGameMenuWindow() {
         System.out.println("show game menu window called");
 
-        BaseController controller = new GameStartMenuWindowController(gameManager,this, "view/gameMenu.fxml");
+        BaseController controller = new GameMenuWindowController(gameManager,this, "view/gameMenu.fxml");
         initializeStage(controller);
     }
 
@@ -61,9 +62,8 @@ public class ViewFactory {
         controller.getDailyLog().setText(startingLog);
 
     }
-
     public void showCraftingWindow() {
-        System.out.println("how game window called");
+        System.out.println("Show crafting window called");
 
         BaseController controller = new CraftItemsWindowController(gameManager,this, "view/crafting.fxml");
         initializeStage(controller);

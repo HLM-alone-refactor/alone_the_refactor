@@ -45,20 +45,19 @@ public class BearEncounterDayTest {
                         + "you are charged by a large male asserting his claim on the territory you're in. "
                         + "Without much in the way to defend yourself, and no knowledge of what to do in the "
                         + "event of a bear attack, the large grizzly descends upon you. "
-                        + "You have died! Game over.";
+                        + "You have died!";
         boolean validResult = false;
-        if (encounterResult.equals(expectedString)) {
-            validResult = true;
-        }
-        assertTrue(validResult);
+        assertEquals(expectedString, encounterResult);
         assertTrue(player.isDead());
-        assertEquals(previousMorale - 5, player.getMorale(), .001);
+        int val = previousMorale - 20;
+        assertEquals(Math.max(val, 0), player.getMorale(), .001);
     }
 
     @Test
     public void testBearEncounterDayWithPistolAndCartridgesItems() {
         getItemFromShelter.act(new Choice("pistol", player, (ItemFactory.getNewInstance("Pistol"))));
         getItemFromShelter.act(new Choice("ammo", player, (ItemFactory.getNewInstance("Pistol Cartridge"))));
+        player.getItems().addAll(ItemFactory.getNewInstances("Pistol Round", "Pistol Round", "Pistol Round"));
         int previousMorale = player.getMorale();
         double previousWeight = player.getWeight();
         int previousHydration = player.getHydration();
@@ -88,6 +87,7 @@ public class BearEncounterDayTest {
         assertEquals(previousMorale + 3, player.getMorale(), .001);
         assertEquals(previousWeight - 1.8, player.getWeight(), .001);
         assertEquals(Optional.of(1000.0 + bear.getGrams()).get(), player.getShelter().getFoodCache().get(bear), .001);
+        assertTrue(!player.getShelter().getEquipment().containsKey(ItemFactory.getNewInstance("Pistol Round")));
     }
 
     @Test
@@ -125,9 +125,9 @@ public class BearEncounterDayTest {
     public void testBearEncounterDayWithKnifeAndSurvivalManualItemsPlayerDies() {
         player.getShelter().addEquipment(ItemFactory.getNewInstance("Survival Manual"), 1);
         getItemFromShelter.act(new Choice("knife", player, (ItemFactory.getNewInstance("Knife"))));
-        this.player.updateMorale(-1);
+        this.player.updateMorale(-4);
         this.player.updateWeight(-700);
-        this.player.updateHydration(-2);
+        this.player.updateHydration(-3);
         String encounterResult = bearEncounterDay.encounter(player);
         String expectedString =
                 "While in the northern territories, you're just another link in the food chain. Every time "
@@ -143,10 +143,7 @@ public class BearEncounterDayTest {
                         + "You have lost a lot of blood. Mother Nature is an unmerciful matron. \n"
                         + "Although you were able to fend off the bear, you have died from your wounds. Game over.";
         boolean validResult = false;
-        if (encounterResult.equals(expectedString)) {
-            validResult = true;
-        }
-        assertTrue(validResult);
+        assertEquals(expectedString, encounterResult);
         assertEquals(0, player.getHydration(), .001);
         assertEquals(0, player.getMorale(), .001);
         assertEquals(175, player.getWeight(), .001);

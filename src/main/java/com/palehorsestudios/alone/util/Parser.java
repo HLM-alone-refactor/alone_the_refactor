@@ -61,31 +61,27 @@ public class Parser {
         // set up needed variables
         Choice choice = null;
 
-        Food food;
-        Item item;
-
-        // set up choice object
         if (keyword != null) {
-            if (keyword.equals("eat")) { // needs figure out what food is being eaten
-                try {
-                    food = FoodFactory.getNewInstance(getStemMapValue(input, FOOD_STEM_MAP));
-                    choice = new Choice(keyword, player, food);
-                } catch (IllegalArgumentException e) {
-                    // do nothing
-                    // was not a legal food
+            Food food = null;
+            Item item = null;
+            switch (keyword) {
+                case "eat" -> {
+                    try {
+                        food = FoodFactory.getNewInstance(getStemMapValue(input, FOOD_STEM_MAP));
+                    } catch (IllegalArgumentException e) {
+                        return null;
+                    }
                 }
-
-            } else if (keyword.equals("get") || keyword.equals("put")) { // needs to figure out what item is being used
-                try {
-                    item = ItemFactory.getNewInstance(getStemMapValue(input, ITEM_STEM_MAP));
-                    choice = new Choice(keyword, player, item);
-                } catch (IllegalArgumentException e) {
-                    // do nothing
-                    // was not a legal item
+                case "get", "put" , "craft" -> {
+                    try {
+                        item = ItemFactory.getNewInstance(getStemMapValue(input, ITEM_STEM_MAP));
+                    } catch (IllegalArgumentException e) {
+                        return null;
+                    }
                 }
-            } else { // doesn't need other things, only keyword and player
-                choice = new Choice(keyword, player);
             }
+
+            choice = new Choice(keyword, player, item, food);
         }
         return choice;
     }
@@ -98,7 +94,7 @@ public class Parser {
         String result = null;
 
         // assume input is of style <action> <thing>, and only want <thing>
-        String[] split = input.split(" ", 2);
+        String[] split = input.split(findKey(input), 2);
         if (split.length > 1) {
             String stem = stemIt(split[1]);
             if (map.containsKey(stem)) {
@@ -125,7 +121,7 @@ public class Parser {
             if (PARSERS.containsKey(s)) {
                 key = s; // found it
                 if (key.equals("get") && words.length > 1) { // check if latter half is some other activity
-                    String latter = input.split(" ", 2)[1]; // get the string after "get"
+                    String latter = input.split("get", 2)[1]; // get the string after "get"
                     latter = stemIt(latter);
                     if (PARSERS.containsKey(latter)) { // check if other activity and set if true
                         key = latter;
