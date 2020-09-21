@@ -5,6 +5,8 @@ import com.palehorsestudios.alone.Foods.Food;
 import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.Shelter;
+import com.palehorsestudios.alone.gui.model.PlayerStatus;
+import com.palehorsestudios.alone.gui.model.Status;
 import com.palehorsestudios.alone.util.HelperMethods;
 
 import java.io.Serializable;
@@ -28,6 +30,7 @@ public class Player implements Serializable {
     private double weight;
     private int morale;
     private boolean isRescued;
+    private Status playerStatus;
 
     /**
      * Public Player constructor.
@@ -135,11 +138,17 @@ public class Player implements Serializable {
     public void updateMorale(int morale) {
         this.morale += morale;
         this.morale = this.morale < MIN_MORALE ? MIN_MORALE : Math.min(this.morale, MAX_MORALE);
+        if (this.morale <= 0) {
+            setPlayerStatus(Status.LOST_WILL_TO_LIVE);
+        }
     }
 
     public void updateHydration(int hydration) {
         this.hydration += hydration;
         this.hydration = this.hydration < MIN_HYDRATION ? MIN_HYDRATION : Math.min(this.hydration, MAX_HYDRATION);
+        if (this.hydration <= 0) {
+            setPlayerStatus(Status.DEHYDRATION);
+        }
     }
 
     // business methods
@@ -152,6 +161,9 @@ public class Player implements Serializable {
      */
     public void updateWeight(double calories) {
         this.weight += HelperMethods.round(calories / CALORIES_PER_POUND, 1);
+        if (this.weight < 180.0 * 0.6) {
+            setPlayerStatus(Status.STARVED);
+        }
     }
 
     public boolean isDead() {
@@ -184,6 +196,14 @@ public class Player implements Serializable {
 
     public double getItemsWeight() {
         return items.stream().mapToDouble(Item::getWeight).sum();
+    }
+
+    public Status getPlayerStatus() {
+        return playerStatus;
+    }
+
+    public void setPlayerStatus(Status playerStatus) {
+        this.playerStatus = playerStatus;
     }
 
     /**

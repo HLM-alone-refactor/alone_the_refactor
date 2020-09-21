@@ -1,21 +1,19 @@
-package com.palehorsestudios.alone.dayencounter;
+package com.palehorsestudios.alone.nightencounter;
 
 import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
-import com.palehorsestudios.alone.dayencounter.DayEncounter;
-import com.palehorsestudios.alone.gui.model.PlayerStatus;
 import com.palehorsestudios.alone.gui.model.Status;
 import com.palehorsestudios.alone.player.Player;
 
-public class RainStormDay extends DayEncounter {
-    private static DayEncounter encounter;
+public class RainStormNight extends NightEncounter {
+    private static NightEncounter encounter;
 
-    private RainStormDay() {
+    private RainStormNight() {
     }
 
-    public static DayEncounter getInstance() {
+    public static NightEncounter getInstance() {
         if (encounter == null) {
-            encounter = new RainStormDay();
+            encounter = new RainStormNight();
         }
         return encounter;
     }
@@ -87,3 +85,4 @@ public class RainStormDay extends DayEncounter {
         }
     }
 }
+
