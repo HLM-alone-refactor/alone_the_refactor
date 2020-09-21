@@ -72,7 +72,7 @@ public class Parser {
                         return null;
                     }
                 }
-                case "get", "put" -> {
+                case "get", "put" , "craft" -> {
                     try {
                         item = ItemFactory.getNewInstance(getStemMapValue(input, ITEM_STEM_MAP));
                     } catch (IllegalArgumentException e) {

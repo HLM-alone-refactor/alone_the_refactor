@@ -22,9 +22,6 @@ public class GetItemActivity extends Activity {
     @Override
     public String act(Choice choice) {
         double maxWeightCarry = 50;
-//        if (choice.getPlayer().getItems().contains(ItemFactory.getNewInstance("Backpack"))) {
-//            maxWeightCarry = 100;
-//        }
         String result;
 
       /* determine if player has less than the maximum carry limit
