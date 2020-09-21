@@ -94,17 +94,17 @@ public class BearEncounterNight extends NightEncounter {
                         + "sources. You have died.";
             }
             return "You wake in the middle of the night... something is nearby. \n"
-                    + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
-                    + "you slowly lift your head to glimpse at the disturbance. \n "
-                    + "A massive grizzly sniffs about your camp, and he is making his way towards you and "
-                    + "your food cache. \n"
-                    + "You've heard stories about people surviving bear attacks by playing dead. "
-                    + "Without much in the way of being able to defend yourself, you decide the best thing "
-                    + "for you to do is to feign your death in hopes that the grizzly will ignore you in "
-                    + "favor of the food you have stored in your cache. \n"
-                    + "Amazingly, the bear remains throughout the night, eating its fill, though it never "
-                    + "bothers you. Exhausted, shaken, and hungry, you watch the sun rise feeling lucky that "
-                    + "you survived. Unfortunately, it seems you'll have to start over on your rations!";
+                + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
+                + "you slowly lift your head to glimpse at the disturbance. \n "
+                + "A massive grizzly sniffs about your camp, and he is making his way towards you and "
+                + "your food cache. \n"
+                + "You've heard stories about people surviving bear attacks by playing dead. "
+                + "Without much in the way of being able to defend yourself, you decide the best thing "
+                + "for you to do is to feign your death in hopes that the grizzly will ignore you in "
+                + "favor of the food you have stored in your cache. \n"
+                + "Amazingly, the bear remains throughout the night, eating its fill, though it never "
+                + "bothers you. Exhausted, shaken, and hungry, you watch the sun rise feeling lucky that "
+                + "you survived. Unfortunately, it seems you'll have to start over on your rations!";
         }
     }
 }

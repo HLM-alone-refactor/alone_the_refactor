@@ -81,6 +81,8 @@ public class ItemSelectionController {
     private CheckBox survivalManual;
     @FXML
     private CheckBox journalandpen;
+    @FXML
+    private CheckBox waterproofbag;
 
     private static int count = 0;
     private List<Item> initItems = new ArrayList<>();
@@ -118,6 +120,7 @@ public class ItemSelectionController {
         inventory.put(lighter, ItemFactory.getNewInstance("Lighter"));
         inventory.put(survivalManual, ItemFactory.getNewInstance("Survival Manual"));
         inventory.put(journalandpen, ItemFactory.getNewInstance("Journal"));
+        inventory.put(waterproofbag, ItemFactory.getNewInstance("Waterproof Bag"));
 
         for (Map.Entry<CheckBox, Item> entry : inventory.entrySet()) {
             entry

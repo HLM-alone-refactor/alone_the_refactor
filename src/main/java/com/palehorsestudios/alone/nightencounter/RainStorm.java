@@ -32,19 +32,16 @@ public class RainStorm extends NightEncounter {
             player.updateMorale(+2);
             // description if the player has waterproof bag
             // to protect his gear while foraging during the storm
-            return "Rain Storm with Backpack" + "The rainbow had been swallowed by a +" +
-                    "rushing thundercloud. The sun darkened and for a brief moment +" +
-                    "raindrops fell on the woods. \n" +
-                    "You see the first lightning descend in the distance, and the thunder +" +
-                    "rumbled a short time later and was reinforced by the multiple echos +" +
-                    "throughout the woods. A second flash of light flashed through the clouds +" +
-                    "and hit somewhere on the other side of the woods. The thunder rumbled again, +" +
-                    "echoing again. \n" +
-                    "The storm came closer. A flash of light illuminated the sky and the rain +" +
-                    "increased significantly. Previously only a few drops had fallen down here and +" +
-                    "there. Now the rain pelted down so vehemently that that you could no +" +
-                    "longer see in front of you.  The rain is getting stronger, and with +" +
-                    "those flashes, it's not good to sit under a tree! \n";
+            return "The sky has been swallowed by a rushing thundercloud. \n" +
+                    "The sky darkened and for a brief moment raindrops fell on the woods. \n" +
+                    "The storm came closer. A flash of light illuminated the sky and the rain \n" +
+                    "increased significantly. Previously only a few drops had fallen down here and \n" +
+                    "there. Now the rain pelted down so vehemently that you could no longer \n" +
+                    "see in front of you.  The rain is getting stronger, and with those flashes, \n" +
+                    "you become drenched. Fortunatley you have waterproof to protect your critical \n" +
+                    "inventory items. However this rain is taking its toll on your morale. \n " +
+                    "You should get to shelter quickly. Its not good to sit under a these trees \n";
+
         } else if (player.getShelter().getEquipment().containsKey(tarp)
                 && player.getShelter().getEquipment().containsKey(manual)
                 && player.getShelter().getEquipment().containsKey(chord)) {
@@ -52,53 +49,43 @@ public class RainStorm extends NightEncounter {
             // description if the player keeps equipment dry with Tarp
             // and survival knowledge at shelter
             player.updateMorale(-1);
-            return "Rain storm with Tarp / Chord and no backpack" +
-                    "The rainbow had been swallowed by a +" +
-                    "rushing thundercloud. The sun darkened and for a brief moment +" +
-                    "raindrops fell on the woods. \n" +
-                    "You see the first lightning descend in the distance, and the thunder +" +
-                    "rumbled a short time later and was reinforced by the multiple echo +" +
-                    "throughout the woods. A second flash of light flashed through the clouds +" +
-                    "and hit somewhere on the other side of the woods. The thunder rumbled again, +" +
-                    "echoing again. \n" +
-                    "The storm came closer. A flash of light illuminated the sky and the rain +" +
-                    "increased significantly. Previously only a few drops had fallen down here and +" +
-                    "there. Now the rain pelted down so vehemently that that you could no +" +
-                    "longer see in front of you.  The rain is getting stronger, and with +" +
-                    "those flashes, it's not good to sit under a tree! \n";
+            return "The sky has been swallowed by a rushing thundercloud. \n" +
+                    "The sky darkened and for a brief moment raindrops fell on the woods. \n" +
+                    "The storm came closer. A flash of light illuminated the sky and the rain \n" +
+                    "increased significantly. Previously only a few drops had fallen down here and \n" +
+                    "there. Now the rain pelted down so vehemently that you could no longer \n" +
+                    "see in front of you.  The rain is getting stronger, and with those flashes, \n" +
+                    "you become drenched. Fortunatley, you have waterproof to protect your critical \n" +
+                    "inventory items. However this rain is taking its toll on your morale. \n " +
+                    "You should get to shelter quickly. Its not good to sit under a these trees \n";
         } else {
             player.updateMorale(-4);
             player.getItems().clear();
             // description for if the player does not have anything to shelter his items outside his shelter
+
             if (player.isDead()) {
-                return "Rain storm without items to protect equipment " + "The rainbow had been swallowed by a +" +
-                "rushing thundercloud. The sun darkened and for a brief moment +" +
-                        "raindrops fell on the woods. \n" +
-                        "You see the first lightning descend in the distance, and the thunder +" +
-                        "rumbled a short time later and was reinforced by the multiple echo +" +
-                        "throughout the woods. A second flash of light flashed through the clouds +" +
-                        "and hit somewhere on the other side of the woods. The thunder rumbled again, +" +
-                        "echoing again. \n" +
-                        "The storm came closer. A flash of light illuminated the sky and the rain +" +
-                        "increased significantly. Previously only a few drops had fallen down here and +" +
-                        "there. Now the rain pelted down so vehemently that that you could no +" +
-                        "longer see in front of you.  The rain is getting stronger, and with +" +
-                        "those flashes, it's not good to sit under a tree! \n";
+                return "The sky has been swallowed by a rushing thundercloud. \n" +
+                        "The sky darkened and for a brief moment raindrops fell on the woods. \n" +
+                        "The storm came closer. A flash of light illuminated the sky and the rain \n" +
+                        "increased significantly. Previously only a few drops had fallen down here and \n" +
+                        "there. Now the rain pelted down so vehemently that you could no longer \n" +
+                        "see in front of you.  The rain is getting stronger, and with those flashes, \n" +
+                        "you become drenched. Unfortunatley, you do not have equipment to protect your critical \n" +
+                        "inventory items. You have lost your inventory. This rain is taking its toll \n " +
+                        "on your morale. You should get to shelter quickly. Its not good to sit under \n" +
+                        "a these trees \n";
             }
-            return "rain" + "Rain Storm with Backpack" +
-                    "The rainbow had been swallowed by a +" +
-                    "rushing thundercloud. The sun darkened and for a brief moment +" +
-                    "raindrops fell on the woods. \n" +
-                    "You see the first lightning descend in the distance, and the thunder +" +
-                    "rumbled a short time later and was reinforced by the multiple echo +" +
-                    "throughout the woods. A second flash of light flashed through the clouds +" +
-                    "and hit somewhere on the other side of the woods. The thunder rumbled again, +" +
-                    "echoing again. \n" +
-                    "The storm came closer. A flash of light illuminated the sky and the rain +" +
-                    "increased significantly. Previously only a few drops had fallen down here and +" +
-                    "there. Now the rain pelted down so vehemently that that you could no +" +
-                    "longer see in front of you.  The rain is getting stronger, and with +" +
-                    "those flashes, it's not good to sit under a tree! \n";
+
+        return "The sky has been swallowed by a rushing thundercloud. " +
+            "The sky darkened and for a brief moment raindrops fell on the woods. " +
+            "The storm came closer. A flash of light illuminated the sky and the rain " +
+            "increased significantly. Previously only a few drops had fallen down here and " +
+            "there. Now the rain pelted down so vehemently that you could no longer " +
+            "see in front of you.  The rain is getting stronger, and with those flashes, " +
+            "you become drenched. Unfortunatley, you do not have equipment to protect your critical " +
+            "inventory items. You have lost your inventory. This rain is taking its toll " +
+            "on your morale. You should get to shelter quickly. Its not good to sit under " +
+            "a these trees";
         }
     }
 }
