@@ -240,7 +240,7 @@ public class GameWindowController extends BaseController implements Initializabl
                 if (dayHalf[0].equals("Morning")) {
                     dayHalf[0] = "Afternoon";
                 } else {
-                    if (!player.isDead() && !player.isRescued(day[0])) {
+                    if (!player.isDead() && !player.isRescued()) {
                         seed[0] = (int) Math.floor(Math.random() * 10);
                         PlayerStatus nightResultObject;
                         String nightTextOutput;
@@ -262,7 +262,7 @@ public class GameWindowController extends BaseController implements Initializabl
                             status = nightResultObject.getStatusUpdate();
                             nightTextOutput = nightResultObject.getTextOutput();
                         }
-                        if (!player.isDead() || !player.isRescued()) {
+                        if (!player.isDead() && !player.isRescued()) {
                             getDailyLog().appendText("Day " + day[0] + " Night: " + nightTextOutput + "\n");
                             dayHalf[0] = "Morning";
                             day[0]++;
