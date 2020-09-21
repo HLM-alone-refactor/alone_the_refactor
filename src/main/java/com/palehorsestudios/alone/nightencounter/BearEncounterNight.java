@@ -22,7 +22,7 @@ public class BearEncounterNight extends NightEncounter {
     }
 
     @Override
-    public PlayerStatus encounter(Player player) {
+    public String encounter(Player player) {
 
         Item pistol = ItemFactory.getNewInstance("Pistol");
         Item cartridges = ItemFactory.getNewInstance("Pistol Cartridge");
@@ -40,7 +40,8 @@ public class BearEncounterNight extends NightEncounter {
             player.updateMorale(-1);
             player.getShelter().addFoodToCache(FoodFactory.getNewInstance("Bear"), FoodFactory.getNewInstance("Bear").getGrams());
             // description for if the player defends the camp with pistol
-            return new PlayerStatus(Status.STILL_ALIVE,"You wake in the middle of the night... something is nearby. \n"
+            player.setPlayerStatus(Status.STILL_ALIVE);
+            return "You wake in the middle of the night... something is nearby. \n"
                     + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
                     + "you reach for your pistol. With it in hand, you open the cylinder to make sure it's loaded "
                     + "and slowly lift your head to glimpse at the disturbance. \n"
@@ -48,7 +49,7 @@ public class BearEncounterNight extends NightEncounter {
                     + "food cache. You slowly level your pistol center mass at the bear, and fire three shots "
                     + "in quick succession. The bear attempts to bite at whatever is stinging him, but your "
                     + "aim is true and the bear slumps to the ground. You set about harvesting the bear before "
-                    + "the meat goes to waste.");
+                    + "the meat goes to waste.";
         } else if (player.getShelter().getEquipment().containsKey(manual)
                 && player.getItems().contains(knife)
                 || player.getShelter().getEquipment().containsKey(knife)
@@ -58,7 +59,7 @@ public class BearEncounterNight extends NightEncounter {
 //      TODO: add else if for hatchet and axe
             // description for if the player defends camp with knife
             player.updateMorale(-1);
-            return new PlayerStatus(Status.STILL_ALIVE ,"You wake in the middle of the night... something is nearby. \n"
+            return "You wake in the middle of the night... something is nearby. \n"
                     + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
                     + "you reach for your knife. With it in hand, you slowly lift your head to glimpse at "
                     + "the disturbance. \n"
@@ -70,14 +71,13 @@ public class BearEncounterNight extends NightEncounter {
                     + "antics, somehow able to hold your nerve in the face of certain death. "
                     + "Eventually, the bear backs down, and disappears into the darkness. \n"
                     + "Reading that survival manual has paid off, although you have a sinking feeling that "
-                    + "the bear may be back.");
+                    + "the bear may be back.";
         } else {
             player.updateMorale(-4);
             player.getShelter().getFoodCache().clear();
-            // TODO: remove all food from food cache
             // description for if the player does not have anything to defend with
             if (player.isDead()) {
-                return new PlayerStatus(Status.STARVED,"You wake in the middle of the night... something is nearby. \n"
+                return "You wake in the middle of the night... something is nearby. \n"
                         + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
                         + "you slowly lift your head to glimpse at the disturbance. \n "
                         + "A massive grizzly sniffs about your camp, and he is making his way towards you and "
@@ -90,9 +90,9 @@ public class BearEncounterNight extends NightEncounter {
                         + "bothers you. Exhausted, shaken, and hungry, you watch the sun rise feeling lucky that "
                         + "you survived. Unfortunately, as you were already somewhat malnourished, you are"
                         + "gripped with hypothermia from your starvation and lack of calories from bodily "
-                        + "sources. You have died.");
+                        + "sources. You have died.";
             }
-            return new PlayerStatus(Status.STILL_ALIVE,"You wake in the middle of the night... something is nearby. \n"
+            return "You wake in the middle of the night... something is nearby. \n"
                     + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
                     + "you slowly lift your head to glimpse at the disturbance. \n "
                     + "A massive grizzly sniffs about your camp, and he is making his way towards you and "
@@ -103,7 +103,7 @@ public class BearEncounterNight extends NightEncounter {
                     + "favor of the food you have stored in your cache. \n"
                     + "Amazingly, the bear remains throughout the night, eating its fill, though it never "
                     + "bothers you. Exhausted, shaken, and hungry, you watch the sun rise feeling lucky that "
-                    + "you survived. Unfortunately, it seems you'll have to start over on your rations!");
+                    + "you survived. Unfortunately, it seems you'll have to start over on your rations!";
         }
     }
 }

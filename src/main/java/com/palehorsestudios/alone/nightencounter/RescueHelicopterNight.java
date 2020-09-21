@@ -19,21 +19,23 @@ public class RescueHelicopterNight extends NightEncounter {
     }
 
     @Override
-    public PlayerStatus encounter(Player player) {
+    public String encounter(Player player) {
 
         if (player.getShelter().hasFire()) {
             player.setHydration(20);
             player.updateMorale(20);
             player.setRescued(true);
-            return new PlayerStatus(Status.RESCUED, "You wake from a deep slumber to the sound of an approaching helicopter."
+            player.setPlayerStatus(Status.RESCUED);
+            return "You wake from a deep slumber to the sound of an approaching helicopter."
                     + " Amazingly, they were ferrying people to a nearby island when they spotted your fire."
                     + " They land on the beach, and greet you with a warm blanket and tell you to hop in."
-                    + " You are saved, but you will never forget this incredible experience.");
+                    + " You are saved, but you will never forget this incredible experience.";
         } else {
             player.updateMorale(-5);
-            return new PlayerStatus(Status.MISSED_RESCUE,"You wake from a deep slumber to the sound of an approaching helicopter."
+            player.setPlayerStatus(Status.MISSED_RESCUE);
+            return "You wake from a deep slumber to the sound of an approaching helicopter."
                     + " You wave your arms and scream your lungs out, but it is no use."
-                    + " They fly right over your camp. Perhaps if you had a fire they would have seen it.");
+                    + " They fly right over your camp. Perhaps if you had a fire they would have seen it.";
         }
     }
 }

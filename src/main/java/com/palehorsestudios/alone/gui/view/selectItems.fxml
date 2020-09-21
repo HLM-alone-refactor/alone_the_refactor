@@ -74,6 +74,7 @@
                         <CheckBox fx:id="lighter" mnemonicParsing="false" text="Lighter" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                         <CheckBox fx:id="survivalManual" mnemonicParsing="false" text="Survival Manual" GridPane.columnIndex="4" GridPane.rowIndex="5" />
                         <CheckBox fx:id="journalandpen" mnemonicParsing="false" text="Journal and Pen" GridPane.rowIndex="6" />
+                        <CheckBox fx:id="waterproogbag" mnemonicParsing="false" text="Waterproof Bag" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                     </children>
                 </GridPane>
                 <Button layoutX="636.0" layoutY="519.0" mnemonicParsing="false" onAction="#playGameButton" prefHeight="37.0" prefWidth="110.0" stylesheets="@css/BasicApplication.css" text="Play" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="55.0">
