@@ -66,7 +66,8 @@ public class CraftActivityTest {
         player.getItems().addAll(ItemFactory.getNewInstances("Wood"));
 
         assertEquals(ItemFactory.getNewInstances("Wood"), player.getItems());
-        assertEquals("Failed at crafting Knife, missing required items.", CraftActivity.getInstance().act(new Choice("Knife", player)));
+        assertEquals("Failed at crafting Knife, missing required items.",
+                CraftActivity.getInstance().act(new Choice("Craft", player, ItemFactory.getNewInstance("Knife"))));
         assertEquals(ItemFactory.getNewInstances("Wood"), player.getItems());
     }
 

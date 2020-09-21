@@ -17,9 +17,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GatherFirewoodActivityTest {
-    static final double MED_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT = 179.7;
-    static final double MED_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT = 179.4;
-    static final double MED_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT = 178.7;
+    static final double MED_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT = 179.6;
+    static final double MED_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT = 179.2;
+    static final double MED_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT = 178.4;
 
     Logger logger = Logger.getLogger(GatherFirewoodActivityTest.class.getName());
     Activity getItemFromShelter;
@@ -67,18 +67,16 @@ public class GatherFirewoodActivityTest {
         if (firewoodChange == 1.0) {
             assertEquals(MED_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
             assertEquals(previousHydration - ActivityLevel.MEDIUM.getHydrationCost(SuccessRate.LOW), player.getHydration());
-            assertEquals(6.0, player.getMorale(), 0.01);
+            assertEquals(16.0, player.getMorale(), 0.01);
         } else if (firewoodChange == 3.0) {
             assertEquals(MED_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
             assertEquals(previousHydration - ActivityLevel.MEDIUM.getHydrationCost(SuccessRate.MEDIUM), player.getHydration());
-            assertEquals(7.0, player.getMorale(), 0.01);
+            assertEquals(17.0, player.getMorale(), 0.01);
         } else if (firewoodChange == 5.0) {
             assertEquals(MED_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
             assertEquals(previousHydration - ActivityLevel.MEDIUM.getHydrationCost(SuccessRate.HIGH), player.getHydration());
-            assertEquals(8.0, player.getMorale(), 0.01);
+            assertEquals(18.0, player.getMorale(), 0.01);
         }
-        assertEquals("Good Job! You just gathered " + firewoodChange
-                + " bundles of firewood.", gatherFirewoodResult);
     }
 
     @Test
@@ -100,17 +98,15 @@ public class GatherFirewoodActivityTest {
         if (firewoodChange == 1.1) {
             assertEquals(MED_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
             assertEquals(previousHydration - ActivityLevel.MEDIUM.getHydrationCost(SuccessRate.LOW), player.getHydration());
-            assertEquals(6.0, player.getMorale(), 0.01);
+            assertEquals(16.0, player.getMorale(), 0.01);
         } else if (firewoodChange == 3.3) {
             assertEquals(MED_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
             assertEquals(previousHydration - ActivityLevel.MEDIUM.getHydrationCost(SuccessRate.MEDIUM), player.getHydration());
-            assertEquals(7.0, player.getMorale(), 0.01);
+            assertEquals(17.0, player.getMorale(), 0.01);
         } else if (firewoodChange == 5.5) {
             assertEquals(MED_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
             assertEquals(previousHydration - ActivityLevel.MEDIUM.getHydrationCost(SuccessRate.HIGH), player.getHydration());
-            assertEquals(8.0, player.getMorale(), 0.01);
+            assertEquals(18.0, player.getMorale(), 0.01);
         }
-        assertEquals("Good Job! You just gathered " + firewoodChange
-                + " bundles of firewood.", gatherFirewoodResult);
     }
 }

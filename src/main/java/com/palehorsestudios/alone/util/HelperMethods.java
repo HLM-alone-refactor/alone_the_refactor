@@ -69,6 +69,9 @@ public class HelperMethods {
      * @return
      */
     public static String capitalize(String input) {
-        return input.substring(0,1).toUpperCase() + input.substring(1);
+        if (!input.isEmpty()) {
+            return input.substring(0,1).toUpperCase() + input.substring(1);
+        }
+        return input;
     }
 }

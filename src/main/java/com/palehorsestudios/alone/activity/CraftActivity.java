@@ -51,6 +51,6 @@ public class CraftActivity extends Activity {
             System.out.println("Cannot craft an unknown item");
         }
 
-        return "Failed at crafting " + choice.getKeyword() +", missing required items.";
+        return "Failed at crafting " + choice.getItem().getType() +", missing required items.";
     }
 }

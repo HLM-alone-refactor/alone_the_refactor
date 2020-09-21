@@ -69,16 +69,14 @@ public class Parser {
                     try {
                         food = FoodFactory.getNewInstance(getStemMapValue(input, FOOD_STEM_MAP));
                     } catch (IllegalArgumentException e) {
-                        // do nothing
-                        // was not a legal food
+                        return null;
                     }
                 }
                 case "get", "put" -> {
                     try {
                         item = ItemFactory.getNewInstance(getStemMapValue(input, ITEM_STEM_MAP));
                     } catch (IllegalArgumentException e) {
-                        // do nothing
-                        // was not a legal item
+                        return null;
                     }
                 }
             }
@@ -96,7 +94,7 @@ public class Parser {
         String result = null;
 
         // assume input is of style <action> <thing>, and only want <thing>
-        String[] split = input.split(" ", 2);
+        String[] split = input.split(findKey(input), 2);
         if (split.length > 1) {
             String stem = stemIt(split[1]);
             if (map.containsKey(stem)) {
