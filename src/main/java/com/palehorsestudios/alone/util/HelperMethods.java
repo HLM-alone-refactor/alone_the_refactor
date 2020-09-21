@@ -45,6 +45,10 @@ public class HelperMethods {
         return sb.toString();
     }
 
+    public static boolean doByPercentTarget(Double target) {
+        return Math.random() <= target;
+    }
+
     /**
      * Capitalizes each word in a given string, excluding 'and', 'is', and 'of'
      * @param input
@@ -65,6 +69,9 @@ public class HelperMethods {
      * @return
      */
     public static String capitalize(String input) {
-        return input.substring(0,1).toUpperCase() + input.substring(1);
+        if (!input.isEmpty()) {
+            return input.substring(0,1).toUpperCase() + input.substring(1);
+        }
+        return input;
     }
 }

@@ -11,7 +11,7 @@ public class ItemFactoryTest extends TestCase {
     @Test
     public void testGetNewInstance() {
         Item item = ItemFactory.getNewInstance("Knife");
-        Item item1 = new Item("Knife", "A short, sharp blade.",
+        Item item1 = new Item("Knife", "A short, sharp blade.", 5.0,
                 Set.of(new Craft(Map.of("Wood", 1, "Metal", 1))));
 
         assertEquals(item1, item);

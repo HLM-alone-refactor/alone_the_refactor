@@ -18,9 +18,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import org.apache.lucene.search.Collector;
 
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static javafx.util.Duration.seconds;
 
@@ -96,7 +98,8 @@ public class ItemSelectionWindowController extends BaseController implements Ini
 
     // Private Variables
     private static final int COUNT_DOWN = 30;
-    private List<Item> initItems = new ArrayList<>();
+    private List<Item> playerItems = new ArrayList<>();
+    private Map<CheckBox, Item> inventory = new HashMap<>();
 
     public ItemSelectionWindowController(GameManager gameManager, ViewFactory viewFactory, String fxmlName) {
         super(gameManager, viewFactory, fxmlName);
@@ -106,72 +109,10 @@ public class ItemSelectionWindowController extends BaseController implements Ini
     public void playGameButton() {
         System.out.println("Play button pressed");
         // Player now managed in gameManager
-        gameManager.setPlayer(new Player(initItems));
+        gameManager.setPlayer(new Player(playerItems));
         viewFactory.showGameWindow();
         Stage stage = (Stage) countdown.getScene().getWindow();
         viewFactory.closeStage(stage);
-    }
-
-    private void selectItems() {
-        Map<CheckBox, Item> inventory = new HashMap<>();
-        inventory.put(fishingLine, ItemFactory.getNewInstance("Fishing Line"));
-        inventory.put(fishingHooks, ItemFactory.getNewInstance("Fishing Hooks"));
-        inventory.put(fishingLures, ItemFactory.getNewInstance("Fishing Lures"));
-        inventory.put(knife, ItemFactory.getNewInstance("Knife"));
-        inventory.put(flintandsteel, ItemFactory.getNewInstance("Flint and Steel"));
-        inventory.put(bow, ItemFactory.getNewInstance("Bow"));
-        inventory.put(arrows, ItemFactory.getNewInstance("Arrow"));
-        inventory.put(familyPhoto, ItemFactory.getNewInstance("Family Photo"));
-        inventory.put(parachuteChord, ItemFactory.getNewInstance("Parachute Chord"));
-        inventory.put(flare, ItemFactory.getNewInstance("Flare"));
-        inventory.put(extraBoots, ItemFactory.getNewInstance("Boots"));
-        inventory.put(extraPants, ItemFactory.getNewInstance("Pants"));
-        inventory.put(sleepingGear, ItemFactory.getNewInstance("Sleeping Gear"));
-        inventory.put(coldWeatherGear, ItemFactory.getNewInstance("Cold Weather Gear"));
-        inventory.put(footTarp, ItemFactory.getNewInstance("Tarp"));
-        inventory.put(matches, ItemFactory.getNewInstance("Matches"));
-        inventory.put(flashlight, ItemFactory.getNewInstance("Flashlight"));
-        inventory.put(firstAid, ItemFactory.getNewInstance("First Aid Kit"));
-        inventory.put(extraBatteries, ItemFactory.getNewInstance("Batteries"));
-        inventory.put(gaugeWire, ItemFactory.getNewInstance("Wire"));
-        inventory.put(cookingPot, ItemFactory.getNewInstance("Pot"));
-        inventory.put(axe, ItemFactory.getNewInstance("Axe"));
-        inventory.put(hatchet, ItemFactory.getNewInstance("Hatchet"));
-        inventory.put(iodineTablets, ItemFactory.getNewInstance("Iodine Tablets"));
-        inventory.put(magnumRevolver, ItemFactory.getNewInstance("Pistol"));
-        inventory.put(cartridges, ItemFactory.getNewInstance("Pistol Cartridge"));
-        inventory.put(shovel, ItemFactory.getNewInstance("Shovel"));
-        inventory.put(harmonica, ItemFactory.getNewInstance("Harmonica"));
-        inventory.put(lighter, ItemFactory.getNewInstance("Lighter"));
-        inventory.put(survivalManual, ItemFactory.getNewInstance("Survival Manual"));
-        inventory.put(journalandpen, ItemFactory.getNewInstance("Journal"));
-
-        for (Map.Entry<CheckBox, Item> entry : inventory.entrySet()) {
-            entry
-                    .getKey()
-                    .selectedProperty()
-                    .addListener(
-                            // initItems.size() instead of count....
-                            new ChangeListener<Boolean>() {
-                                public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
-                                    if (initItems.size() >= 10) {
-                                        entry.getKey().setSelected(false);
-                                        if (initItems.contains(entry.getValue())) {
-                                            initItems.remove(entry.getValue());
-                                        }
-                                        //paneSelected.setDisable(true);
-                                    } else {
-                                        if (entry.getKey().isSelected()) {
-                                            initItems.add(entry.getValue());
-                                        } else if (!entry.getKey().isSelected()
-                                                && initItems.contains(entry.getValue())) {
-                                            initItems.remove(entry.getValue());
-                                        }
-                                    }
-                                }
-                            });
-        }
-
     }
 
     public Button getNext() {
@@ -187,7 +128,7 @@ public class ItemSelectionWindowController extends BaseController implements Ini
     }
 
     public List<Item> getInitItems() {
-        return initItems;
+        return playerItems;
     }
 
     @FXML
@@ -221,4 +162,52 @@ public class ItemSelectionWindowController extends BaseController implements Ini
                                 }));
         timeline.playFromStart();
     }
+
+    private void addCheckBoxes(int colums) {
+        List<Item> itemBank = ItemFactory.getAllItems()
+                .stream()
+                .filter(Item::isInitialItemChoice)
+                .collect(Collectors.toList());
+        int row = 0, col = 0;
+        for (Item item: itemBank) {
+            CheckBox checkBox = new CheckBox(item.getType());
+            paneSelected.add(checkBox,col, row);
+            inventory.put(checkBox, item);
+
+            col = ++col % colums;
+            row = col == 0 ? ++row : row;
+        }
+
+   }
+
+   private void selectItems() {
+        addCheckBoxes(5);
+
+       for (Map.Entry<CheckBox, Item> entry : inventory.entrySet()) {
+           entry
+                   .getKey()
+                   .selectedProperty()
+                   .addListener(
+                           // initItems.size() instead of count....
+                           new ChangeListener<Boolean>() {
+                               public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
+                                   if (playerItems.size() >= 10) {
+                                       entry.getKey().setSelected(false);
+                                       if (playerItems.contains(entry.getValue())) {
+                                           playerItems.remove(entry.getValue());
+                                       }
+                                       //paneSelected.setDisable(true);
+                                   } else {
+                                       if (entry.getKey().isSelected()) {
+                                           playerItems.add(entry.getValue());
+                                       } else if (!entry.getKey().isSelected()
+                                               && playerItems.contains(entry.getValue())) {
+                                           playerItems.remove(entry.getValue());
+                                       }
+                                   }
+                               }
+                           });
+       }
+
+   }
 }

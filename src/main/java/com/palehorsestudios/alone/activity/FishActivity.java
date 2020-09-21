@@ -3,8 +3,13 @@ package com.palehorsestudios.alone.activity;
 import com.palehorsestudios.alone.Choice;
 import com.palehorsestudios.alone.Foods.Food;
 import com.palehorsestudios.alone.Foods.FoodFactory;
+import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.SuccessRate;
+import com.palehorsestudios.alone.util.HelperMethods;
+
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class FishActivity extends Activity {
     private static FishActivity activityReference;
@@ -30,7 +35,7 @@ public class FishActivity extends Activity {
         // get boost factor based on items the player is carrying
         double boostFactor =
                 Activity.getActivityBoostFactor(ItemFactory.getNewInstances("Survival Manual",
-                        "Fishing Hooks", "Fishing Line", "Fishing Lures"), choice.getPlayer());
+                        "Fishing Hooks", "Fishing Line", "Fishing Lures", "Fishing Bait"), choice.getPlayer());
         // gear, maybe we should eliminate low success rate possibility.
         if (successRate == SuccessRate.LOW) {
             choice.getPlayer().updateMorale(-2);
@@ -49,6 +54,9 @@ public class FishActivity extends Activity {
             choice.getPlayer().updateMorale(3);
             result = "I hope there's room in your food cache. You caught three white fish!";
         }
+
+        result += luckFindInActivity(ItemFactory.getByFind("Fish"), choice, successRate, 0.9, 1);
+
         return result;
     }
 }
