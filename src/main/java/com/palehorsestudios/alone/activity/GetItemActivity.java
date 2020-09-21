@@ -1,12 +1,12 @@
 package com.palehorsestudios.alone.activity;
 
 import com.palehorsestudios.alone.Choice;
+import com.palehorsestudios.alone.Items.ItemFactory;
 
 import java.util.Optional;
 
 public class GetItemActivity extends Activity {
 
-    private static final int MAX_ITEM_CARRY_SIZE = 3;
     private static GetItemActivity activityReference;
 
     private GetItemActivity() {
@@ -21,21 +21,23 @@ public class GetItemActivity extends Activity {
 
     @Override
     public String act(Choice choice) {
+        double maxWeightCarry = 50;
         String result;
+
       /* determine if player has less than the maximum carry limit
       and item is in shelter. */
         Optional<Integer> shelterItemCount = Optional.ofNullable
                 (choice.getPlayer().getShelter().getEquipment().get(choice.getItem()));
         if (shelterItemCount.isPresent() && shelterItemCount.get() > 0) {
-            if (choice.getPlayer().getItems().size() < MAX_ITEM_CARRY_SIZE) {
+            if (choice.getItem().getWeight() + choice.getPlayer().getItemsWeight() < maxWeightCarry) {
                 int retrievalResult = choice.getPlayer().getShelter().removeEquipment(choice.getItem(), 1);
-                result = "You retrieved " + retrievalResult + " " + choice.getItem() + " from your shelter.";
+                result = "You retrieved " + retrievalResult + " " + choice.getItem().getType() + " from your shelter.";
                 choice.getPlayer().getItems().add(choice.getItem());
             } else {
-                result = "You can only carry " + MAX_ITEM_CARRY_SIZE + " items.";
+                result = "You can only carry " + maxWeightCarry + "lbs of items.";
             }
         } else {
-            result = "You do not have a(n) " + choice.getItem() + " in your shelter.";
+            result = "You do not have a(n) " + choice.getItem().getType() + " in your shelter.";
         }
         return result;
     }

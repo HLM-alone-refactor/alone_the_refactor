@@ -123,7 +123,7 @@ public class BearEncounterNightTest {
 
     @Test
     public void testBearEncounterNightWithPistolAndCartridgesItems() {
-        player = new Player(ItemFactory.getNewInstances("Pistol Cartridge", "Pistol"));
+        player = new Player(ItemFactory.getNewInstances("Pistol Cartridge", "Pistol", "Pistol Round", "Pistol Round", "Pistol Round"));
         getItemFromShelter.act(new Choice("pistol", player, (ItemFactory.getNewInstance("Pistol"))));
         getItemFromShelter.act(new Choice("ammo", player, (ItemFactory.getNewInstance("Pistol Cartridge"))));
         String encounterResult = bearEncounterNight.encounter(player);
@@ -142,10 +142,70 @@ public class BearEncounterNightTest {
             validResult = true;
         }
         assertTrue(validResult);
-        assertEquals(4, player.getHydration(), .001);
-        assertEquals(4, player.getMorale(), .001);
+        assertEquals(14, player.getHydration(), .001);
+        assertEquals(14, player.getMorale(), .001);
         assertEquals(178.2, player.getWeight(), .001);
+        assertTrue(!player.getShelter().getEquipment().containsKey(ItemFactory.getNewInstance("Pistol Round")));
     }
+
+    @Test
+    public void testBearEncounterNightWithPistolAndCartridgesItemsOnPlayer() {
+        player = new Player(List.of());
+        player.getItems().addAll(ItemFactory.getNewInstances("Pistol Cartridge", "Pistol", "Pistol Round", "Pistol Round", "Pistol Round"));
+        getItemFromShelter.act(new Choice("pistol", player, (ItemFactory.getNewInstance("Pistol"))));
+        getItemFromShelter.act(new Choice("ammo", player, (ItemFactory.getNewInstance("Pistol Cartridge"))));
+        String encounterResult = bearEncounterNight.encounter(player);
+        String expectedString =
+                "You wake in the middle of the night... something is nearby. \n"
+                        + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
+                        + "you reach for your pistol. With it in hand, you open the cylinder to make sure it's loaded "
+                        + "and slowly lift your head to glimpse at the disturbance. \n"
+                        + "A massive grizzly sniffs about your camp, and he is making his way towards you and your "
+                        + "food cache. You slowly level your pistol center mass at the bear, and fire three shots "
+                        + "in quick succession. The bear attempts to bite at whatever is stinging him, but your "
+                        + "aim is true and the bear slumps to the ground. You set about harvesting the bear before "
+                        + "the meat goes to waste.";
+        boolean validResult = false;
+        if (encounterResult.equals(expectedString)) {
+            validResult = true;
+        }
+        assertTrue(validResult);
+        assertEquals(14, player.getHydration(), .001);
+        assertEquals(14, player.getMorale(), .001);
+        assertEquals(178.2, player.getWeight(), .001);
+        assertTrue(!player.getItems().contains(ItemFactory.getNewInstance("Pistol Round")));
+    }
+
+    @Test
+    public void testBearEncounterNightWithPistolAndCartridges_itemsOnPlayerAndShelter() {
+        player = new Player(ItemFactory.getNewInstances("Pistol", "Pistol Round"));
+        player.getItems().addAll(ItemFactory.getNewInstances("Pistol Cartridge", "Pistol Round"));
+        getItemFromShelter.act(new Choice("pistol", player, (ItemFactory.getNewInstance("Pistol"))));
+        getItemFromShelter.act(new Choice("ammo", player, (ItemFactory.getNewInstance("Pistol Cartridge"))));
+        String encounterResult = bearEncounterNight.encounter(player);
+        String expectedString =
+                "You wake in the middle of the night... something is nearby. \n"
+                        + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
+                        + "you reach for your pistol. With it in hand, you open the cylinder to make sure it's loaded "
+                        + "and slowly lift your head to glimpse at the disturbance. \n"
+                        + "A massive grizzly sniffs about your camp, and he is making his way towards you and your "
+                        + "food cache. You slowly level your pistol center mass at the bear, and fire three shots "
+                        + "in quick succession. The bear attempts to bite at whatever is stinging him, but your "
+                        + "aim is true and the bear slumps to the ground. You set about harvesting the bear before "
+                        + "the meat goes to waste.";
+        boolean validResult = false;
+        if (encounterResult.equals(expectedString)) {
+            validResult = true;
+        }
+        assertTrue(validResult);
+        assertEquals(14, player.getHydration(), .001);
+        assertEquals(14, player.getMorale(), .001);
+        assertEquals(178.2, player.getWeight(), .001);
+        assertTrue(!player.getItems().contains(ItemFactory.getNewInstance("Pistol Round")));
+        assertTrue(!player.getShelter().getEquipment().containsKey(ItemFactory.getNewInstance("Pistol Round")));
+    }
+
+
 
     @Test
     public void testBearEncounterNightWithKnifeAndSurvivalManualItemsPlayerSurvives() {

@@ -69,34 +69,34 @@ public class ForageActivityTest {
                         + "of leaf beetles under a decayed log. These critters are packed full of protein!"};
         boolean validResult = false;
         for (String possibleResult : possibleResults) {
-            if (foragingResult.equals(possibleResult)) {
+            if (foragingResult.contains(possibleResult)) {
                 validResult = true;
                 break;
             }
         }
         assertTrue(validResult);
-        if (foragingResult.equals("Lucky for you, berries are ripe this time of year. You picked as many as you could carry.")) {
-            assertEquals(6, player.getMorale());
+        if (foragingResult.contains("Lucky for you, berries are ripe this time of year. You picked as many as you could carry.")) {
+            assertEquals(16, player.getMorale());
             assertEquals(
                     Optional.of(berries.getGrams() * 2).get(),
                     player.getShelter().getFoodCache().get(berries));
-            assertEquals(LOW_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
+            assertEquals(LOW_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.5);
             assertEquals(previousHydration - ActivityLevel.LOW.getHydrationCost(SuccessRate.LOW), player.getHydration());
-        } else if (foragingResult.equals("Delicious fungus! You found a log covered in edible mushrooms.")) {
-            assertEquals(6, player.getMorale());
+        } else if (foragingResult.contains("Delicious fungus! You found a log covered in edible mushrooms.")) {
+            assertEquals(16, player.getMorale());
             assertEquals(
                     Optional.of(mushroom.getGrams() * 4).get(),
                     player.getShelter().getFoodCache().get(mushroom),
                     0.001);
-            assertEquals(LOW_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
+            assertEquals(LOW_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.5);
             assertEquals(previousHydration - ActivityLevel.LOW.getHydrationCost(SuccessRate.MEDIUM), player.getHydration());
         } else {
-            assertEquals(7, player.getMorale());
+            assertEquals(17, player.getMorale());
             assertEquals(
                     Optional.of(bug.getGrams() * 3).get(),
                     player.getShelter().getFoodCache().get(bug),
                     0.001);
-            assertEquals(LOW_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
+            assertEquals(LOW_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.5);
             assertEquals(previousHydration - ActivityLevel.LOW.getHydrationCost(SuccessRate.HIGH), player.getHydration());
         }
     }
@@ -113,35 +113,35 @@ public class ForageActivityTest {
                         + "of leaf beetles under a decayed log. These critters are packed full of protein!"};
         boolean validResult = false;
         for (String possibleResult : possibleResults) {
-            if (foragingResult.equals(possibleResult)) {
+            if (foragingResult.contains(possibleResult)) {
                 validResult = true;
                 break;
             }
         }
         assertTrue(validResult);
-        if (foragingResult.equals("Lucky for you, berries are ripe this time of year. You picked as many as you could carry.")) {
-            assertEquals(6, player.getMorale());
+        if (foragingResult.contains("Lucky for you, berries are ripe this time of year. You picked as many as you could carry.")) {
+            assertEquals(16, player.getMorale());
             assertEquals(
                     Optional.of(berries.getGrams() * 2 + berries.getGrams() * 2 * 0.1).get(),
                     player.getShelter().getFoodCache().get(berries),
                     0.001);
-            assertEquals(LOW_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
+            assertEquals(LOW_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.5);
             assertEquals(previousHydration - ActivityLevel.LOW.getHydrationCost(SuccessRate.LOW), player.getHydration());
-        } else if (foragingResult.equals("Delicious fungus! You found a log covered in edible mushrooms.")) {
-            assertEquals(6, player.getMorale());
+        } else if (foragingResult.contains("Delicious fungus! You found a log covered in edible mushrooms.")) {
+            assertEquals(16, player.getMorale());
             assertEquals(
                     Optional.of(mushroom.getGrams() * 4 + mushroom.getGrams() * 4 * 0.1).get(),
                     player.getShelter().getFoodCache().get(mushroom),
                     0.001);
-            assertEquals(LOW_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
+            assertEquals(LOW_ACTIVITY_MED_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.5);
             assertEquals(previousHydration - ActivityLevel.LOW.getHydrationCost(SuccessRate.MEDIUM), player.getHydration());
         } else {
-            assertEquals(7, player.getMorale());
+            assertEquals(17, player.getMorale());
             assertEquals(
                     Optional.of(bug.getGrams() * 3 + bug.getGrams() * 3 * 0.1).get(),
                     player.getShelter().getFoodCache().get(bug),
                     0.001);
-            assertEquals(LOW_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
+            assertEquals(LOW_ACTIVITY_HIGH_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.5);
             assertEquals(previousHydration - ActivityLevel.LOW.getHydrationCost(SuccessRate.HIGH), player.getHydration());
         }
     }

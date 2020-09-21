@@ -2,10 +2,13 @@ package com.palehorsestudios.alone.activity;
 
 import com.palehorsestudios.alone.Choice;
 import com.palehorsestudios.alone.Items.Item;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.Player;
 import com.palehorsestudios.alone.player.SuccessRate;
+import com.palehorsestudios.alone.util.HelperMethods;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Activity {
     public abstract String act(Choice choice);
@@ -40,5 +43,25 @@ public abstract class Activity {
         } else {
             return SuccessRate.HIGH;
         }
+    }
+
+    /*
+    package private method
+     */
+    static String luckFindInActivity(List<Item> items, Choice choice, SuccessRate successRate, double luck, int minOnReturn) {
+        StringBuilder sb = new StringBuilder();
+        int repeat = (successRate == SuccessRate.LOW) ? 1 : (successRate == SuccessRate.MEDIUM) ? 2 : 3;
+        for (int i = 0; i < repeat; i++) {
+            int amount = HelperMethods.doByPercentTarget(luck) ? ThreadLocalRandom.current().nextInt(minOnReturn,
+                    3) : 0;
+            if (amount > 0) {
+                Item item = items.get(ThreadLocalRandom.current().nextInt(items.size()));
+                choice.getPlayer().getShelter().addEquipment(item, amount);
+                sb.append("\n\tLucky~You! You found " + amount + " " + item.getType() + "!");
+            }
+
+        }
+
+        return sb.toString();
     }
 }

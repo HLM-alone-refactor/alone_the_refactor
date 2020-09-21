@@ -20,7 +20,7 @@ public class ItemTest extends TestCase {
     }
 
     public void testXmlToObject() {
-        Item item1 = new Item("knife", "A sharp, short blade.",
+        Item item1 = new Item("knife", "A sharp, short blade.", 5.0,
                 Set.of(new Craft(Map.of("steel", 1, "wood", 2)),
                 new Craft(Map.of("iron", 1, "wood", 2))));
         assertEquals(item1, item);

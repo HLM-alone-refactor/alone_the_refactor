@@ -106,20 +106,20 @@ public class TrapActivityTest {
                 "You'll have plenty of lucky rabbit feet now. Your snared three rabbits!"};
         boolean validResult = false;
         for (String possibleResult : possibleResults) {
-            if (trappingResult.equals(possibleResult)) {
+            if (trappingResult.contains(possibleResult)) {
                 validResult = true;
                 break;
             }
         }
         assertTrue(validResult);
-        if (trappingResult.equals("Those varmints are smarter than they look. Your traps were empty.")) {
+        if (trappingResult.contains("Those varmints are smarter than they look. Your traps were empty.")) {
             assertEquals(3, player.getMorale());
             assertEquals(
                     Optional.of(1000.0).get(), player.getShelter().getFoodCache().get(squirrel));
             assertEquals(Optional.of(1000.0).get(), player.getShelter().getFoodCache().get(rabbit));
             assertEquals(MED_ACTIVITY_LOW_SUCCESS_PLAYER_WEIGHT, player.getWeight(), 0.005);
             assertEquals(previousHydration - ActivityLevel.MEDIUM.getHydrationCost(SuccessRate.LOW), player.getHydration());
-        } else if (trappingResult.equals("Your patience has paid off. There were two squirrels in your traps!")) {
+        } else if (trappingResult.contains("Your patience has paid off. There were two squirrels in your traps!")) {
             assertEquals(6, player.getMorale());
             assertEquals(
                     Optional.of(1000.0 + (squirrel.getGrams() * 2 + squirrel.getGrams() * 2 * 0.1))
