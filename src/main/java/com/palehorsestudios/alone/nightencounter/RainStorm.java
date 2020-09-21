@@ -75,17 +75,3 @@ public class RainStorm extends NightEncounter {
                         "on your morale. You should get to shelter quickly. Its not good to sit under \n" +
                         "a these trees \n";
             }
-
-        return "The sky has been swallowed by a rushing thundercloud. " +
-            "The sky darkened and for a brief moment raindrops fell on the woods. " +
-            "The storm came closer. A flash of light illuminated the sky and the rain " +
-            "increased significantly. Previously only a few drops had fallen down here and " +
-            "there. Now the rain pelted down so vehemently that you could no longer " +
-            "see in front of you.  The rain is getting stronger, and with those flashes, " +
-            "you become drenched. Unfortunatley, you do not have equipment to protect your critical " +
-            "inventory items. You have lost your inventory. This rain is taking its toll " +
-            "on your morale. You should get to shelter quickly. Its not good to sit under " +
-            "a these trees";
-        }
-    }
-}
