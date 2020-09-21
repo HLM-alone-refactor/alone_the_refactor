@@ -256,6 +256,7 @@ public class GameWindowController extends BaseController implements Initializabl
                             status = nightResultObject.getStatusUpdate();
                             nightTextOutput = nightResultObject.getTextOutput();
                         } else {
+                            // call overnight status to see if died from something other than event
                             nightResultObject = overnightStatusUpdate(player);
                             status = nightResultObject.getStatusUpdate();
                             nightTextOutput = nightResultObject.getTextOutput();
