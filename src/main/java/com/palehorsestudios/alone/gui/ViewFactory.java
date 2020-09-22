@@ -4,6 +4,9 @@ import com.palehorsestudios.alone.gui.controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -24,7 +27,7 @@ public class ViewFactory {
     public void showGameMenuWindow() {
         System.out.println("show game menu window called");
 
-        BaseController controller = new GameMenuWindowController(gameManager,this, "view/gameMenu.fxml");
+        GameMenuWindowController controller = new GameMenuWindowController(gameManager,this, "view/gameMenu.fxml");
         initializeStage(controller);
     }
 
@@ -69,12 +72,6 @@ public class ViewFactory {
         initializeStage(controller);
     }
 
-    public void showGameOver() {
-        System.out.println("Show game over window");
-
-        BaseController controller = new GameOverWindowController(gameManager, this, "view/gameOver.fxml");
-        initializeStage(controller);
-    }
 
     private void initializeStage(BaseController baseController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(baseController.getFxmlName()));

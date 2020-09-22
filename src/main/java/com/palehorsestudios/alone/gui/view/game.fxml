@@ -14,7 +14,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -23,7 +22,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="531.0" prefWidth="1019.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="593.0" prefWidth="1119.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <MenuBar prefHeight="0.0" prefWidth="517.0" VBox.vgrow="NEVER">
             <menus>
@@ -112,14 +111,14 @@
                                         <Insets left="10.0" right="10.0" />
                                     </padding>
                                 </GridPane>
-                                <ListView fx:id="carriedItems" layoutX="193.0" layoutY="60.0" prefHeight="98.0" prefWidth="114.0" AnchorPane.rightAnchor="161.0" AnchorPane.topAnchor="60.0">
+                                <ListView fx:id="carriedItems" layoutX="193.0" layoutY="60.0" prefHeight="98.0" prefWidth="114.0" AnchorPane.bottomAnchor="91.0" AnchorPane.rightAnchor="161.0" AnchorPane.topAnchor="60.0">
                                     <effect>
                                         <InnerShadow />
                                     </effect>
                                 </ListView>
                                 <Label layoutX="193.0" layoutY="6.0" text="Items Carrying:" AnchorPane.rightAnchor="192.0" AnchorPane.topAnchor="6.0" />
-                                <Label layoutX="196.0" layoutY="158.0" text="Food Cache:" AnchorPane.rightAnchor="206.0" AnchorPane.topAnchor="158.0" />
-                                <ListView fx:id="foodCache" layoutX="193.0" layoutY="175.0" prefHeight="72.0" prefWidth="114.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="161.0" AnchorPane.topAnchor="175.0">
+                                <Label layoutX="196.0" layoutY="158.0" text="Food Cache:" AnchorPane.bottomAnchor="74.0" AnchorPane.rightAnchor="206.0" />
+                                <ListView fx:id="foodCache" layoutX="193.0" layoutY="175.0" prefHeight="72.0" prefWidth="114.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="161.0">
                                     <effect>
                                         <InnerShadow />
                                     </effect>
@@ -133,7 +132,7 @@
                                 <Separator layoutX="1.0" layoutY="128.0" prefHeight="3.0" prefWidth="178.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="128.0" />
                                 <Separator layoutX="176.0" orientation="VERTICAL" prefHeight="246.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
                         <Label layoutX="216.0" layoutY="37.0" text="Weight:" />
-                        <TextField fx:id="inventoryWeight" layoutX="262.0" layoutY="33.0" prefHeight="25.0" prefWidth="47.0" />
+                        <TextField fx:id="inventoryWeight" layoutX="262.0" layoutY="33.0" prefHeight="25.0" prefWidth="47.0" AnchorPane.rightAnchor="159.0" AnchorPane.topAnchor="33.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="230.0" prefWidth="430.0">
@@ -178,14 +177,6 @@
                                         <InnerShadow />
                                     </effect>
                                 </TextField>
-                                <TextArea fx:id="gameOver" editable="false" layoutX="94.0" layoutY="150.0" prefHeight="246.0" prefWidth="537.0" text="       " visible="false" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="150.0">
-                                    <font>
-                                        <Font name="Chalkduster" size="15.0" />
-                                    </font>
-                                    <effect>
-                                        <SepiaTone />
-                                    </effect>
-                                </TextArea>
                         <MediaView fx:id="mediaView" fitHeight="${mediaViewPane.height}" fitWidth="${mediaViewPane.width}" managed="false" />
                             </children>
                         </AnchorPane>

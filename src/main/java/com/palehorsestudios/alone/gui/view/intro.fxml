@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="676.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="853.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
@@ -25,7 +25,7 @@
                                 </SepiaTone>
                             </effect>
                         </TextArea>
-                        <Button layoutX="298.0" layoutY="344.0" mnemonicParsing="false" onAction="#startGameAction" prefHeight="45.0" prefWidth="903.0" text="Start Game" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <Button layoutX="298.0" layoutY="344.0" mnemonicParsing="false" onAction="#startGameAction" prefHeight="45.0" prefWidth="903.0" text="Begin" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                             <font>
                                 <Font size="24.0" />
                             </font>
@@ -33,7 +33,7 @@
                                 <InnerShadow />
                             </effect>
                         </Button>
-                        <TextField alignment="CENTER" editable="false" layoutX="102.0" layoutY="14.0" promptText="Game Introduction" text="Game Introduction" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TextField alignment="CENTER" editable="false" layoutX="102.0" layoutY="14.0" promptText="Game Introduction" text="Welcome Aboard" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <font>
                                 <Font size="19.0" />
                             </font>
