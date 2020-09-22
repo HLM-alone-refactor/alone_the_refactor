@@ -22,13 +22,13 @@ public class DrinkWaterActivity extends Activity {
         if (waterLevel > 0) {
             if (waterLevel > 2) {
                 choice.getPlayer().getShelter().updateWater(-3);
-                choice.getPlayer().setHydration(choice.getPlayer().getHydration() + 3);
+                choice.getPlayer().updateHydration(3);
             } else if (waterLevel > 1) {
                 choice.getPlayer().getShelter().updateWater(-2);
-                choice.getPlayer().setHydration(choice.getPlayer().getHydration() + 2);
+                choice.getPlayer().updateHydration(2);
             } else {
                 choice.getPlayer().getShelter().updateWater(-1);
-                choice.getPlayer().setHydration(choice.getPlayer().getHydration() + 1);
+                choice.getPlayer().updateHydration(1);
             }
             result = "That's better. Your hydration is now at "
                     + choice.getPlayer().getHydration()

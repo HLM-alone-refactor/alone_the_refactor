@@ -20,9 +20,9 @@ public class PutItemActivity extends Activity {
         String result;
         if (choice.getPlayer().getItems().remove(choice.getItem())) {
             choice.getPlayer().getShelter().addEquipment(choice.getItem(), 1);
-            result = "One " + choice.getItem() + " moved to your shelter.";
+            result = "One " + choice.getItem().getType() + " moved to your shelter.";
         } else {
-            result = "You do not have a(n) " + choice.getItem() + " on you.";
+            result = "You do not have a(n) " + choice.getItem().getType() + " on you.";
         }
         return result;
     }

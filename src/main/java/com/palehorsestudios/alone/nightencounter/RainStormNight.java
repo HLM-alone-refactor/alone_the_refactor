@@ -48,7 +48,8 @@ public class RainStormNight extends NightEncounter {
             // description if the player keeps equipment dry with Tarp
             // and survival knowledge at shelter
             player.updateMorale(-1);
-            String result = "The sky has been swallowed by a rushing thundercloud. " +
+            player.setPlayerStatus(Status.HARD_RAIN);
+            return "The sky has been swallowed by a rushing thundercloud. " +
                     "The sky darkened and for a brief moment raindrops fell on the woods." +
                     "The storm came closer. A flash of light illuminated the sky and the rain" +
                     "increased significantly. Previously only a few drops had fallen down here and" +
@@ -56,32 +57,18 @@ public class RainStormNight extends NightEncounter {
                     "see in front of you. The rain is getting stronger, and with those flashes," +
                     "you become drenched. You get back to your shelter and you are able to fashion protection" +
                     "for your equipment from the storm.";
-            if (player.isDead()) {
-                player.setPlayerStatus(Status.LOST_WILL_TO_LIVE);
-                return result;
-            } else {
-                player.setPlayerStatus(Status.HARD_RAIN);
-                return result;
-            }
         } else {
             player.updateMorale(-4);
             player.getItems().clear();
-            String result = "The sky has been swallowed by a rushing thundercloud. " +
+            player.setPlayerStatus(Status.HARD_RAIN);
+            // description for if the player does not have anything to shelter his items outside his shelter
+            return "The sky has been swallowed by a rushing thundercloud. " +
                     "The sky darkened and for a brief moment raindrops fell on the woods." +
                     "The storm came closer. A flash of light illuminated the sky and the rain" +
                     "increased significantly. Previously only a few drops had fallen down here and" +
                     "there. Now the rain pelted down so vehemently that you could no longer" +
                     "see in front of you. The rain is getting stronger, and with those flashes," +
                     "you become drenched. All of your items washed away.";
-            // description for if the player does not have anything to shelter his items outside his shelter
-            if (player.isDead()) {
-                player.setPlayerStatus(Status.LOST_WILL_TO_LIVE);
-                return result;
-            } else {
-                player.setPlayerStatus(Status.HARD_RAIN);
-
-            }
-            return result;
         }
     }
 }

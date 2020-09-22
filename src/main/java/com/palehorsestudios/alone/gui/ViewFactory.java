@@ -25,28 +25,28 @@ public class ViewFactory {
     }
 
     public void showGameMenuWindow() {
-        System.out.println("show game menu window called");
+        //System.out.println("show game menu window called");
 
         GameMenuWindowController controller = new GameMenuWindowController(gameManager,this, "view/gameMenu.fxml");
         initializeStage(controller);
     }
 
     public void showAboutWindow() {
-        System.out.println("show game menu window called");
+        //System.out.println("show game menu window called");
 
         BaseController controller = new AboutUsWindowController(gameManager,this, "view/about.fxml");
         initializeStage(controller);
     }
 
     public void showIntroWindow() {
-        System.out.println("show Intro window called");
+        //System.out.println("show Intro window called");
 
         BaseController controller = new GameIntroWindowController(gameManager,this, "view/intro.fxml");
         initializeStage(controller);
     }
 
     public void showSelectItemsWindow() {
-        System.out.println("Show select items window called");
+        //System.out.println("Show select items window called");
 
         BaseController controller = new ItemSelectionWindowController(gameManager,this, "view/testSelectItems.fxml");
         initializeStage(controller);
@@ -57,7 +57,7 @@ public class ViewFactory {
     }
 
     public void showGameWindow(String startingLog) {
-        System.out.println("how game window called");
+        //System.out.println("how game window called");
 
 //        BaseController controller = new GameWindowController(gameManager,this, "view/game.fxml");
         GameWindowController controller = new GameWindowController(gameManager,this, "view/game.fxml");
@@ -66,12 +66,11 @@ public class ViewFactory {
 
     }
     public void showCraftingWindow() {
-        System.out.println("Show crafting window called");
+        //System.out.println("Show crafting window called");
 
         BaseController controller = new CraftItemsWindowController(gameManager,this, "view/crafting.fxml");
         initializeStage(controller);
     }
-
 
     private void initializeStage(BaseController baseController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(baseController.getFxmlName()));

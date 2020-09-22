@@ -48,7 +48,7 @@ public class CraftActivity extends Activity {
             }
 
         } catch (IllegalArgumentException e) {
-            System.out.println("Cannot craft an unknown item");
+            //System.out.println("Cannot craft an unknown item");
         }
 
         return "Failed at crafting " + choice.getItem().getType() +", missing required items.";

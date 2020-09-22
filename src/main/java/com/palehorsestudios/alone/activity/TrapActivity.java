@@ -31,7 +31,7 @@ public class TrapActivity extends Activity {
         double caloriesBurned = ActivityLevel.MEDIUM.getCaloriesBurned(successRate);
         choice.getPlayer().updateWeight(-caloriesBurned);
         int hydrationCost = ActivityLevel.MEDIUM.getHydrationCost(successRate);
-        choice.getPlayer().setHydration(choice.getPlayer().getHydration() - hydrationCost);
+        choice.getPlayer().updateHydration(-hydrationCost);
         double boostFactor =
                 Activity.getActivityBoostFactor(ItemFactory.getNewInstances("Survival Manual", "Wire", "Knife"),
                         choice.getPlayer());

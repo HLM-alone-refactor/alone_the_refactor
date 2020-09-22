@@ -38,7 +38,7 @@ public class GameMenuWindowController extends BaseController implements Initiali
 
     @FXML
     void loadGameAction() {
-        System.out.println("Load Game Button clicked");
+        //System.out.println("Load Game Button clicked");
 
         Stage stage = (Stage) menuTitle.getScene().getWindow();
 
@@ -57,7 +57,7 @@ public class GameMenuWindowController extends BaseController implements Initiali
 
     @FXML
     void newGameAction() {
-        System.out.println("New game button clicked");
+        //System.out.println("New game button clicked");
         viewFactory.showIntroWindow();
         Stage stage = (Stage) menuTitle.getScene().getWindow();
         viewFactory.closeStage(stage);

@@ -23,7 +23,7 @@ public class GetWaterActivity extends Activity {
         double caloriesBurned = ActivityLevel.LOW.getCaloriesBurned(successRate);
         choice.getPlayer().updateWeight(-caloriesBurned);
         int hydrationCost = ActivityLevel.LOW.getHydrationCost(successRate);
-        choice.getPlayer().setHydration(choice.getPlayer().getHydration() - hydrationCost);
+        choice.getPlayer().updateHydration(-hydrationCost);
         double boostFactor =
                 Activity.getActivityBoostFactor(ItemFactory.getNewInstances("Iodine Tablets", "Pot", "Boots"),
                         choice.getPlayer());

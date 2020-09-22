@@ -73,7 +73,8 @@ public class Item implements Serializable {
     }
 
     public double getWeight() {
-        return Objects.requireNonNullElse(weight, 1.0);
+        double temp = Objects.requireNonNullElse(weight, 1.0);
+        return temp > 0 ? temp : 1.0;
     }
 
     public Set<String> getFindBy() {

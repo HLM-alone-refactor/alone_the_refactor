@@ -24,7 +24,7 @@ public class ImproveShelterActivity extends Activity {
         double caloriesBurned = ActivityLevel.HIGH.getCaloriesBurned(successRate);
         choice.getPlayer().updateWeight(-caloriesBurned);
         int hydrationCost = ActivityLevel.HIGH.getHydrationCost(successRate);
-        choice.getPlayer().setHydration(choice.getPlayer().getHydration() - hydrationCost);
+        choice.getPlayer().updateHydration(-hydrationCost);
         double boostFactor = Activity.getActivityBoostFactor(ItemFactory.getNewInstances("Knife",
                 "Parachute Chord", "Axe", "Hatchet", "Shovel", "Survival Manual"), choice.getPlayer());
         double improvementAmount;
