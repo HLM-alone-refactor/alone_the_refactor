@@ -26,7 +26,7 @@ public class BoostMoraleActivity extends Activity {
         double caloriesBurned = ActivityLevel.LOW.getCaloriesBurned(SuccessRate.LOW);
         choice.getPlayer().updateWeight(-caloriesBurned);
         int hydrationCost = ActivityLevel.LOW.getHydrationCost(SuccessRate.LOW);
-        choice.getPlayer().setHydration(choice.getPlayer().getHydration() - hydrationCost);
+        choice.getPlayer().updateHydration(-hydrationCost);
         List<Item> moraleBoostItemsOwn = new ArrayList<>();
         Set<Item> moraleBoostItems = new HashSet<>(ItemFactory.getNewInstances("Family Photo", "Harmonica", "Journal"));
         for (Item i : moraleBoostItems) {

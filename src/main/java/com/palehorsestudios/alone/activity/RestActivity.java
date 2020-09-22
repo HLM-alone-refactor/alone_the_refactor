@@ -35,7 +35,7 @@ public class RestActivity extends Activity {
         double caloriesBurned = ActivityLevel.LOW.getCaloriesBurned(burnRate);
         choice.getPlayer().updateWeight(-caloriesBurned);
         int hydrationCost = ActivityLevel.LOW.getHydrationCost(burnRate);
-        choice.getPlayer().setHydration(choice.getPlayer().getHydration() - hydrationCost);
+        choice.getPlayer().updateHydration(-hydrationCost);
         return "You rested for " + hours + " hours and are ready for the next adventure!";
     }
 }

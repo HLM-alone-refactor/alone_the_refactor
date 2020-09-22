@@ -33,19 +33,19 @@ public class BuildFireActivity extends Activity {
             if (boostFactor == 0.0) {
                 successRate = SuccessRate.LOW;
                 choice.getPlayer().updateWeight(-ActivityLevel.LOW.getCaloriesBurned(SuccessRate.HIGH));
-                choice.getPlayer().setHydration(choice.getPlayer().getHydration() - ActivityLevel.LOW.getHydrationCost(SuccessRate.HIGH));
+                choice.getPlayer().updateHydration(-ActivityLevel.LOW.getHydrationCost(SuccessRate.HIGH));
             } else if (boostFactor == 0.1) {
                 successRate = SuccessRate.MEDIUM;
                 choice.getPlayer().updateWeight(-ActivityLevel.LOW.getCaloriesBurned(SuccessRate.MEDIUM));
-                choice.getPlayer().setHydration(choice.getPlayer().getHydration() - ActivityLevel.LOW.getHydrationCost(SuccessRate.MEDIUM));
+                choice.getPlayer().updateHydration(-ActivityLevel.LOW.getHydrationCost(SuccessRate.MEDIUM));
             } else if (boostFactor == 0.2) {
                 successRate = SuccessRate.MEDIUM;
                 choice.getPlayer().updateWeight(-ActivityLevel.LOW.getCaloriesBurned(SuccessRate.MEDIUM));
-                choice.getPlayer().setHydration(choice.getPlayer().getHydration() - ActivityLevel.LOW.getHydrationCost(SuccessRate.MEDIUM));
+                choice.getPlayer().updateHydration(-ActivityLevel.LOW.getHydrationCost(SuccessRate.MEDIUM));
             } else {
                 successRate = SuccessRate.HIGH;
                 choice.getPlayer().updateWeight(-ActivityLevel.LOW.getCaloriesBurned(SuccessRate.LOW));
-                choice.getPlayer().setHydration(choice.getPlayer().getHydration() - ActivityLevel.LOW.getHydrationCost(SuccessRate.LOW));
+                choice.getPlayer().updateHydration(-ActivityLevel.LOW.getHydrationCost(SuccessRate.LOW));
             }
             int attemptOutcome;
             if (successRate == SuccessRate.LOW) {

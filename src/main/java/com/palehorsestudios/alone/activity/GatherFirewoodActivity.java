@@ -26,7 +26,7 @@ public class GatherFirewoodActivity extends Activity {
         double caloriesBurned = ActivityLevel.MEDIUM.getCaloriesBurned(successRate);
         choice.getPlayer().updateWeight(-caloriesBurned);
         int hydrationCost = ActivityLevel.MEDIUM.getHydrationCost(successRate);
-        choice.getPlayer().setHydration(choice.getPlayer().getHydration() - hydrationCost);
+        choice.getPlayer().updateHydration(-hydrationCost);
         double firewoodAmount = 0.0;
         double boostFactor =
                 Activity.getActivityBoostFactor(ItemFactory.getNewInstances("Parachute Chord", "Axe",

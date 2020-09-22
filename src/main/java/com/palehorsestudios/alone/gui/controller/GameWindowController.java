@@ -17,6 +17,7 @@ import com.palehorsestudios.alone.nightencounter.RainStormNight;
 import com.palehorsestudios.alone.nightencounter.RescueHelicopterNight;
 import com.palehorsestudios.alone.player.Player;
 import com.palehorsestudios.alone.player.SuccessRate;
+import com.palehorsestudios.alone.util.Encounter;
 import com.palehorsestudios.alone.util.HelperMethods;
 import com.palehorsestudios.alone.util.Parser;
 import com.palehorsestudios.alone.util.Saving;
@@ -41,9 +42,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.palehorsestudios.alone.gui.model.Status.*;
@@ -199,83 +200,93 @@ public class GameWindowController extends BaseController implements Initializabl
                     }
                 });
         int day = 1;
-        String dayHalf = "Morning";
-        getDateAndTime().setText("Day " + day + " " + dayHalf);
+        String dayPart = "Morning";
+        getDateAndTime().setText("Day " + day + " " + dayPart);
+        getNarrative(new File("resources/parserHelp.txt"));
+        Set<Activity> noDayChange = Set.of(EatActivity.getInstance(), DrinkWaterActivity.getInstance(), GetItemActivity.getInstance(),
+                PutItemActivity.getInstance(), BuildFireActivity.getInstance());
+
+        double encounterChance = 0;
+        List<DayEncounter> dayEncounters = List.of(
+                BearEncounterDay.getInstance(),
+                RescueHelicopterDay.getInstance(),
+                RainStormDay.getInstance());
+        List<NightEncounter> nightEncounters = List.of(
+                        RainStormNight.getInstance(),
+                        BearEncounterNight.getInstance(),
+                        RescueHelicopterNight.getInstance());
+
+        // update ui
+        updateUI();
 
         while (!player.isDead() && !player.isRescued() && !player.isRescued(day)) {
             player.setPlayerStatus(STILL_ALIVE); // player woke up so they still going reset status for activities that don't adjust
-            
-            // update ui
-            updateUI();
+
+
             String input = getInput();
-            // hmm had to use main here?
             Choice choice = parser.parseChoice(input, player);
             Activity activity = parser.parseActivityChoice(choice);
+
+
             if (activity == null) {
-                getNarrative(new File("resources/parserHelp.txt"));
-            } else if (activity == EatActivity.getInstance()
-                    || activity == DrinkWaterActivity.getInstance()
-                    || activity == GetItemActivity.getInstance()
-                    || activity == PutItemActivity.getInstance()
-                    || activity == BuildFireActivity.getInstance()) {
+//                getNarrative(new File("resources/parserHelp.txt"));
+            } else if (noDayChange.contains(activity)) { // not time changing activity
                 String activityResult = activity.act(choice);
-                getDailyLog().appendText("Day " + day + " " + dayHalf + ": " + activityResult + "\n");
+                addDailyLog(day, dayPart, activityResult);
+                checkDeath(day, dayPart);
 
-            } else {
-                double seed = Math.random();
-                String result;
-                String dayTextOutput;
+            } else { // do time changing activity
+                String result = doEncounterOrOther(dayEncounters, encounterChance, activity::act, choice);
+                addDailyLog(day, dayPart, result);
+                checkDeath(day, dayPart);
 
-                if (seed < .25) {
-                    DayEncounter[] dayEncounters = new DayEncounter[]{
-                            BearEncounterDay.getInstance(),
-                            RescueHelicopterDay.getInstance(),
-                            RainStormDay.getInstance()};
-                    int randomDayEncounterIndex = (int) Math.floor(Math.random() * dayEncounters.length);
-                    result = dayEncounters[randomDayEncounterIndex].encounter(player);
-                    dayTextOutput = result;
-                } else {
-                    dayTextOutput = activity.act(choice);
-                }
+                if (dayPart.equals("Morning")) { // switch to afternoon from morning
+                    dayPart = "Afternoon";
+                } else { // night. do encounter or see if survive
+                    dayPart = "Night";
 
-                getDailyLog().appendText("Day " + day + " " + dayHalf + ": " + dayTextOutput + "\n");
-                if (dayHalf.equals("Morning")) {
-                    dayHalf = "Afternoon";
-                } else {
                     if (!player.isDead() && !player.isRescued()) {
-                        seed =  Math.random();
-                        String nightResult;
-                        String nightTextOutput;
-                        if (seed < .25) {
-                            NightEncounter[] nightEncounters =
-                                    new NightEncounter[]{
-                                            RainStormNight.getInstance(),
-                                            BearEncounterNight.getInstance(),
-                                            RescueHelicopterNight.getInstance()};
-                            int randomNightEncounterIndex =
-                                    (int) Math.floor(Math.random() * nightEncounters.length);
-                            // Get playerstatus object from encounter
-                            nightResult = nightEncounters[randomNightEncounterIndex].encounter(player);
-                        } else {
-                            // call overnight status to see if died from something other than event
-                            nightResult = overnightStatusUpdate(player);
-                        }
-                        nightTextOutput = nightResult;
+                        result = doEncounterOrOther(nightEncounters, encounterChance, this::overnightStatusUpdate, player);
+                        addDailyLog(day, dayPart, result);
+                        getDateAndTime().setText("Day " + day + " " + dayPart);
                         if (!player.isDead() && !player.isRescued()) {
-                            getDailyLog().appendText("Day " + day + " Night: " + nightTextOutput + "\n");
-                            dayHalf = "Morning";
+                            dayPart = "Morning";
                             day++;
-                        } else {
-                            updateUI();
                         }
                     }
                 }
-
-
-                playStatusMedia(player.getPlayerStatus());
-                getDateAndTime().setText("Day " + day + " " + dayHalf);
             }
+
+            playStatusMedia(player.getPlayerStatus());
+            getDateAndTime().setText("Day " + day + " " + dayPart);
+
+            // update ui
+            updateUI();
         }
+    }
+
+    private void checkDeath(int day, String dayPart) {
+        if (player.isDead()) {
+            addDailyLog(day, dayPart, "You have " + player.getPlayerStatus().getDescription() + ".\n\nGAME OVER");
+        }
+    }
+
+    private <T> String doEncounterOrOther(List<? extends Encounter> encounters, double encounterChance,
+                                          Function<T, String> function, T choice) {
+        double seed = Math.random();
+        String result;
+
+        if (seed < encounterChance) {
+            int randomDayEncounterIndex = ThreadLocalRandom.current().nextInt(encounters.size());
+            result = encounters.get(randomDayEncounterIndex).encounter(player);
+        } else {
+            result = function.apply(choice);
+        }
+        return result;
+    }
+
+    private void addDailyLog(int day, String dayPart, String other) {
+        getDailyLog().appendText("Day " + day + " " + dayPart + ": " + other + "\n");
     }
 
     private void playStatusMedia(Status status) {
@@ -298,7 +309,7 @@ public class GameWindowController extends BaseController implements Initializabl
                 //System.out.println("Last night there was a torrential downpour!!!");
             }
             case DEHYDRATION -> {
-                //System.out.println("Died of dehydration");
+                System.out.println("Died of dehydration");
             }
             case LOST_WILL_TO_LIVE -> {
                 System.out.println("Lost will");
@@ -473,10 +484,10 @@ public class GameWindowController extends BaseController implements Initializabl
                     "Whoops! We seemed to have misplaced the next segment of the story. We're working on it!");
         }
     }
-    public static String overnightStatusUpdate(Player player) {
+    private String overnightStatusUpdate(Player player) {
         String result;
         SuccessRate successRate;
-        Status status = STILL_ALIVE;
+
         double overnightPreparedness = player.getShelter().getIntegrity();
         if (player.getShelter().hasFire()) {
             overnightPreparedness += 10;
@@ -496,19 +507,19 @@ public class GameWindowController extends BaseController implements Initializabl
                     "Last night was great! I feel refreshed and ready to take on whatever comes my way today.";
             player.updateMorale(2);
         }
+
         double caloriesBurned = ActivityLevel.MEDIUM.getCaloriesBurned(successRate);
         player.updateWeight(-caloriesBurned);
-        if (player.getWeight() < 180.0 * 0.8) {
-            result = result + " But you die of losing too much weight! \n\n Game Over!";
-            player.setPlayerStatus(STARVED);
-        }
+
         int hydrationCost = ActivityLevel.MEDIUM.getHydrationCost(successRate);
-        player.setHydration(player.getHydration() - hydrationCost);
-        if (player.getHydration() < 0) {
-            result = result + " But you die of thirst! \n\n Game Over!";
-            player.setPlayerStatus(DEHYDRATION);
-        }
+        player.updateHydration(-hydrationCost);
+
         player.getShelter().setFire(false);
+
+        if (player.isDead()) {
+            result = " You have " + player.getPlayerStatus().getDescription() + ". \n\nGAME OVER";
+        }
+
         return result;
     }
 

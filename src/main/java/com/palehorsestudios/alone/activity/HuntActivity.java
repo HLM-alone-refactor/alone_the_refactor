@@ -31,7 +31,7 @@ public class HuntActivity extends Activity {
         double caloriesBurned = ActivityLevel.HIGH.getCaloriesBurned(successRate);
         choice.getPlayer().updateWeight(-caloriesBurned);
         int hydrationCost = ActivityLevel.HIGH.getHydrationCost(successRate);
-        choice.getPlayer().setHydration(choice.getPlayer().getHydration() - hydrationCost);
+        choice.getPlayer().updateHydration(-hydrationCost);
         // get boost factor based on items the player is carrying
         double boostFactor =
                 Activity.getActivityBoostFactor(ItemFactory.getNewInstances("Survival Manual", "Arrow",

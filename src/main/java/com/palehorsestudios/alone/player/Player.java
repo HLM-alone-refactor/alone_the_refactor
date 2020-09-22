@@ -184,8 +184,11 @@ public class Player implements Serializable {
 
     public boolean isRescued(int days) {
         boolean isRescued = false;
-        if (days > 15) {
+        if (days > 100) {
             isRescued = ((int) Math.floor(Math.random() * 2)) != 0;
+        }
+        if (isRescued) {
+            setPlayerStatus(Status.RESCUED);
         }
         return isRescued;
     }
