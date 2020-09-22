@@ -217,7 +217,7 @@ public class GameWindowController extends BaseController implements Initializabl
         Set<Activity> noDayChange = Set.of(EatActivity.getInstance(), DrinkWaterActivity.getInstance(), GetItemActivity.getInstance(),
                 PutItemActivity.getInstance(), BuildFireActivity.getInstance());
 
-        double encounterChance = 0;
+        double encounterChance = 0.25;
         List<DayEncounter> dayEncounters = List.of(
                 BearEncounterDay.getInstance(),
                 RescueHelicopterDay.getInstance(),
