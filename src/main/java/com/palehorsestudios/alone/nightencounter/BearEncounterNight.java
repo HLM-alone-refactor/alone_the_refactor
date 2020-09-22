@@ -59,6 +59,7 @@ public class BearEncounterNight extends NightEncounter {
 //      TODO: add else if for hatchet and axe
             // description for if the player defends camp with knife
             player.updateMorale(-1);
+            player.setPlayerStatus(Status.STILL_ALIVE);
             return "You wake in the middle of the night... something is nearby. \n"
                     + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
                     + "you reach for your knife. With it in hand, you slowly lift your head to glimpse at "
@@ -77,6 +78,7 @@ public class BearEncounterNight extends NightEncounter {
             player.getShelter().getFoodCache().clear();
             // description for if the player does not have anything to defend with
             if (player.isDead()) {
+                player.setPlayerStatus(Status.STARVED);
                 return "You wake in the middle of the night... something is nearby. \n"
                         + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
                         + "you slowly lift your head to glimpse at the disturbance. \n "
@@ -92,6 +94,7 @@ public class BearEncounterNight extends NightEncounter {
                         + "gripped with hypothermia from your starvation and lack of calories from bodily "
                         + "sources. You have died.";
             }
+            player.setPlayerStatus(Status.STILL_ALIVE);
             return "You wake in the middle of the night... something is nearby. \n"
                     + "You hear a coarse, weighty breathiness, the kind only a bear might make. Instinctively, "
                     + "you slowly lift your head to glimpse at the disturbance. \n "

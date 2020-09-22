@@ -20,19 +20,27 @@ import com.palehorsestudios.alone.util.HelperMethods;
 import com.palehorsestudios.alone.util.Parser;
 import com.palehorsestudios.alone.util.Saving;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -82,6 +90,8 @@ public class GameWindowController extends BaseController implements Initializabl
 
     @FXML
     private MediaView mediaView;
+    @FXML
+    private AnchorPane mediaViewPane;
 
     // private Vars
     private String currentInput;
@@ -222,7 +232,7 @@ public class GameWindowController extends BaseController implements Initializabl
                 final int[] seed = {(int) Math.floor(Math.random() * 10)};
                 String result;
                 String dayTextOutput;
-                if (false){//(seed[0] > 7) {
+                if (seed[0] > 2) {
                     DayEncounter[] dayEncounters = new DayEncounter[]{
                             BearEncounterDay.getInstance(),
                             RescueHelicopterDay.getInstance()};
@@ -240,7 +250,7 @@ public class GameWindowController extends BaseController implements Initializabl
                         seed[0] = (int) Math.floor(Math.random() * 10);
                         String nightResult;
                         String nightTextOutput;
-                        if (false) {//(seed[0] > 7) {
+                        if (seed[0] > 7) {
                             NightEncounter[] nightEncounters =
                                     new NightEncounter[]{
                                             RainStormNight.getInstance(),
@@ -272,36 +282,71 @@ public class GameWindowController extends BaseController implements Initializabl
     }
 
     private void playStatusMedia(Status status) {
+        ObservableList<Media> mediaList;
         switch (status) {
             case STILL_ALIVE -> {
                 System.out.println("Still alive");
             }
             case EATEN_BY_BEAR -> {
                 System.out.println("eaten by bear. you lose");
-                setMediaViewAndPlayVideo("resources/clips/dark_souls.mp4");
+                playVideoClips("resources/clips/revenant.mp4","resources/clips/dark_souls.mp4");
             }
             case RESCUED -> {
                 System.out.println("You were rescued!!");
-                setMediaViewAndPlayVideo("resources/clips/the_nod.mp4");
+                playVideoClips("resources/clips/the_nod.mp4");
             }
             case MISSED_RESCUE -> {
                 System.out.println("You missed your chance of rescue, so sad!");
+                playVideoClips("resources/clips/copter.mp4");
             }
             case HARD_RAIN -> {
                 System.out.println("Last night there was a torrential downpour!!!");
+                playVideoClips("resources/clips/heavy_rain.mp4");
             }
-            case DEHYDRATION -> {
-                System.out.println("Died of dehydration");
+            case DEHYDRATION, STARVED, LOST_WILL_TO_LIVE -> {
+                System.out.println("Died of dehydration|starved|no morale");
+                playVideoClips("resources/clips/dark_souls.mp4");
+            }
+            case DOWN_BUT_NOT_DEFEATED -> {
+                playVideoClips("resources/clips/bear_fu.mp4");
             }
         }
     }
 
-    private void setMediaViewAndPlayVideo(String fileName) {
-        Media media = new Media(Paths.get(fileName).toUri().toString());
-        MediaPlayer player = new MediaPlayer(media);
+    private void playVideoClips(String ... files) {
+        ObservableList<Media> mediaList = FXCollections.observableArrayList();
+        getVideoMediaObject(mediaList, files);
+        mediaView.setViewOrder(-1);
+        playMediaTracks(mediaList);
+
+    }
+
+    private void playMediaTracks(ObservableList<Media> mediaList) {
+        if (mediaList.size() == 0) {
+            curActivity.setViewOrder(0.0);
+            mediaView.setViewOrder(1.0);
+            return;
+        }
+        MediaPlayer mediaplayer = new MediaPlayer(mediaList.remove(0));
         mediaView.setPreserveRatio(false);
-        mediaView.setMediaPlayer(player);
-        player.play();
+        mediaView.setMediaPlayer(mediaplayer);
+
+        mediaplayer.play();
+
+        mediaplayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaplayer.dispose();
+                playMediaTracks(mediaList);
+            }
+        });
+    }
+
+    private void getVideoMediaObject(ObservableList<Media> mediaList, String ... files) {
+        for(String fileName: files) {
+            Media media = new Media(Paths.get(fileName).toUri().toString());
+            mediaList.add(media);
+        }
     }
 
     public void updateUI() {
@@ -403,7 +448,7 @@ public class GameWindowController extends BaseController implements Initializabl
                     public void run() {
                         try {
                             for (Item item : player.getItems()) {
-                                getCarriedItems().getItems().add(item.toString());
+                                getCarriedItems().getItems().add(item.getType());
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -480,7 +525,6 @@ public class GameWindowController extends BaseController implements Initializabl
     public static String overnightStatusUpdate(Player player) {
         String result;
         SuccessRate successRate;
-        Status status = STILL_ALIVE;
         double overnightPreparedness = player.getShelter().getIntegrity();
         if (player.getShelter().hasFire()) {
             overnightPreparedness += 10;

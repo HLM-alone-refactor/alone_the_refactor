@@ -31,7 +31,7 @@ public class RainStormNight extends NightEncounter {
             player.updateMorale(+2);
             // description if the player has waterproof bag
             // to protect his gear while foraging during the storm
-            player.setPlayerStatus(Status.STILL_ALIVE);
+            player.setPlayerStatus(Status.HARD_RAIN);
             return "The sky has been swallowed by a rushing thundercloud. " +
                     "The sky darkened and for a brief moment raindrops fell on the woods." +
                     "The storm came closer. A flash of light illuminated the sky and the rain" +
@@ -78,7 +78,7 @@ public class RainStormNight extends NightEncounter {
                 player.setPlayerStatus(Status.LOST_WILL_TO_LIVE);
                 return result;
             } else {
-                player.setPlayerStatus(Status.STILL_ALIVE);
+                player.setPlayerStatus(Status.HARD_RAIN);
 
             }
             return result;

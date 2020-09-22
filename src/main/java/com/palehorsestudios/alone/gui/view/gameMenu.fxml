@@ -5,13 +5,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="557.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="pane" prefHeight="694.0" prefWidth="1306.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-    <Button alignment="CENTER" layoutX="156.0" layoutY="248.0" mnemonicParsing="false" onAction="#newGameAction" prefHeight="61.0" prefWidth="187.0" text="New Game" />
-      <Button alignment="CENTER" layoutX="415.0" layoutY="248.0" minWidth="0.0" mnemonicParsing="false" onAction="#loadGameAction" prefHeight="61.0" prefWidth="187.0" text="Load Game" />
-      <Label fx:id="menuTitle" alignment="CENTER" layoutX="156.0" layoutY="42.0" prefHeight="127.0" prefWidth="446.0" text="Alone">
+    <Button fx:id="buttonNew" alignment="CENTER" layoutX="882.0" layoutY="237.0" mnemonicParsing="false" onAction="#newGameAction" prefHeight="94.0" prefWidth="250.0" text="New Game" AnchorPane.rightAnchor="174.0" AnchorPane.topAnchor="237.0">
          <font>
-            <Font name="Times New Roman" size="48.0" />
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="buttonLoad" alignment="CENTER" layoutX="882.0" layoutY="429.0" minWidth="0.0" mnemonicParsing="false" onAction="#loadGameAction" prefHeight="94.0" prefWidth="250.0" text="Load Game" AnchorPane.rightAnchor="174.0" AnchorPane.topAnchor="429.0">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label fx:id="menuTitle" alignment="CENTER" layoutX="430.0" layoutY="57.0" prefHeight="127.0" prefWidth="446.0" text="Alone" textFill="#010c11" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="57.0">
+         <font>
+            <Font name="Sitka Small" size="72.0" />
          </font>
       </Label>
    </children>
