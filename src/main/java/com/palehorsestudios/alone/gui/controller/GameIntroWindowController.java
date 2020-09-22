@@ -55,6 +55,9 @@ public class GameIntroWindowController extends BaseController implements Initial
                         "Whoops! We seemed to have misplaced the next segment of the story. We're working on it!");
                 return;
             }
+            intro.setStyle("-fx-font-size: 14px;");
+            // make sure scroll bar starts at top..
+            intro.positionCaret(0);
 
     }
 
