@@ -37,7 +37,7 @@ public class GameOverWindowController extends BaseController implements Initiali
 
     private void playClip() {
         if (gameManager.getWinCondition().equals("dead")) {
-            System.out.println("game over");
+            //System.out.println("game over");
 
             Media media = new Media(Paths.get("resources/clips/dark_souls.mp4").toUri().toString());
             MediaPlayer player = new MediaPlayer(media);

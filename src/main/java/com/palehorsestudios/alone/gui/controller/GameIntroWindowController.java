@@ -30,7 +30,7 @@ public class GameIntroWindowController extends BaseController implements Initial
 
     @FXML
     public void startGameAction() {
-        System.out.println("startGameAction");
+        //System.out.println("startGameAction");
         viewFactory.showSelectItemsWindow();
         Stage stage = (Stage) intro.getScene().getWindow();
 //        System.out.println("test");
@@ -44,7 +44,7 @@ public class GameIntroWindowController extends BaseController implements Initial
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-            System.out.println("Accessing intronarrative.txt");
+            //System.out.println("Accessing intronarrative.txt");
             File file = new File("resources/intronarrative.txt");
             try {
                 String intro = Files.lines(file.toPath()).collect(Collectors.joining("\n"));

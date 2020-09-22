@@ -6,6 +6,7 @@ import com.palehorsestudios.alone.Items.Item;
 import com.palehorsestudios.alone.activity.*;
 import com.palehorsestudios.alone.dayencounter.BearEncounterDay;
 import com.palehorsestudios.alone.dayencounter.DayEncounter;
+import com.palehorsestudios.alone.dayencounter.RainStormDay;
 import com.palehorsestudios.alone.dayencounter.RescueHelicopterDay;
 import com.palehorsestudios.alone.gui.GameManager;
 import com.palehorsestudios.alone.gui.ViewFactory;
@@ -89,6 +90,7 @@ public class GameWindowController extends BaseController implements Initializabl
     private static List<Item> initItems;
     private final InputSignal inputSignal = new InputSignal();
     public static class InputSignal { }
+    private final Parser parser = new Parser();
 
 
     @Override
@@ -187,7 +189,6 @@ public class GameWindowController extends BaseController implements Initializabl
 
     // game thread logic, so we should also wrap the UI access calls
     private void executeGameLoop() {
-        player.setPlayerStatus(STILL_ALIVE);
         // must run in ui thread
         Platform.runLater(
                 new Runnable() {
@@ -197,12 +198,13 @@ public class GameWindowController extends BaseController implements Initializabl
                         getNarrative(new File("resources/scene1.txt"));
                     }
                 });
-        final int[] day = {1};
-        final String[] dayHalf = {"Morning"};
-        getDateAndTime().setText("Day " + day[0] + " " + dayHalf[0]);
+        int day = 1;
+        String dayHalf = "Morning";
+        getDateAndTime().setText("Day " + day + " " + dayHalf);
 
-        Parser parser = new Parser();
-        while (!player.isDead() && !player.isRescued() && !player.isRescued(day[0])) {
+        while (!player.isDead() && !player.isRescued() && !player.isRescued(day)) {
+            player.setPlayerStatus(STILL_ALIVE); // player woke up so they still going reset status for activities that don't adjust
+            
             // update ui
             updateUI();
             String input = getInput();
@@ -217,30 +219,34 @@ public class GameWindowController extends BaseController implements Initializabl
                     || activity == PutItemActivity.getInstance()
                     || activity == BuildFireActivity.getInstance()) {
                 String activityResult = activity.act(choice);
-                getDailyLog().appendText("Day " + day[0] + " " + dayHalf[0] + ": " + activityResult + "\n");
+                getDailyLog().appendText("Day " + day + " " + dayHalf + ": " + activityResult + "\n");
+
             } else {
-                final int[] seed = {(int) Math.floor(Math.random() * 10)};
+                double seed = Math.random();
                 String result;
                 String dayTextOutput;
-                if (false){//(seed[0] > 7) {
+
+                if (seed < .25) {
                     DayEncounter[] dayEncounters = new DayEncounter[]{
                             BearEncounterDay.getInstance(),
-                            RescueHelicopterDay.getInstance()};
+                            RescueHelicopterDay.getInstance(),
+                            RainStormDay.getInstance()};
                     int randomDayEncounterIndex = (int) Math.floor(Math.random() * dayEncounters.length);
                     result = dayEncounters[randomDayEncounterIndex].encounter(player);
                     dayTextOutput = result;
                 } else {
                     dayTextOutput = activity.act(choice);
                 }
-                getDailyLog().appendText("Day " + day[0] + " " + dayHalf[0] + ": " + dayTextOutput + "\n");
-                if (dayHalf[0].equals("Morning")) {
-                    dayHalf[0] = "Afternoon";
+
+                getDailyLog().appendText("Day " + day + " " + dayHalf + ": " + dayTextOutput + "\n");
+                if (dayHalf.equals("Morning")) {
+                    dayHalf = "Afternoon";
                 } else {
                     if (!player.isDead() && !player.isRescued()) {
-                        seed[0] = (int) Math.floor(Math.random() * 10);
+                        seed =  Math.random();
                         String nightResult;
                         String nightTextOutput;
-                        if (false) {//(seed[0] > 7) {
+                        if (seed < .25) {
                             NightEncounter[] nightEncounters =
                                     new NightEncounter[]{
                                             RainStormNight.getInstance(),
@@ -250,23 +256,24 @@ public class GameWindowController extends BaseController implements Initializabl
                                     (int) Math.floor(Math.random() * nightEncounters.length);
                             // Get playerstatus object from encounter
                             nightResult = nightEncounters[randomNightEncounterIndex].encounter(player);
-                            nightTextOutput = nightResult;
                         } else {
                             // call overnight status to see if died from something other than event
                             nightResult = overnightStatusUpdate(player);
-                            nightTextOutput = nightResult;
                         }
+                        nightTextOutput = nightResult;
                         if (!player.isDead() && !player.isRescued()) {
-                            getDailyLog().appendText("Day " + day[0] + " Night: " + nightTextOutput + "\n");
-                            dayHalf[0] = "Morning";
-                            day[0]++;
+                            getDailyLog().appendText("Day " + day + " Night: " + nightTextOutput + "\n");
+                            dayHalf = "Morning";
+                            day++;
                         } else {
                             updateUI();
                         }
                     }
                 }
+
+
                 playStatusMedia(player.getPlayerStatus());
-                getDateAndTime().setText("Day " + day[0] + " " + dayHalf[0]);
+                getDateAndTime().setText("Day " + day + " " + dayHalf);
             }
         }
     }
@@ -274,24 +281,27 @@ public class GameWindowController extends BaseController implements Initializabl
     private void playStatusMedia(Status status) {
         switch (status) {
             case STILL_ALIVE -> {
-                System.out.println("Still alive");
+                //System.out.println("Still alive");
             }
             case EATEN_BY_BEAR -> {
-                System.out.println("eaten by bear. you lose");
+                //System.out.println("eaten by bear. you lose");
                 setMediaViewAndPlayVideo("resources/clips/dark_souls.mp4");
             }
             case RESCUED -> {
-                System.out.println("You were rescued!!");
+                //System.out.println("You were rescued!!");
                 setMediaViewAndPlayVideo("resources/clips/the_nod.mp4");
             }
             case MISSED_RESCUE -> {
-                System.out.println("You missed your chance of rescue, so sad!");
+                //System.out.println("You missed your chance of rescue, so sad!");
             }
             case HARD_RAIN -> {
-                System.out.println("Last night there was a torrential downpour!!!");
+                //System.out.println("Last night there was a torrential downpour!!!");
             }
             case DEHYDRATION -> {
-                System.out.println("Died of dehydration");
+                //System.out.println("Died of dehydration");
+            }
+            case LOST_WILL_TO_LIVE -> {
+                System.out.println("Lost will");
             }
         }
     }
@@ -321,57 +331,32 @@ public class GameWindowController extends BaseController implements Initializabl
                                 && !getFirewood().getText().isEmpty()
                                 && !getFirewood().getText().isBlank()
                                 && !getWater().getText().isEmpty()
-                                && !getWater().getText().isBlank()) {
+                                && !getWater().getText().isBlank()
+                                && !getInventoryWeight().getText().isBlank()
+                                && !getInventoryWeight().getText().isEmpty()) {
                             try {
                                 double currentWeight = Double.parseDouble(getWeight().getText());
-                                if (currentWeight < player.getWeight()) {
-                                    getWeight().setStyle("-fx-text-inner-color: green;");
-                                } else if (currentWeight > player.getWeight()) {
-                                    getWeight().setStyle("-fx-text-inner-color: red;");
-                                } else {
-                                    getWeight().setStyle("-fx-text-inner-color: black;");
-                                }
+                                changeColor(currentWeight, player.getWeight(), getWeight());
+
                                 int currentHydration = Integer.parseInt(getHydration().getText());
-                                if (currentHydration < player.getHydration()) {
-                                    getHydration().setStyle("-fx-text-inner-color: green;");
-                                } else if (currentHydration > player.getHydration()) {
-                                    getHydration().setStyle("-fx-text-inner-color: red;");
-                                } else {
-                                    getHydration().setStyle("-fx-text-inner-color: black;");
-                                }
+                                changeColor(currentHydration, player.getHydration(), getHydration());
+
                                 int currentMorale = Integer.parseInt(getMorale().getText());
-                                if (currentMorale < player.getMorale()) {
-                                    getMorale().setStyle("-fx-text-inner-color: green;");
-                                } else if (currentMorale > player.getMorale()) {
-                                    getMorale().setStyle("-fx-text-inner-color: red;");
-                                } else {
-                                    getMorale().setStyle("-fx-text-inner-color: black;");
-                                }
+                                changeColor(currentMorale, player.getMorale(), getMorale());
+
                                 double currentIntegrity =
                                         Double.parseDouble(getIntegrity().getText());
-                                if (currentIntegrity < player.getShelter().getIntegrity()) {
-                                    getIntegrity().setStyle("-fx-text-inner-color: green;");
-                                } else if (currentIntegrity > player.getShelter().getIntegrity()) {
-                                    getIntegrity().setStyle("-fx-text-inner-color: red;");
-                                } else {
-                                    getIntegrity().setStyle("-fx-text-inner-color: black;");
-                                }
+                                changeColor(currentIntegrity, player.getShelter().getIntegrity(), getIntegrity());
+
                                 double currentFirewood = Double.parseDouble(getFirewood().getText());
-                                if (currentFirewood < player.getShelter().getFirewood()) {
-                                    getFirewood().setStyle("-fx-text-inner-color: green;");
-                                } else if (currentFirewood > player.getShelter().getFirewood()) {
-                                    getFirewood().setStyle("-fx-text-inner-color: red;");
-                                } else {
-                                    getFirewood().setStyle("-fx-text-inner-color: black;");
-                                }
+                                changeColor(currentFirewood, player.getShelter().getFirewood(), getFirewood());
+
                                 int currentWater = Integer.parseInt(getWater().getText());
-                                if (currentWater < player.getShelter().getWaterTank()) {
-                                    getWater().setStyle("-fx-text-inner-color: green;");
-                                } else if (currentWater > player.getShelter().getWaterTank()) {
-                                    getWater().setStyle("-fx-text-inner-color: red;");
-                                } else {
-                                    getWater().setStyle("-fx-text-inner-color: black;");
-                                }
+                                changeColor(currentWater, player.getShelter().getWaterTank(), getWater());
+
+                                double currentInWeight = Double.parseDouble(getInventoryWeight().getText());
+                                changeColor(player.getItemsWeight(), currentInWeight, getInventoryWeight());
+
                             } catch (Exception e) {
                             }
                         }
@@ -381,6 +366,7 @@ public class GameWindowController extends BaseController implements Initializabl
                         getIntegrity().setText(String.valueOf((player.getShelter().getIntegrity())));
                         getFirewood().setText(String.valueOf((player.getShelter().getFirewood())));
                         getWater().setText(String.valueOf((player.getShelter().getWaterTank())));
+                        getInventoryWeight().setText(String.valueOf(player.getItemsWeight()));
                     }
                 });
 
@@ -403,7 +389,7 @@ public class GameWindowController extends BaseController implements Initializabl
                     public void run() {
                         try {
                             for (Item item : player.getItems()) {
-                                getCarriedItems().getItems().add(item.toString());
+                                getCarriedItems().getItems().add(item.getType());
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -464,6 +450,16 @@ public class GameWindowController extends BaseController implements Initializabl
                         }
                     }
                 });
+    }
+
+    private void changeColor(double field, double that, TextField tf) {
+        if (field < that) {
+            tf.setStyle("-fx-text-inner-color: green;");
+        } else if (field > that) {
+            tf.setStyle("-fx-text-inner-color: red;");
+        } else {
+            tf.setStyle("-fx-text-inner-color: black;");
+        }
     }
 
     private void getNarrative(File file) {
@@ -541,6 +537,10 @@ public class GameWindowController extends BaseController implements Initializabl
     /* GETTERS AND SETTERS*/
     public TextField getWeight() {
         return weight;
+    }
+
+    public TextField getInventoryWeight() {
+        return inventoryWeight;
     }
 
     public TextField getHydration() {

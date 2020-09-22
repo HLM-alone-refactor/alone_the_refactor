@@ -34,6 +34,13 @@ public class ParserTest {
     }
 
     @Test
+    public void delme() {
+        System.out.println(parser.stemIt("fish"));
+        System.out.println(parser.stemIt("fishes"));
+        System.out.println(parser.stemIt("fishing"));
+    }
+
+    @Test
     public void testParseChoiceEat() {
         assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Moose")), parser.parseChoice("eat moose", player));
         assertEquals(new Choice("eat", player, FoodFactory.getNewInstance("Fish")), parser.parseChoice("eat fish", player));

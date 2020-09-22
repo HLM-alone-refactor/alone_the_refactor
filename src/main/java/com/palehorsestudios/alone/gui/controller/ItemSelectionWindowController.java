@@ -107,7 +107,7 @@ public class ItemSelectionWindowController extends BaseController implements Ini
 
     @FXML
     public void playGameButton() {
-        System.out.println("Play button pressed");
+        //System.out.println("Play button pressed");
         // Player now managed in gameManager
         gameManager.setPlayer(new Player(playerItems));
         viewFactory.showGameWindow();

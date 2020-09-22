@@ -90,7 +90,7 @@ public class Parser {
     Get the value from given map via the input. This assumes input is '<action> <thing>' where trying to figure out what
     <thing> is.
      */
-    private  String getStemMapValue(String input, Map<String, String> map) {
+    private String getStemMapValue(String input, Map<String, String> map) {
         String result = null;
 
         // assume input is of style <action> <thing>, and only want <thing>

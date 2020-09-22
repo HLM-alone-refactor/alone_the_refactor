@@ -17,7 +17,7 @@ public class RainStormTest {
 
   @Before
   public void setUp() throws Exception {
-    rainStorm = RainStorm.getInstance();
+    rainStorm = RainStormNight.getInstance();
     player = new Player(List.of());
   }
 
