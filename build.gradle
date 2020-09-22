@@ -17,6 +17,7 @@ plugins {
 
     // for converting xml to java objects
     id 'com.intershop.gradle.jaxb' version '4.3.1'
+
 }
 
 sourceSets.main {
@@ -26,6 +27,7 @@ sourceSets.main {
     resources {
         srcDirs = ['src/main/java', 'resources']
         exclude "**/*.java"
+        includes = ["**/*", "*"]
     }
 }
 
@@ -75,10 +77,11 @@ jlink {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'com.palehorsestudios.alone.Main'
+                'Main-Class': 'com.palehorsestudios.alone.Main',
         )
     }
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+    destinationDir(file("aloneJar"))
 }
