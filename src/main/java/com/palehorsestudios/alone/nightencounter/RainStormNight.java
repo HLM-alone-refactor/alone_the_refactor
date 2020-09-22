@@ -60,7 +60,7 @@ public class RainStormNight extends NightEncounter {
                 player.setPlayerStatus(Status.LOST_WILL_TO_LIVE);
                 return result;
             } else {
-                player.setPlayerStatus(Status.STILL_ALIVE);
+                player.setPlayerStatus(Status.HARD_RAIN);
                 return result;
             }
         } else {

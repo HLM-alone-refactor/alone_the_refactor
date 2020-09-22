@@ -255,6 +255,7 @@ public class GameWindowController extends BaseController implements Initializabl
                                     new NightEncounter[]{
                                             RainStormNight.getInstance(),
                                             BearEncounterNight.getInstance(),
+                                            RainStormNight.getInstance(),
                                             RescueHelicopterNight.getInstance()};
                             int randomNightEncounterIndex =
                                     (int) Math.floor(Math.random() * nightEncounters.length);
