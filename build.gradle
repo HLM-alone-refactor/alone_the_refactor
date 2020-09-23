@@ -14,6 +14,9 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.8'
     id 'org.beryx.jlink' version '2.12.0'
+
+    // for converting xml to java objects
+    id 'com.intershop.gradle.jaxb' version '4.3.1'
 }
 
 sourceSets.main {
@@ -42,6 +45,15 @@ dependencies {
 
     // slf4j logging
     compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.13.3'
+
+    // xml binding for item and food classes
+    compile('javax.xml.bind:jaxb-api:2.3.0')
+    compile('javax.activation:activation:1.1')
+    compile('org.glassfish.jaxb:jaxb-runtime:2.3.0')
+
+    // stemming english for text parsing
+    compile('org.apache.lucene:lucene-analyzers:3.6.2')
+
 }
 
 application {
@@ -51,7 +63,7 @@ application {
 
 javafx {
     version = "14"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = [ 'javafx.controls', 'javafx.fxml','javafx.media' ]
 }
 
 jlink {
@@ -69,4 +81,5 @@ jar {
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+    destinationDir(file("alonejar"))
 }

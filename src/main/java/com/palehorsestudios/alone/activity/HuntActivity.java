@@ -1,59 +1,63 @@
 package com.palehorsestudios.alone.activity;
 
 import com.palehorsestudios.alone.Choice;
-import com.palehorsestudios.alone.Food;
-import com.palehorsestudios.alone.Item;
+import com.palehorsestudios.alone.Foods.Food;
+import com.palehorsestudios.alone.Foods.FoodFactory;
+import com.palehorsestudios.alone.Items.Item;
+import com.palehorsestudios.alone.Items.ItemFactory;
 import com.palehorsestudios.alone.player.SuccessRate;
+import com.palehorsestudios.alone.util.HelperMethods;
 
-public class HuntActivity extends Activity{
-  private static HuntActivity activityReference;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
-    private HuntActivity(){}
+public class HuntActivity extends Activity {
+    private static HuntActivity activityReference;
+
+    private HuntActivity() {
+    }
 
     public static Activity getInstance() {
-      if(activityReference == null) {
-        activityReference = new HuntActivity();
-      }
-      return activityReference;
+        if (activityReference == null) {
+            activityReference = new HuntActivity();
+        }
+        return activityReference;
     }
 
     @Override
     public String act(Choice choice) {
-      String result;
-      SuccessRate successRate = generateSuccessRate();
-      double caloriesBurned = ActivityLevel.HIGH.getCaloriesBurned(successRate);
-      choice.getPlayer().updateWeight(-caloriesBurned);
-      int hydrationCost = ActivityLevel.HIGH.getHydrationCost(successRate);
-      choice.getPlayer().setHydration(choice.getPlayer().getHydration() - hydrationCost);
-      // get boost factor based on items the player is carrying
-      double boostFactor =
-          Activity.getActivityBoostFactor(
-              new Item[] {
-                  Item.SURVIVAL_MANUAL,
-                  Item.ARROWS,
-                  Item.BOW,
-                  Item.PISTOL,
-                  Item.PISTOL_CARTRIDGES,
-                  Item.KNIFE
-              },
-              choice.getPlayer());
-      // gear, maybe we should eliminate low success rate possibility.
-      if (successRate == SuccessRate.LOW) {
-        choice.getPlayer().updateMorale(-2);
-        result = "I guess that's why they don't call it killing. You couldn't get a shot on an animal.";
-      } else if (successRate == SuccessRate.MEDIUM) {
-        choice.getPlayer().getShelter()
-            .addFoodToCache(
-                Food.PORCUPINE, Food.PORCUPINE.getGrams() + Food.PORCUPINE.getGrams() * boostFactor);
-        choice.getPlayer().updateMorale(2);
-        result = "Watch out for those quills! You killed a nice fat porcupine that should keep you fed for a while.";
-      } else {
-        choice.getPlayer().getShelter()
-            .addFoodToCache(Food.MOOSE, Food.MOOSE.getGrams() + Food.MOOSE.getGrams() * boostFactor);
-        choice.getPlayer().updateMorale(4);
-        result = "Moose down! It took five trips, but you were able to process the meat and transport it back to " +
-            "your shelter before a predator got to it first.";
-      }
-      return result;
+        String result;
+        SuccessRate successRate = generateSuccessRate();
+        double caloriesBurned = ActivityLevel.HIGH.getCaloriesBurned(successRate);
+        choice.getPlayer().updateWeight(-caloriesBurned);
+        int hydrationCost = ActivityLevel.HIGH.getHydrationCost(successRate);
+        choice.getPlayer().updateHydration(-hydrationCost);
+        // get boost factor based on items the player is carrying
+        double boostFactor =
+                Activity.getActivityBoostFactor(ItemFactory.getNewInstances("Survival Manual", "Arrow",
+                        "Bow", "Pistol", "Pistol Cartridge", "Knife"), choice.getPlayer());
+        // gear, maybe we should eliminate low success rate possibility.
+        if (successRate == SuccessRate.LOW) {
+            choice.getPlayer().updateMorale(-2);
+            result = "I guess that's why they don't call it killing. You couldn't get a shot on an animal.";
+        } else if (successRate == SuccessRate.MEDIUM) {
+            Food porcupine = FoodFactory.getNewInstance("Porcupine");
+            choice.getPlayer().getShelter()
+                    .addFoodToCache(
+                            porcupine, porcupine.getGrams() + porcupine.getGrams() * boostFactor);
+            choice.getPlayer().updateMorale(2);
+            result = "Watch out for those quills! You killed a nice fat porcupine that should keep you fed for a while.";
+        } else {
+            Food moose = FoodFactory.getNewInstance("Moose");
+            choice.getPlayer().getShelter()
+                    .addFoodToCache(moose, moose.getGrams() + moose.getGrams() * boostFactor);
+            choice.getPlayer().updateMorale(4);
+            result = "Moose down! It took five trips, but you were able to process the meat and transport it back to " +
+                    "your shelter before a predator got to it first.";
+        }
+
+        result += luckFindInActivity(ItemFactory.getByFind("Hunt"), choice, successRate, 0.4, 1);
+
+        return result;
     }
 }
